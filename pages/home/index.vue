@@ -1,4 +1,5 @@
 <template>
+
   <div class="container mx-auto px-4">
     <div class="grid gap-4 grid-cols-2">
       <div class="box1">
@@ -6,26 +7,35 @@
       </div>
     </div>
 
+
+
     <div class="grid gap-4 grid-cols-2">
       <div
-        class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        
       >
-        <BarChart
-          :dataValue="[65, 59, 80, 81, 56, 55, 40]"
-          :labelDisplay="true"
-          :labelName1="'Pre-Synergy Multiple'"
-          :labelName2="'Post-Synergry Multiple'"
-        />
+      <InvChart
+    :labels="labels"
+      :preSynergyData="preSynergyData"
+      :postSynergyData="postSynergyData"
+      :chartWidth="700"
+      :chartHeight="500"
+      :barSpacing="15"
+      orientation="vertical"
+    />
       </div>
       <div
-        class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        
       >
         <HorizontalBarChart
-          :dataValue="[65, 59, 80, 81, 56, 55, 40]"
-          :labelDisplay="true"
-          :labelName1="'Pre-Synergy Multiple'"
-          :labelName2="'Post-Synergry Multiple'"
-        />
+    :labels="labels"
+      :preSynergyData="preSynergyData"
+      :postSynergyData="postSynergyData"
+      :chartWidth="600"
+      :chartHeight="600"
+      :barHeight="30"
+      :barSpacing="25"
+      :valueScaleSteps="7"
+    />
       </div>
     </div>
 
@@ -136,6 +146,41 @@ button:disabled {
 import '@/assets/styles/global.css';
 import BarChart from '~/components/BarChart.vue';
 import HorizontalBarChart from '~/components/HorizontalBarChart.vue';
+
+
+const labelsh = [
+  "Project A1",
+  "Project A2",
+  "Project A3",
+  "Project A4",
+  "Project A5",
+  "Project A6",
+  "Project A7",
+  "Project A8",
+  "Project A9",
+  "Project A10",
+];
+
+const preSynergyDatah = [8, 2, 6, 4, 7, 1, 3, 5, 9, 4];
+const postSynergyDatah = [4, 1, 3, 2, 4, 1, 2, 3, 4, 2];
+
+
+const labels = [
+  "Progress Capital",
+  "Cynthia Ng",
+  "Louay Alsadeek",
+  "Miami Industries",
+  "Moseley Watkins",
+  "Troy Pollet",
+  "Errol Blumer",
+  "Mac Crowther",
+  "Adam Gatto",
+];
+
+const preSynergyData = [4, 5, 4.5, 6, 5.5, 5.5, 4.8, 5, 5.5];
+const postSynergyData = [3, 2.8, 3.2, 2.7, 3.1, 3.5, 2.9, 3.2, 4.6];
+
+
 
 const viewItem = (item) => {
 
