@@ -1,0 +1,56 @@
+/* Tables */
+
+position: absolute;
+width: 1136px;
+height: 655px;
+left: 292px;
+top: 552px;
+
+background: #FFFFFF;
+border: 1px solid #D4D4D4;
+border-radius: 7px;
+
+---------------------------------------------
+/* Bar Chart Standard/Light */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 631px;
+height: 428px;
+left: 292px;
+top: 115px;
+
+/* Light/Base/Surface */
+background: #FFFFFF;
+border: 1px solid #D4D4D4;
+border-radius: 4px;
+
+------------------------------------------------
+/* Horizontal Bar Chart/Light */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 495px;
+height: 428px;
+left: 933px;
+top: 115px;
+
+/* Light/Base/Surface */
+background: #FFFFFF;
+border: 1px solid #D4D4D4;
+border-radius: 4px;
+

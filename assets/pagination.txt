@@ -1,0 +1,133 @@
+<template>
+  <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-center slds-m-around_medium">
+    <!-- Display Total Items -->
+    <div class="slds-text-body_small slds-m-right_medium">
+      Total {{ totalItems }} items
+    </div>
+
+    <div class="slds-grid slds-grid_align-spread">
+
+
+      <ul class="slds-list_horizontal slds-has-dividers_around-space slds-m-horizontal_small">
+        <li>
+          <button :disabled="isFirstPage" @click="goToPreviousPage"
+            class="slds-button slds-button_neutral pagination-btns">
+            <span class="slds-icon_container null slds-icon__svg--default">
+              <svg class="slds-icon slds-icon-text-default nav-left-right" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronleft"></use>
+              </svg>
+            </span>
+          </button>
+        </li>
+        <li v-for="page in visiblePages" :key="page">
+          <button class="slds-button slds-button_neutral pagination-btns"
+            :class="{ 'slds-button_brand': page === currentPage }" @click="goToPage(page)">
+            {{ page }}
+          </button>
+        </li>
+        <li>
+          <button class="slds-button slds-button_neutral pagination-btns" :disabled="isLastPage" @click="goToNextPage">
+            <span class="slds-icon_container null slds-icon__svg--default">
+              <svg class="slds-icon slds-icon-text-default nav-left-right" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+              </svg>
+            </span>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="slds-m-left_medium">
+      <div class="slds-form-element">
+        <div class="slds-select_container">
+          <select id="pageSize" class="slds-select" v-model="pageSize" @change="updatePageSize">
+            <option v-for="size in pageSizeOptions" :key="size" :value="size">
+              {{ size }} / page
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="slds-m-left_medium" style="display: flex;justify-content: center;align-items: center;">
+      <label class="slds-form-element__label" for="goToPage">Go to:</label>
+      <div class="slds-form-element">
+        <input type="number" id="goToPage" class="slds-input goto" :min="1" :max="totalPages" v-model="goToPageInput"
+          @change="jumpToPage" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+const emit = defineEmits(['paginate'])
+const { totalItems } = defineProps(['totalItems']);
+// const totalItems = ref(22);
+const currentPage = ref(1);
+const pageSize = ref(20);
+const pageSizeOptions = ref([20, 50, 100, 200]);
+const totalPages = computed(() => Math.ceil(totalItems / pageSize.value));
+const goToPageInput = ref(currentPage.value);
+
+const isFirstPage = computed(() => currentPage.value === 1);
+const isLastPage = computed(() => currentPage.value === totalPages.value);
+
+const visiblePages = computed(() => {
+  const startPage = Math.max(1, currentPage.value - 2);
+  const endPage = Math.min(totalPages.value, startPage + 4);
+  return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+});
+
+const goToPreviousPage = () => {
+  if (!isFirstPage.value) currentPage.value -= 1;
+  emit('paginate', { page: currentPage.value });
+
+};
+
+const goToNextPage = () => {
+  if (!isLastPage.value) currentPage.value += 1;
+  emit('paginate', { page: currentPage.value })
+};
+
+const goToPage = (page) => {
+  currentPage.value = page;
+  emit('paginate', { page: currentPage.value })
+};
+
+const updatePageSize = () => {
+  currentPage.value = 1;
+  emit('paginate', { page: currentPage.value })
+};
+
+const jumpToPage = () => {
+  const page = parseInt(goToPageInput.value, 10);
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page;
+    emit('paginate', { page: currentPage.value })
+  }
+};
+</script>
+
+<style scoped>
+.pagination-btns {
+  border-radius: 0;
+  padding: 0rem 0.75rem;
+  border: 1px solid #D9D9D9;
+  margin: 0 0.25rem;
+}
+
+.goto {
+  padding: 0;
+  text-align: center;
+}
+
+.nav-left-right {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.slds-icon_container {
+  display: inline-block;
+  padding: 0.5rem 0;
+}
+</style>

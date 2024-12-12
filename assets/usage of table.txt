@@ -1,0 +1,5 @@
+    <DataTable :enable-scroll="true" :columns="columns" :data="propertyStore.properties"
+            :isLoading="propertyStore.isLoading" />
+        </div>
+        <Pagination v-show="propertyStore.totalCount > 0" :total-items="propertyStore.totalCount"
+          @paginate="paginate" />
