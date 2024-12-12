@@ -1,33 +1,89 @@
 <template>
-    <div>
-    
-          <DataTable
-      :data="tableData"
-      :columns="tableColumns"
-      
-     
-    >
-     <template #action="{ item }">
-    <div class="action-buttons">
-    <button @click="editItem(item)">
-      <i class="fas fa-edit"></i> Edit
-    </button>
-    <button @click="deleteItem(item)">
-      <i class="fas fa-trash"></i> Delete
-    </button>
-    <button @click="viewItem(item)">
-      <i class="fas fa-eye"></i> View
-    </button>
-  </div>
-  </template>
-  </DataTable>
-  
-    
+  <div class="container mx-auto px-4">
+    <div class="grid gap-4 grid-cols-2">
+      <div class="box1">
+        <h1 class="investmentScore">Hello Joanna!</h1>
+      </div>
+    </div>
+
+    <div class="grid gap-4 grid-cols-2">
+      <div
+        class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      >
+        <BarChart
+          :dataValue="[65, 59, 80, 81, 56, 55, 40]"
+          :labelDisplay="true"
+          :labelName1="'Pre-Synergy Multiple'"
+          :labelName2="'Post-Synergry Multiple'"
+        />
+      </div>
+      <div
+        class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      >
+        <HorizontalBarChart
+          :dataValue="[65, 59, 80, 81, 56, 55, 40]"
+          :labelDisplay="true"
+          :labelName1="'Pre-Synergy Multiple'"
+          :labelName2="'Post-Synergry Multiple'"
+        />
+      </div>
+    </div>
+
+    <div class="container-fluid pt-5">
+      <div
+        class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      >
+        <div style="display: inline-block; width: 100%">
+          <div class="investment float-left">My Investments</div>
+          <div class="float-right">
+            <button
+              class="text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            >
+              <svg
+                class="h-6 w-6 text-white-700"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              <p class="text-base">Add Item</p>
+            </button>
+          </div>
         </div>
+
+        <div class="relative overflow-x-auto sm:rounded-lg">
+          <DataTable :data="tableData" :columns="tableColumns">
+
+
+            <template #action="{ item }">
+              <div class="action-buttons">
+                <button @click="editItem(item)">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+                <button @click="deleteItem(item)">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+                <button @click="viewItem(item)">
+                  <i class="fas fa-eye"></i> View
+                </button>
+              </div>
+            </template>
+          </DataTable>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
-<style>
-
+<style scoped>
 button {
   margin: 0 5px;
   padding: 5px 10px;
@@ -50,19 +106,46 @@ button:disabled {
   align-items: center;
   gap: 4px;
 }
+
+.flex-container {
+  display: flex;
+  gap: 16px;
+}
+
+.box1 {
+  flex: 1;
+  padding: 16px;
+}
+
+.box {
+  flex: 1;
+  padding: 16px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button {
+  padding-right: 12px;
+  display: inline-block;
+}
 </style>
 
 <script setup>
+import '@/assets/styles/global.css';
+import BarChart from '~/components/BarChart.vue';
+import HorizontalBarChart from '~/components/HorizontalBarChart.vue';
 
 const viewItem = (item) => {
 
  alert(`Editing item: ${item.title}`);
-    
+
 }
 
 const tableColumns  = [
-    { label: 'ID', key: 'id',  sortable: true },
-    { label: 'Name', key: 'title',  sortable: true  },
+    { label: 'ID', key: 'id',  sortable: true  },
+    { label: 'Name', key: 'title',  sortable: true   },
     { label: 'Pre Synergy Multiple', key: 'preSynergyMultiple', sortable: true },
     { label: 'Post Synergy Multiple', key: 'postSynergyMultiple', sortable: false },
 ];
@@ -81,10 +164,7 @@ const tableData  = [
 
 ];
 
-
-
 definePageMeta({
     layout: "home",
 })
 </script>
-

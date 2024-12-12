@@ -1,152 +1,92 @@
+<script setup lang="ts">
+const {
+  loggedIn,
+  user,
+  refresh,
+  fetch,
+  login,
+  logout,
+  currentProvider,
+  clear,
+} = useOidcAuth();
 
-<template>
-<UContainer>
-    <div class="flex-container">
-        <div class="box1">
-            <h1 class="investmentScore">Hello Joanna!</h1>
-        </div>
-        <div class="box1">
-            <div class="float-right"><p class="py-1">Search for Investments</p>
-           
-                <UInput
-                    icon="i-heroicons-magnifying-glass-20-solid"
-                    size="sm"
-                    color="white"
-                    :trailing="false"
-                    placeholder="Progress Capital"
-                />
-                 </div>
-        </div>
-    </div>
-    <div class="flex-container">
-       <div class="box">      
-            <BarChart :dataValue="[65, 59, 80, 81, 56, 55, 40]" :labelDisplay="true" :labelName1="'Pre-Synergy Multiple'" :labelName2="'Post-Synergry Multiple'"/>     
-      </div>
-      <div class="box">
-            <HorizontalBarChart :dataValue="[65, 59, 80, 81, 56, 55, 40]" :labelDisplay="true" :labelName1="'Pre-Synergy Multiple'" :labelName2="'Post-Synergry Multiple'"/>    
-      </div>
-    </div>
-    <div class="container-fluid pt-5">
-        <div class="box">
-        <div style="display:inline-block;width:100%">
-            <div class="investment float-left">
-               My Investments
-            </div>
-            <div class="addButton float-right">
-                <UButton
-                    icon="i-heroicons-plus"
-                    size="sm"
-                    style="background-color: #00008b; color: white; border: none;"
-                    variant="solid"
-                    label="Add Item"
-                    :trailing="false"
-                />
-            </div>
-            </div>
-            <UTable :rows="people" :columns="columns">
-           
-                <template #actions-data="{ row }">
-                    <div class="button-container">
-                        <div class="edit-button">
-                            <UButton label="Edit" color="white">
-                                <template #leading>
-                                    <UIcon name="i-heroicons-pencil-solid" class="w-5 h-5" />
-                                </template>
-                            </UButton>
-                        </div>
-                        <UButton color="white">
-                            <template #leading>
-                                <UIcon name="i-heroicons-trash-solid" class="w-5 h-5 bg-red-700" />
-                            </template>
-                        </UButton>
-                   </div>
-                </template>
-            </UTable>
-        </div>
-    </div>
- </UContainer>
-</template>
-
-<style scoped>
-.flex-container {
-  display: flex;
-  gap: 16px;
+const refreshing = ref(false);
+const clearing = ref(false);
+async function handleRefresh() {
+  refreshing.value = true;
+  await refresh();
+  refreshing.value = false;
 }
-.box1 {
-  flex: 1;
-  padding: 16px; 
+async function handleClear() {
+  clearing.value = true;
+  await clear();
+  clearing.value = false;
 }
-.box {
-  flex: 1;
-  padding: 16px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-}
-.edit-button{
-    padding-right:12px;
-    display:inline-block;
-}
-</style>
-
-<script setup>
-import '@/assets/styles/global.css';
-import BarChart from '~/components/BarChart.vue';
-import HorizontalBarChart from '~/components/HorizontalBarChart.vue';
-
-const columns = [{
-  key: 'title',
-  label: 'Investment Title'
-}, {
-  key: 'total',
-  label: 'Total Consideration'
-}, {
-  key: 'guaranteed',
-  label: 'Guaranteed'
-}, {
-  key: 'atRisk',
-  label: 'At-risk'
-}, {
-  key: 'actions'
-}]
-
-const people = [{
-  title: 'Lindsay Walton',
-  total: '10',
-  guaranteed: '10',
-  atRisk: '10',
-}, {
-  title: 'Lindsay Walton',
-  total: '10',
-  guaranteed: '10',
-  atRisk: '10',
-}, {
-  title: 'Lindsay Walton',
-  total: '10',
-  guaranteed: '10',
-  atRisk: '10',
-}, {
-  title: 'Lindsay Walton',
-  total: '10',
-  guaranteed: '10',
-  atRisk: '10',
-}, {
-  title: 'Lindsay Walton',
-  total: '10',
-  guaranteed: '10',
-  atRisk: '10',
-}, {
-  title: 'Lindsay Walton',
-   total: '10',
-  guaranteed: '10',
-  atRisk: '10',
-}]
-
-
-
-
-
-
 </script>
 
+<template>
+  <NuxtLink to="/home" class="font-bold">Investment App</NuxtLink>
+  <div class="grid grid-cols-3 w-full">
+    <!-- <div class="col-start-1 flex flex-col items-center gap-4">
+      <p class="text-xl">Login with</p>
+      <button class="btn-base btn-login" @click="login()">
+        <span class="i-majesticons-login-line" />
+        <span class="pl-2">Default provider</span>
+      </button>
+      <button
+        v-for="(provider, index) in providers"
+        :key="index"
+        class="btn-base btn-login"
+        :disabled="provider.disabled"
+        @click="login(provider.name as any)"
+      >
+        <span :class="provider.icon" />
+        <span class="pl-2">{{ provider.label }}</span>
+      </button>
+    </div> -->
+    <div class="col-start-2 flex flex-col items-center gap-4">
+      <p class="text-xl">Session controls</p>
+      <p>Logged in: {{ loggedIn }}</p>
+      <p>Current provider: {{ currentProvider }}</p>
+      <button
+        class="btn-base btn-login"
+        :disabled="!loggedIn || !user?.canRefresh || refreshing"
+        @click="handleRefresh()"
+      >
+        <span class="i-majesticons-refresh" />
+        <span class="pl-2">Refresh</span>
+      </button>
+      <button class="btn-base btn-login" :disabled="!loggedIn" @click="fetch()">
+        <span class="i-majesticons-refresh" />
+        <span class="pl-2">Fetch</span>
+      </button>
+      <button
+        class="btn-base btn-login"
+        :disabled="!loggedIn"
+        @click="logout(currentProvider)"
+      >
+        <span class="i-majesticons-logout-line" />
+        <span class="pl-2">Logout</span>
+      </button>
+      <button
+        class="btn-base btn-login"
+        :disabled="!loggedIn || clearing"
+        @click="handleClear()"
+      >
+        <span class="i-majesticons-delete-bin-line" />
+        <span class="pl-2">Clear session</span>
+      </button>
+    </div>
+    <div class="col-start-3">
+      <p class="pb-4 text-xl">User object</p>
+      <div v-for="(value, key, index) in user" :key="index">
+        <span class="text-base font-bold">
+          {{ `${key}` }}
+        </span>
+        <p class="break-all pb-3 text-sm">
+          {{ value }}
+        </p>
+      </div>
+    </div>
+  </div>
+</template>

@@ -3,7 +3,7 @@
     <table>
       <thead>
         <tr>
-          <th v-for="column in columns" :key="column.key" @click="sortBy(column.key)">
+          <th v-for="column in columns" :key="column.key" @click="sortBy(column.key)" style="min-width:column.width">
             {{ column.label }}
             <span v-if="sortColumn === column.key">
               {{ sortDirection === 'asc' ? '▲' : '▼' }}
@@ -17,9 +17,11 @@
           <td v-for="column in columns" :key="column.key">
             {{ item[column.key] }}
           </td>
+
           <td v-if="$slots.action">
             <slot name="action" :item="item"></slot>
           </td>
+
         </tr>
       </tbody>
     </table>
