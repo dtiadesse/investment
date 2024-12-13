@@ -31,13 +31,13 @@
 
     <div class="container-fluid pt-5">
       <div
-        class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       >
         <div style="display: inline-block; width: 100%">
-          <div class="investment float-left">My Investments</div>
-          <div class="float-right">
+          <div class="pt-6 pl-6 investment float-left">All Investments</div>
+          <div class="py-5 pr-4 float-right">
             <button
-              class="text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              class="text-white flex addItem font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"
             >
               <svg
                 class="h-6 w-6 text-white-700"
@@ -59,21 +59,56 @@
           </div>
         </div>
 
-        <div class="relative overflow-x-auto sm:rounded-lg">
+        <div class="relative overflow-x-auto">
           <DataTable :data="tableData" :columns="tableColumns">
-
-
             <template #action="{ item }">
               <div class="action-buttons">
-                <button @click="editItem(item)">
-                  <i class="fas fa-edit"></i> Edit
-                </button>
-                <button @click="deleteItem(item)">
-                  <i class="fas fa-trash"></i> Delete
-                </button>
-                <button @click="viewItem(item)">
-                  <i class="fas fa-eye"></i> View
-                </button>
+              <button @click="editItem(item)"
+                    class="px-1 py-1 text-sm font-bold text-center border border-slate-300 inline-flex items-center rounded-lg focus:outline-none"
+                  >
+                    <svg
+                      class="h-5 w-5 text-slate-700"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" />
+                      <path
+                        d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"
+                      />
+                      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+                    </svg>
+                    Edit
+                  </button>
+                   <button  @click="deleteItem(item)"
+                    class="px-1 py-1 ml-2 text-sm font-bold text-center border border-slate-300 inline-flex items-center rounded-lg focus:outline-none"
+                  >
+                    <svg
+                      class="h-5 w-5 text-red-700"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" />
+                      <line x1="4" y1="7" x2="20" y2="7" />
+                      <line x1="10" y1="11" x2="10" y2="17" />
+                      <line x1="14" y1="11" x2="14" y2="17" />
+                      <path
+                        d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+                      />
+                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                    </svg>
+                  </button>
               </div>
             </template>
           </DataTable>
@@ -84,10 +119,14 @@
 </template>
 
 <style scoped>
+.addItem{
+  background-color:rgb(10 35 104)
+}
 button {
   margin: 0 5px;
   padding: 5px 10px;
   cursor: pointer;
+  
 }
 button.active {
   font-weight: bold;
@@ -144,23 +183,23 @@ const viewItem = (item) => {
 }
 
 const tableColumns  = [
-    { label: 'ID', key: 'id',  sortable: true  },
-    { label: 'Name', key: 'title',  sortable: true   },
-    { label: 'Pre Synergy Multiple', key: 'preSynergyMultiple', sortable: true },
-    { label: 'Post Synergy Multiple', key: 'postSynergyMultiple', sortable: false },
+    { label: 'Investment Title', key: 'title',  sortable: true ,width:'40%' ,color:'#000',fontWeight:'600' },
+    { label: 'Total Consideration', key: 'totalConsideration', sortable: true },
+    { label: 'Guaranteed', key: 'guaranteed', sortable: true },
+    { label: 'At-risk', key: 'atRisk', sortable: true },
 ];
 
 const tableData  = [
-    { id: 120005, title: 'Progress Capital - Team - Recruiting', preSynergyMultiple: '3.36', postSynergyMultiple: '5.22' },
-    { id: 120001, title: 'Cynthia Ng - Individual - Recruiting', preSynergyMultiple: '0', postSynergyMultiple: '0' },
-    { id: 109890, title: 'jimo liu - Individual - Recruiting', preSynergyMultiple: '1.59', postSynergyMultiple: '3.03' },
-    { id: 112345, title: 'Louay Alsadek - Team - Recruiting', preSynergyMultiple: '1.1', postSynergyMultiple: '1.91' },
-    { id: 134009, title: 'Miami Industrial - Fernandez & Palazzo - Team - Recruiting', preSynergyMultiple: '3.44', postSynergyMultiple: '3.44' },
-    { id: 100001, title: 'Moseley Watkins - Team - Recruiting', preSynergyMultiple: '1.23', postSynergyMultiple: '3.92' },
-    { id: 120002, title: 'Troy Pollet - Individual - Recruiting', preSynergyMultiple: '3.67', postSynergyMultiple: '3.49' },
-    { id: 100052, title: 'Errol Blumer - Individual - Recruiting', preSynergyMultiple: '5.37', postSynergyMultiple: '0' },
-    { id: 100022, title: 'Mac Crowther Team - Team - Recruiting', preSynergyMultiple: '6.58', postSynergyMultiple: '3.5' },
-    { id: 100045, title: 'Adam Gatto - Individual - Recruiting', preSynergyMultiple: '1.01', postSynergyMultiple: '1.36' },
+    {  title: 'Progress Capital - Team - Recruiting', totalConsideration: '3.36', guaranteed: '5.22' ,atRisk:'2.4'},
+    {  title: 'Cynthia Ng - Individual - Recruiting', totalConsideration: '0', guaranteed: '0' ,atRisk:'2.4'},
+    {  title: 'jimo liu - Individual - Recruiting', totalConsideration: '1.59', guaranteed: '3.03',atRisk:'2.4' },
+    {  title: 'Louay Alsadek - Team - Recruiting', totalConsideration: '1.1', guaranteed: '1.91',atRisk:'2.4' },
+    {  title: 'Miami Industrial - Fernandez & Palazzo - Team - Recruiting', totalConsideration: '3.44', guaranteed: '3.44',atRisk:'2.4' },
+    {  title: 'Moseley Watkins - Team - Recruiting', totalConsideration: '1.23', guaranteed: '3.92',atRisk:'2.4' },
+    {  title: 'Troy Pollet - Individual - Recruiting', totalConsideration: '3.67', guaranteed: '3.49',atRisk:'2.4' },
+    {  title: 'Errol Blumer - Individual - Recruiting', totalConsideration: '5.37', guaranteed: '0',atRisk:'2.4' },
+    {  title: 'Mac Crowther Team - Team - Recruiting', totalConsideration: '6.58', guaranteed: '3.5',atRisk:'2.4' },
+    {  title: 'Adam Gatto - Individual - Recruiting', totalConsideration: '1.01', guaranteed: '1.36',atRisk:'2.4' },
 
 ];
 
