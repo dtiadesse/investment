@@ -11,29 +11,31 @@
 
     <div class="grid gap-4 grid-cols-2">
       <div
-        
+       class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       >
+      
       <InvChart
-    :labels="labels"
+      :seriesLabels="seriesLabels"
+      :labels="labels"
       :preSynergyData="preSynergyData"
       :postSynergyData="postSynergyData"
       :chartWidth="700"
       :chartHeight="500"
-      :barSpacing="15"
+      :barSpacing="13"
       orientation="vertical"
     />
       </div>
       <div
-        
+       class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       >
         <HorizontalBarChart
     :labels="labels"
       :preSynergyData="preSynergyData"
       :postSynergyData="postSynergyData"
-      :chartWidth="600"
-      :chartHeight="600"
-      :barHeight="30"
-      :barSpacing="25"
+      :chartWidth="500"
+      :chartHeight="500"
+      :barHeight="20"
+      :barSpacing="13"
       :valueScaleSteps="7"
     />
       </div>
@@ -203,6 +205,7 @@ const labelsh = [
 const preSynergyDatah = [8, 2, 6, 4, 7, 1, 3, 5, 9, 4];
 const postSynergyDatah = [4, 1, 3, 2, 4, 1, 2, 3, 4, 2];
 
+const seriesLabels = ["Pre-Synergy Multiple", "Post-Synergy Multiple"];
 
 const labels = [
   "Progress Capital",
@@ -218,8 +221,6 @@ const labels = [
 
 const preSynergyData = [4, 5, 4.5, 6, 5.5, 5.5, 4.8, 5, 5.5];
 const postSynergyData = [3, 2.8, 3.2, 2.7, 3.1, 3.5, 2.9, 3.2, 4.6];
-
-
 
 const viewItem = (item) => {
 

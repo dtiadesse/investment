@@ -9,6 +9,10 @@ import { onMounted, ref, watch } from "vue";
 
 // Props for the chart
 const props = defineProps({
+  seriesLabels: {
+    type: Array,
+    required: true,
+  },
   labels: {
     type: Array,
     required: true,
@@ -47,6 +51,7 @@ const drawChart = () => {
 
   const ctx = canvas.value.getContext("2d");
   const {
+    seriesLabels,
     labels,
     preSynergyData,
     postSynergyData,
@@ -61,7 +66,7 @@ const drawChart = () => {
   canvas.value.height = chartHeight;
 
   // Chart variables
-  const padding = 50;
+  const padding = 80;
   const barColors = ["#2C2F48", "#00A8E8"];
   const maxDataValue = Math.max(...preSynergyData, ...postSynergyData);
   const chartAreaWidth = chartWidth - padding * 2;
@@ -91,7 +96,7 @@ const drawChart = () => {
   ctx.stroke();
 
   // Draw grid lines and labels
-  ctx.strokeStyle = "#ddd";
+  ctx.strokeStyle = "#fff";
   ctx.textAlign = "center";
   ctx.fillStyle = "#000";
 
@@ -100,6 +105,7 @@ const drawChart = () => {
       const y = padding + (chartAreaHeight / 5) * i;
       const value = (maxDataValue * (5 - i)) / 5;
 
+      ctx.strokeStyle = "#ddd";
       // Horizontal grid lines
       ctx.beginPath();
       ctx.moveTo(padding, y);
@@ -113,6 +119,7 @@ const drawChart = () => {
     for (let i = 0; i <= 5; i++) {
       const x = padding + (chartAreaWidth / 5) * i;
       const value = (maxDataValue * i) / 5;
+      ctx.strokeStyle = "#ddd";
 
       // Vertical grid lines
       ctx.beginPath();
@@ -149,10 +156,19 @@ const drawChart = () => {
       ctx.fillStyle = barColors[1];
       ctx.fillRect(groupStart + barWidth, base - postValue, barWidth, postValue);
 
+      const groupX = index * (2 * (barWidth + barSpacing)) + padding;
       // Draw label
-      ctx.fillStyle = "#000";
+      ctx.save();
+      ctx.fillStyle = "black";
+      ctx.font = "10px Arial";
       ctx.textAlign = "center";
-      ctx.fillText(label, groupStart + barWidth / 2, chartHeight - padding + 15);
+      ctx.translate(groupStart-25 + (2* (barWidth + barSpacing)) / 2, chartHeight - padding + 35);
+      ctx.rotate(-Math.PI / 4); // Rotate 45 degrees
+      ctx.fillText(label, 0, 0);
+      ctx.restore();
+      //ctx.fillStyle = "#000";
+      //ctx.textAlign = "center";
+      //ctx.fillText(label, groupStart + barWidth / 2, chartHeight - padding + 15);
     } else {
       // Pre-Synergy Bar
       ctx.fillStyle = barColors[0];
@@ -167,7 +183,25 @@ const drawChart = () => {
       ctx.textAlign = "right";
       ctx.fillText(label, padding - 10, groupStart + barWidth);
     }
+     const legendXStart = padding+120;
+      const legendY = chartHeight-15; // Position above canvas bottom
+      const legendSpacing = 160;
+
+      seriesLabels.forEach((label, index) => {
+        const x = legendXStart + index * legendSpacing;
+
+        // Draw legend color box
+        ctx.fillStyle = barColors[index];
+        ctx.fillRect(x, legendY, 15, 15);
+
+        // Draw legend text
+        ctx.fillStyle = "#0f0d0dc7";
+        ctx.font = "14px Arial";
+        ctx.textAlign = "left";
+        ctx.fillText(label, x + 20, legendY + 12); // Add space after color box
+      });
   });
+ 
 };
 
 onMounted(() => {
@@ -190,7 +224,7 @@ watch(
 }
 
 .chart {
-  border: 1px solid #ccc;
   display: block;
+  position:relative;
 }
 </style>

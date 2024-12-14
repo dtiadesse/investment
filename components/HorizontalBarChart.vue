@@ -155,7 +155,6 @@ watch(
 }
 
 .chart {
-  border: 1px solid #ccc;
   display: block;
 }
 </style>
