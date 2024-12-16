@@ -13,7 +13,7 @@
       <div
        class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       >
-      
+      <p class="prepostsynergy">Pre and Post Synergry</p>
       <InvChart
       :seriesLabels="seriesLabels"
       :labels="labels"
@@ -28,14 +28,16 @@
       <div
        class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       >
+      
+    <p  class="prepostsynergy">Total Consideration vs At-Risk Consideration</p>
         <HorizontalBarChart
     :labels="labels"
       :preSynergyData="preSynergyData"
       :postSynergyData="postSynergyData"
-      :chartWidth="500"
-      :chartHeight="500"
-      :barHeight="20"
-      :barSpacing="13"
+      :chartWidth="550"
+      :chartHeight="480"
+      :barHeight="27"
+      :barSpacing="15"
       :valueScaleSteps="7"
     />
       </div>
@@ -180,6 +182,13 @@ button:disabled {
 .edit-button {
   padding-right: 12px;
   display: inline-block;
+}
+
+.prepostsynergy{
+    padding: 22px;
+    font-size: 22px;
+    font-weight: 600;
+    position: absolute;
 }
 </style>
 

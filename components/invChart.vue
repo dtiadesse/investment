@@ -66,7 +66,7 @@ const drawChart = () => {
   canvas.value.height = chartHeight;
 
   // Chart variables
-  const padding = 80;
+  const padding = 90;
   const barColors = ["#2C2F48", "#00A8E8"];
   const maxDataValue = Math.max(...preSynergyData, ...postSynergyData);
   const chartAreaWidth = chartWidth - padding * 2;
@@ -86,8 +86,8 @@ const drawChart = () => {
   ctx.beginPath();
   if (orientation === "vertical") {
     ctx.moveTo(padding, padding);
-    ctx.lineTo(padding, chartHeight - padding);
-    ctx.lineTo(chartWidth - padding, chartHeight - padding);
+   // ctx.lineTo(padding, chartHeight - padding);
+   // ctx.lineTo(chartWidth - padding, chartHeight - padding);
   } else {
     ctx.moveTo(padding, chartHeight - padding);
     ctx.lineTo(chartWidth - padding, chartHeight - padding);
@@ -113,6 +113,9 @@ const drawChart = () => {
       ctx.stroke();
 
       // Y-axis values
+      ctx.fillStyle = "black";
+      ctx.font = "12px Arial";
+      ctx.textAlign = "center";
       ctx.fillText(value.toFixed(1), padding - 20, y + 5);
     }
   } else {
@@ -150,21 +153,32 @@ const drawChart = () => {
     if (orientation === "vertical") {
       // Pre-Synergy Bar
       ctx.fillStyle = barColors[0];
-      ctx.fillRect(groupStart, base - preValue, barWidth, preValue);
+      ctx.fillRect(groupStart + 12, base - preValue, barWidth, preValue);
 
       // Post-Synergy Bar
       ctx.fillStyle = barColors[1];
-      ctx.fillRect(groupStart + barWidth, base - postValue, barWidth, postValue);
+      ctx.fillRect(groupStart + barWidth + 12, base - postValue, barWidth, postValue);
 
       const groupX = index * (2 * (barWidth + barSpacing)) + padding;
       // Draw label
       ctx.save();
       ctx.fillStyle = "black";
-      ctx.font = "10px Arial";
+      ctx.font = "12px Arial";
       ctx.textAlign = "center";
       ctx.translate(groupStart-25 + (2* (barWidth + barSpacing)) / 2, chartHeight - padding + 35);
       ctx.rotate(-Math.PI / 4); // Rotate 45 degrees
-      ctx.fillText(label, 0, 0);
+      let truncatedText = label;
+      const maxChars = 10;
+      const maxWidth = 200; 
+      if (label.length > maxChars) {
+        truncatedText = label.slice(0, maxChars) + "...";
+      }
+
+      // Truncate text by pixel width
+      while (ctx.measureText(truncatedText).width > maxWidth && truncatedText.length > 0) {
+        truncatedText = truncatedText.slice(0, -1) + "...";
+      }
+      ctx.fillText(truncatedText, 0, 0);
       ctx.restore();
       //ctx.fillStyle = "#000";
       //ctx.textAlign = "center";
@@ -183,10 +197,10 @@ const drawChart = () => {
       ctx.textAlign = "right";
       ctx.fillText(label, padding - 10, groupStart + barWidth);
     }
-     const legendXStart = padding+120;
-      const legendY = chartHeight-15; // Position above canvas bottom
+     const legendXStart = padding + 120;
+      const legendY = chartHeight - 15; // Position above canvas bottom
       const legendSpacing = 160;
-
+  
       seriesLabels.forEach((label, index) => {
         const x = legendXStart + index * legendSpacing;
 
@@ -226,5 +240,6 @@ watch(
 .chart {
   display: block;
   position:relative;
+  margin-top:-8px;
 }
 </style>
