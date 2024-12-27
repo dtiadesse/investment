@@ -65,7 +65,7 @@ const drawChart = () => {
   canvas.value.height = chartHeight;
 
   // Chart variables
-  const padding = 50; // Padding around the chart
+  const padding = 53; // Padding around the chart
   const barColors = ["#00A8E8", "#2C2F48"];
   const maxDataValue = Math.max(...preSynergyData, ...postSynergyData);
   const chartAreaWidth = chartWidth - padding * 2;
@@ -77,11 +77,11 @@ const drawChart = () => {
   ctx.clearRect(0, 0, chartWidth, chartHeight);
 
   // Draw axes
-  ctx.strokeStyle = "#000";
+  ctx.strokeStyle = "#ddd";
   ctx.beginPath();
   ctx.moveTo(padding, padding);
   ctx.lineTo(padding, chartHeight - padding); // Y-axis
-  ctx.lineTo(chartWidth - padding, chartHeight - padding); // X-axis
+  //ctx.lineTo(chartWidth - padding, chartHeight - padding); // X-axis
   ctx.stroke();
 
   // Draw grid lines and values for the X-axis
@@ -100,8 +100,41 @@ const drawChart = () => {
     ctx.stroke();
 
     // Draw value labels on the X-axis
-    ctx.fillText(value.toFixed(1), x, chartHeight - padding + 20);
+    ctx.fillStyle = "black";
+    ctx.font = "12px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(value.toFixed(1), x + 7, chartHeight - padding + 20);
   }
+
+  // Function to truncate or wrap long labels
+  const drawLabel = (ctx, text, x, y, maxWidth, lineHeight) => {
+      const words = text.split(" ");
+      let line = "";
+      let lines = [];
+
+      // Break text into lines
+      words.forEach((word) => {
+        const testLine = line + word + " ";
+        const testWidth = ctx.measureText(testLine).width;
+
+        if (testWidth > maxWidth) {
+          lines.push(line);
+          line = word + " ";
+        } else {
+          line = testLine;
+        }
+      });
+      lines.push(line);
+
+      // Draw each line
+      lines.forEach((line, index) => {
+        ctx.fillStyle = "#000";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(line.trim(), x, y + index * lineHeight);
+      });
+
+  };
 
   // Draw horizontal bars
   labels.forEach((label, index) => {
@@ -114,6 +147,11 @@ const drawChart = () => {
 
     // Post-Synergy Bar
     const postBarWidth = (postSynergyData[index] / maxDataValue) * chartAreaWidth;
+
+    // Draw the label (wrap if too long)
+     drawLabel(ctx, label, padding - 28, y + barHeight / 3.5 - 7, padding - 30, 14);
+
+
     ctx.fillStyle = barColors[1];
     ctx.fillRect(
       padding + preBarWidth,
@@ -123,9 +161,9 @@ const drawChart = () => {
     );
 
     // Draw labels for the bar groups
-    ctx.fillStyle = "#000";
-    ctx.textAlign = "right";
-    ctx.fillText(label, padding - 10, y + barHeight / 1.5);
+   // ctx.fillStyle = "#000";
+    //ctx.textAlign = "center";
+    //ctx.fillText(label, padding - 25, y + barHeight / 1.5);
   });
 };
 
@@ -155,7 +193,7 @@ watch(
 }
 
 .chart {
-  border: 1px solid #ccc;
   display: block;
+  margin-top: 24px;
 }
 </style>
