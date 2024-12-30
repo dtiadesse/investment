@@ -51,7 +51,9 @@
           <div class="pt-6 pl-6 investment float-left">All Investments</div>
           <div class="py-5 pr-4 float-right">
             <button
+              @click="showModal"
               class="text-white flex addItem font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"
+               
             >
               <svg
                 class="h-6 w-6 text-white-700"
@@ -70,6 +72,8 @@
               </svg>
               <p class="text-base">Add Item</p>
             </button>
+            
+
           </div>
         </div>
 
@@ -126,12 +130,102 @@
               </div>
             </template>
           </DataTable>
+              
         </div>
       </div>
     </div>
+
   </div>
+  <Modal
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
+    
 </template>
 
+
+<script>
+import '@/assets/styles/global.css';
+import BarChart from '~/components/BarChart.vue';
+import HorizontalBarChart from '~/components/HorizontalBarChart.vue';
+import Modal from '~/components/Modal.vue';
+
+
+export default {
+  data() {
+    return {
+      isModalVisible: false,
+      labelsh : [
+        "Project A1",
+        "Project A2",
+        "Project A3",
+        "Project A4",
+        "Project A5",
+        "Project A6",
+        "Project A7",
+        "Project A8",
+        "Project A9",
+        "Project A10",
+      ],
+      preSynergyDatah : [8, 2, 6, 4, 7, 1, 3, 5, 9, 4],
+      postSynergyDatah : [4, 1, 3, 2, 4, 1, 2, 3, 4, 2],
+      seriesLabels : ["Pre-Synergy Multiple", "Post-Synergy Multiple"],
+      labels : [
+        "Progress Capital",
+        "Cynthia Ng",
+        "Louay Alsadeek",
+        "Miami Industries",
+        "Moseley Watkins",
+        "Troy Pollet",
+        "Errol Blumer",
+        "Mac Crowther",
+        "Adam Gatto",
+      ],
+      preSynergyData : [4, 5, 4.5, 6, 5.5, 5.5, 4.8, 5, 5.5],
+      postSynergyData : [3, 2.8, 3.2, 2.7, 3.1, 3.5, 2.9, 3.2, 4.6],
+      tableColumns  : [
+          { label: 'Investment Title', key: 'title',  sortable: true ,width:'40%' ,color:'#000',fontWeight:'600' },
+          { label: 'Total Consideration', key: 'totalConsideration', sortable: true },
+          { label: 'Guaranteed', key: 'guaranteed', sortable: true },
+          { label: 'At-risk', key: 'atRisk', sortable: true },
+      ],
+      tableData  : [
+          {  id:1, title: 'Progress Capital - Team - Recruiting', totalConsideration: '3.36', guaranteed: '5.22' ,atRisk:'2.4'},
+          {  id:2, title: 'Cynthia Ng - Individual - Recruiting', totalConsideration: '0', guaranteed: '0' ,atRisk:'2.4'},
+          {  id:3, title: 'jimo liu - Individual - Recruiting', totalConsideration: '1.59', guaranteed: '3.03',atRisk:'2.4' },
+          {  id:4, title: 'Louay Alsadek - Team - Recruiting', totalConsideration: '1.1', guaranteed: '1.91',atRisk:'2.4' },
+          {  id:5, title: 'Miami Industrial - Fernandez & Palazzo - Team - Recruiting', totalConsideration: '3.44', guaranteed: '3.44',atRisk:'2.4' },
+          {  id:6, title: 'Moseley Watkins - Team - Recruiting', totalConsideration: '1.23', guaranteed: '3.92',atRisk:'2.4' },
+          {  id:7, title: 'Troy Pollet - Individual - Recruiting', totalConsideration: '3.67', guaranteed: '3.49',atRisk:'2.4' },
+          {  id:8, title: 'Errol Blumer - Individual - Recruiting', totalConsideration: '5.37', guaranteed: '0',atRisk:'2.4' },
+          {  id:9, title: 'Mac Crowther Team - Team - Recruiting', totalConsideration: '6.58', guaranteed: '3.5',atRisk:'2.4' },
+          {  id:10, title: 'Adam Gatto - Individual - Recruiting', totalConsideration: '1.01', guaranteed: '1.36',atRisk:'2.4' },
+      ]
+    }
+  },
+
+methods: {
+  deleteItem (item)  {
+    const index = this.tableData.findIndex(function(object) {
+        return object.id === item.id;
+    });
+    this.tableData.splice(index,1);
+  },
+
+  editItem (item)  {
+    alert(`Editing item: ${item.title}`);
+  },
+
+  showModal() {
+        this.isModalVisible = true;
+      },
+      closeModal() {
+        this.isModalVisible = false;
+      }
+}
+
+}
+</script>
 <style scoped>
 .addItem{
   background-color:rgb(10 35 104)
@@ -190,75 +284,14 @@ button:disabled {
     font-weight: 600;
     position: absolute;
 }
-</style>
-
-<script setup>
-import '@/assets/styles/global.css';
-import BarChart from '~/components/BarChart.vue';
-import HorizontalBarChart from '~/components/HorizontalBarChart.vue';
-
-
-const labelsh = [
-  "Project A1",
-  "Project A2",
-  "Project A3",
-  "Project A4",
-  "Project A5",
-  "Project A6",
-  "Project A7",
-  "Project A8",
-  "Project A9",
-  "Project A10",
-];
-
-const preSynergyDatah = [8, 2, 6, 4, 7, 1, 3, 5, 9, 4];
-const postSynergyDatah = [4, 1, 3, 2, 4, 1, 2, 3, 4, 2];
-
-const seriesLabels = ["Pre-Synergy Multiple", "Post-Synergy Multiple"];
-
-const labels = [
-  "Progress Capital",
-  "Cynthia Ng",
-  "Louay Alsadeek",
-  "Miami Industries",
-  "Moseley Watkins",
-  "Troy Pollet",
-  "Errol Blumer",
-  "Mac Crowther",
-  "Adam Gatto",
-];
-
-const preSynergyData = [4, 5, 4.5, 6, 5.5, 5.5, 4.8, 5, 5.5];
-const postSynergyData = [3, 2.8, 3.2, 2.7, 3.1, 3.5, 2.9, 3.2, 4.6];
-
-const viewItem = (item) => {
-
- alert(`Editing item: ${item.title}`);
-
+.fade-enter-to,
+.fade-leave-to {
+  opacity: 0;
 }
 
-const tableColumns  = [
-    { label: 'Investment Title', key: 'title',  sortable: true ,width:'40%' ,color:'#000',fontWeight:'600' },
-    { label: 'Total Consideration', key: 'totalConsideration', sortable: true },
-    { label: 'Guaranteed', key: 'guaranteed', sortable: true },
-    { label: 'At-risk', key: 'atRisk', sortable: true },
-];
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 500ms ease-out;
+}
+</style>
 
-const tableData  = [
-    {  title: 'Progress Capital - Team - Recruiting', totalConsideration: '3.36', guaranteed: '5.22' ,atRisk:'2.4'},
-    {  title: 'Cynthia Ng - Individual - Recruiting', totalConsideration: '0', guaranteed: '0' ,atRisk:'2.4'},
-    {  title: 'jimo liu - Individual - Recruiting', totalConsideration: '1.59', guaranteed: '3.03',atRisk:'2.4' },
-    {  title: 'Louay Alsadek - Team - Recruiting', totalConsideration: '1.1', guaranteed: '1.91',atRisk:'2.4' },
-    {  title: 'Miami Industrial - Fernandez & Palazzo - Team - Recruiting', totalConsideration: '3.44', guaranteed: '3.44',atRisk:'2.4' },
-    {  title: 'Moseley Watkins - Team - Recruiting', totalConsideration: '1.23', guaranteed: '3.92',atRisk:'2.4' },
-    {  title: 'Troy Pollet - Individual - Recruiting', totalConsideration: '3.67', guaranteed: '3.49',atRisk:'2.4' },
-    {  title: 'Errol Blumer - Individual - Recruiting', totalConsideration: '5.37', guaranteed: '0',atRisk:'2.4' },
-    {  title: 'Mac Crowther Team - Team - Recruiting', totalConsideration: '6.58', guaranteed: '3.5',atRisk:'2.4' },
-    {  title: 'Adam Gatto - Individual - Recruiting', totalConsideration: '1.01', guaranteed: '1.36',atRisk:'2.4' },
-
-];
-
-definePageMeta({
-    layout: "home",
-})
-</script>
