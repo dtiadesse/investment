@@ -5,10 +5,10 @@
       <button
         v-for="(tab, index) in tabs"
         :key="index"
-        @click="activeTab = index"
+        @click="activeTab = index,props.currentTab = index"
         :class="[
           'py-2 px-4 focus:outline-none',
-          activeTab === index ? 'border-b-2 border-blue-900 bg-gray-300 text-gray-900' : 'text-gray-500',
+          (props.currentTab >0 ? props.currentTab == index: activeTab == index) ? 'border-b-2 border-blue-900 bg-gray-300 text-gray-900' : 'text-gray-500',
         ]"
       >
         {{ tab.label }}
@@ -20,7 +20,7 @@
       <div
         v-for="(tab, index) in tabs"
         :key="index"
-        v-show="activeTab === index"
+        v-show="props.currentTab >0 ? props.currentTab == index: activeTab == index"
       >
         <slot :name="tab.name" />
       </div>
@@ -31,6 +31,13 @@
 <script setup>
 import { ref } from "vue";
 
+const props = defineProps({
+  currentTab: {
+    type: Number,
+    required: true,
+  },
+});
+
 const activeTab = ref(0);
 const tabs = ref([
   { label: "Main Details", name: "mainDetails" },
@@ -40,5 +47,6 @@ const tabs = ref([
   { label: "Financial Returns", name: "Financialreturns" },
   { label: "Financial Impact", name: "Financialimpact" },
 ]);
+
 </script>
 
