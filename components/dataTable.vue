@@ -3,7 +3,7 @@
     <table>
       <thead>
         <tr>
-          <th v-for="column in columns" :key="column.key" @click="sortBy(column.key)" :style="{'min-width':column.width,'width':column.width}">
+          <th v-for="column in columns" :key="column.key" @click="sortBy(column.key)" :style="{'min-width':column.width,'width':column.width,'color':'#fff'}">
             {{ column.label }}
             <span v-if="sortColumn === column.key">
               {{ sortDirection === 'asc' ? '▲' : '▼' }}
@@ -14,7 +14,7 @@
       </thead>
       <tbody>
         <tr v-for="item in paginatedData" :key="item.id">
-          <td v-for="column in columns" :key="column.key" :style="{'color':column.color,'font-weight':column.fontWeight}">
+          <td v-for="column in columns" :key="column.key" :style="{'color':column.color,'font-weight':column.fontWeight,'color':'#fff'}">
             {{ item[column.key] }}
           </td>
 
@@ -27,14 +27,14 @@
     </table>
     <div class="pagination">
       <nav class="flex items-center -space-x-px" aria-label="Pagination">
-        <button type="button"  @click="changePage(currentPage - 1)" :disabled="currentPage === 1" class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" aria-label="Previous">
+        <button type="button"  @click="changePage(currentPage - 1)" :disabled="currentPage === 1" class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 hover:bg-gray-400 focus:outline-none focus:bg-gray-100 text-gray-900 disabled:opacity-30 disabled:pointer-events-none hover:text-gray-900" aria-label="Previous">
           <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m15 18-6-6 6-6"></path>
           </svg>
           <span class="hidden sm:block">Previous</span>
         </button>
-        <button type="button" class="min-h-[38px] min-w-[38px] flex hover:bg-gray-100 justify-center items-center border border-gray-200 py-2 px-3 text-sm first:rounded-s-lg last:rounded-e-lg  disabled:opacity-50 disabled:pointer-events-none" aria-current="page" @click="changePage(page)" v-for="page in totalPages" :key="page" :class="{ active: page === currentPage }">{{page}}</button>
-        <button type="button" @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages" class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" aria-label="Next">
+        <button type="button" class="min-h-[38px] min-w-[38px] flex hover:bg-gray-400 justify-center hover:text-gray-900 items-center border border-gray-200 py-2 px-3 text-sm first:rounded-s-lg last:rounded-e-lg  disabled:opacity-50 disabled:pointer-events-none" aria-current="page" @click="changePage(page)" v-for="page in totalPages" :key="page" :class="{ active: page === currentPage }">{{page}}</button>
+        <button type="button" @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages" class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 hover:bg-gray-400 hover:text-gray-900 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" aria-label="Next">
           <span class="hidden sm:block" >Next</span>
           <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m9 18 6-6-6-6"></path>
@@ -154,7 +154,6 @@ button.active {
 button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
-   background-color:#fff;
 }
 .nextButton{
   background-color:#ddd6;

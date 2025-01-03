@@ -100,7 +100,7 @@ const drawChart = () => {
     ctx.stroke();
 
     // Draw value labels on the X-axis
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     ctx.font = "12px Arial";
     ctx.textAlign = "center";
     ctx.fillText(value.toFixed(1), x + 7, chartHeight - padding + 20);
@@ -128,7 +128,7 @@ const drawChart = () => {
 
       // Draw each line
       lines.forEach((line, index) => {
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = "#fff";
         ctx.font = "12px Arial";
         ctx.textAlign = "center";
         ctx.fillText(line.trim(), x, y + index * lineHeight);

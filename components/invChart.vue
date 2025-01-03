@@ -113,7 +113,7 @@ const drawChart = () => {
       ctx.stroke();
 
       // Y-axis values
-      ctx.fillStyle = "black";
+      ctx.fillStyle = "white";
       ctx.font = "12px Arial";
       ctx.textAlign = "center";
       ctx.fillText(value.toFixed(1), padding - 20, y + 5);
@@ -162,7 +162,7 @@ const drawChart = () => {
       const groupX = index * (2 * (barWidth + barSpacing)) + padding;
       // Draw label
       ctx.save();
-      ctx.fillStyle = "black";
+      ctx.fillStyle = "white";
       ctx.font = "12px Arial";
       ctx.textAlign = "center";
       ctx.translate(groupStart-25 + (2* (barWidth + barSpacing)) / 2, chartHeight - padding + 35);
@@ -193,7 +193,7 @@ const drawChart = () => {
       ctx.fillRect(base + preValue, groupStart + barWidth, postValue, barWidth);
 
       // Draw label
-      ctx.fillStyle = "#000";
+      ctx.fillStyle = "#fff";
       ctx.textAlign = "right";
       ctx.fillText(label, padding - 10, groupStart + barWidth);
     }
@@ -209,7 +209,7 @@ const drawChart = () => {
         ctx.fillRect(x, legendY, 15, 15);
 
         // Draw legend text
-        ctx.fillStyle = "#0f0d0dc7";
+        ctx.fillStyle = "#fff";
         ctx.font = "14px Arial";
         ctx.textAlign = "left";
         ctx.fillText(label, x + 20, legendY + 12); // Add space after color box

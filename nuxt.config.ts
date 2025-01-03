@@ -1,10 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
-  modules: ['@nuxt/ui'],
+  css: ['~/assets/css/tailwind.css','@/assets/css/global.css'],
   app: {
     baseURL: '/', // Changes base path
+  }, // Include the Tailwind CSS file
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
   },
-  css: ['@/assets/styles/global.css'],
-})
+});

@@ -85,7 +85,7 @@
                     class="px-1 py-1 text-sm font-bold text-center border border-slate-300 inline-flex items-center rounded-lg focus:outline-none"
                   >
                     <svg
-                      class="h-5 w-5 text-slate-700"
+                      class="h-5 w-5"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
@@ -145,7 +145,7 @@
 
 
 <script>
-import '@/assets/styles/global.css';
+import '@/assets/css/global.css';
 import BarChart from '~/components/BarChart.vue';
 import HorizontalBarChart from '~/components/HorizontalBarChart.vue';
 import Modal from '~/components/Modal.vue';
