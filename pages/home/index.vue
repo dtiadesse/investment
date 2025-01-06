@@ -138,7 +138,10 @@
   </div>
   <Modal
       v-show="isModalVisible"
+      :tableData="tableData"
       @close="closeModal"
+      @save="saveEdit"
+      :editData="editData"
     />
     
 </template>
@@ -200,7 +203,8 @@ export default {
           {  id:8, title: 'Errol Blumer - Individual - Recruiting', totalConsideration: '5.37', guaranteed: '0',atRisk:'2.4' },
           {  id:9, title: 'Mac Crowther Team - Team - Recruiting', totalConsideration: '6.58', guaranteed: '3.5',atRisk:'2.4' },
           {  id:10, title: 'Adam Gatto - Individual - Recruiting', totalConsideration: '1.01', guaranteed: '1.36',atRisk:'2.4' },
-      ]
+      ],
+      editData: null,
     }
   },
 
@@ -214,14 +218,37 @@ methods: {
 
   editItem (item)  {
     alert(`Editing item: ${item.title}`);
+    this.editData = { ...item };
+    this.isModalVisible = true;
+  },
+
+  addItem () {
+    this.editData.id=this.tableData.legnth+1
+    this.tableData.push(this.editData);
   },
 
   showModal() {
-        this.isModalVisible = true;
-      },
-      closeModal() {
-        this.isModalVisible = false;
+    this.isModalVisible = true;
+  },
+
+  closeModal() {
+    this.isModalVisible = false;
+  },
+
+  saveEdit(updatedData) {
+      // Update the item in the items array
+      const index = this.tableData.findIndex((item) => item.id === updatedData.id);
+      console.log('index',index)
+      if (index !== -1) 
+      {
+        this.tableData.splice(index, 1, updatedData);
       }
+      else
+      {
+        this.tableData.push(updatedData);
+      }
+      this.closeModal();
+  },
 }
 
 }

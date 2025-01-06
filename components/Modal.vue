@@ -11,98 +11,100 @@
       </button>
       <h2 class="text-xl font-bold mb-4 text-center  half-underline">Add New Investment</h2>
       <div>
-        <form @submit.prevent="handleSubmit">
-          <Tabs :currentTab="currentTab">
-            <template #mainDetails>          
-              <div class="flex items-center justify-center">
-                <div class="max-w-md w-full">
-                    <!-- Title Field -->
-                    <div class="mb-4">
-                      <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
-                        Title
-                      </label>
-                      <input
-                        id="title"
-                        type="text"
-                        v-model="form.title"
-                        class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Progress Capital - Team - Recruiting"
-                      />
-                    </div>
+          <Tabs :currentTab="currentTab" :tabs="['Main Details', 'Revenue', 'Total & Risk','Other','Financial Returns','Financial Impact']">
+            <template #default="{ activeTab,currentTab }"> 
+             <form @submit.prevent="handleSubmit">  
+              <div v-if="activeTab === 0">      
+                  <div class="flex items-center justify-center">
+                    <div class="max-w-md w-full">
+                        <!-- Title Field -->
+                        <div class="mb-4">
+                          <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
+                            Title
+                          </label>
+                          <input
+                            id="title"
+                            type="text"
+                            v-model="form.title"
+                            class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Progress Capital - Team - Recruiting"
+                          />
+                          <span v-if="errors.title" class="text-red-500 text-sm">{{ errors.title }}</span>
+                        </div>
 
-                    <!-- Type Field -->
-                    <div class="mb-4">
-                      <label for="type" class="block text-sm font-medium text-gray-700 mb-2">
-                        Type
-                      </label>
-                      <select
-                        id="type"
-                        v-model="form.selectedType"
-                        class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
-                      >
-                        <option disabled value="">Select an type</option>
-                        <option v-for="(option, index) in options" :key="index" :value="option">
-                          {{ option }}
-                        </option>
-                      </select>
-                    </div>
+                        <!-- Type Field -->
+                        <div class="mb-4">
+                          <label for="type" class="block text-sm font-medium text-gray-700 mb-2">
+                            Type
+                          </label>
+                          <select
+                            id="type"
+                            v-model="form.selectedType"
+                            class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+                          >
+                            <option disabled value="">Select an type</option>
+                            <option v-for="(option, index) in options" :key="index" :value="option">
+                              {{ option }}
+                            </option>
+                          </select>
+                        </div>
 
-                    <!-- Investment Details Field -->
-                    <div class="mb-4">
-                      <label for="investmentDetails" class="block text-sm font-medium text-gray-700 mb-2">
-                        Investment Details
-                      </label>
-                      <select
-                        id="investmentDetails"
-                        v-model="form.investmentDetails"
-                        class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
-                      >
-                        <option disabled value="">Select an Investment Details</option>
-                        <option v-for="(option, index) in options" :key="index" :value="option">
-                          {{ option }}
-                        </option>
-                      </select>
-                    </div>
-                    
-                    <!-- Size Field -->
-                    <div class="mb-4">
-                      <label for="size" class="block text-sm font-medium text-gray-700 mb-2">
-                        Size
-                      </label>
-                      <select
-                        id="size"
-                        v-model="form.size"
-                        class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
-                      >
-                        <option disabled value="">Select an size</option>
-                        <option v-for="(option, index) in options" :key="index" :value="option">
-                          {{ option }}
-                        </option>
-                      </select>
-                    </div>
+                        <!-- Investment Details Field -->
+                        <div class="mb-4">
+                          <label for="investmentDetails" class="block text-sm font-medium text-gray-700 mb-2">
+                            Investment Details
+                          </label>
+                          <select
+                            id="investmentDetails"
+                            v-model="form.investmentDetails"
+                            class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+                          >
+                            <option disabled value="">Select an Investment Details</option>
+                            <option v-for="(option, index) in options" :key="index" :value="option">
+                              {{ option }}
+                            </option>
+                          </select>
+                        </div>
+                        
+                        <!-- Size Field -->
+                        <div class="mb-4">
+                          <label for="size" class="block text-sm font-medium text-gray-700 mb-2">
+                            Size
+                          </label>
+                          <select
+                            id="size"
+                            v-model="form.size"
+                            class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+                          >
+                            <option disabled value="">Select an size</option>
+                            <option v-for="(option, index) in options" :key="index" :value="option">
+                              {{ option }}
+                            </option>
+                          </select>
+                        </div>
 
-                  
-                </div>
+                      
+                    </div>
+                  </div>
+                  <!-- Submit Button -->
+                  <div class="m-4 flex ">
+                        <button
+                          type="button"
+                          @click="close()"
+                          class="w-full  mr-4 px-4 py-2 border-2 border-gray-200 font-bold bg-inherit text-black rounded"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          @click="validateCurrentTab(0)"
+                          class="w-full bg-blue-900 text-white py-2 px-4 rounded hover:bg-blue-900"
+                        >
+                          Next
+                        </button>
+                  </div>
               </div>
-              <!-- Submit Button -->
-              <div class="m-4 flex ">
-                    <button
-                      type="button"
-                      @click="close()"
-                      class="w-full  mr-4 px-4 py-2 border-2 border-gray-200 font-bold bg-inherit text-black rounded"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      @click="validateCurrentTab"
-                      class="w-full bg-blue-900 text-white py-2 px-4 rounded hover:bg-blue-900"
-                    >
-                      Add investment
-                    </button>
-              </div>
-            </template>
-            <template #revenue>
+              <div v-if="activeTab === 1"> 
               <div class="flex items-center justify-center">
                 <div class="max-w-md w-full">
                     <!-- Base Revenue Field -->
@@ -168,21 +170,21 @@
               <div class="m-4 flex ">
                     <button
                       type="button"
-                      @click="close()"
+                      @click="previousTab()"
                       class="w-full  mr-4 px-4 py-2 border-2 border-gray-200 font-bold bg-inherit text-black rounded"
                     >
-                      Cancel
+                      Previous
                     </button>
                     <button
                       type="button"
-                      @click="validateCurrentTab"
+                      @click="validateCurrentTab(1)"
                       class="w-full bg-blue-900 text-white py-2 px-4 rounded hover:bg-blue-900"
                     >
-                      Add investment
+                      Next
                     </button>
                     </div>
-            </template>
-            <template #totalRisk>
+              </div>
+              <div v-if="activeTab === 2"> 
               <div class="flex items-center justify-center">
                 <div class="max-w-md w-full">
                     <!-- Total Consideration Field -->
@@ -245,13 +247,13 @@
 
                     <!-- At Risk Stable Field -->
                     <div class="mb-4">
-                      <label for="atRisks" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="atRisk" class="block text-sm font-medium text-gray-700 mb-2">
                         At Risk (Stable)
                       </label>
                       <input
-                        id="atRisks"
+                        id="atRisk"
                         type="text"
-                        v-model="form.atRisks"
+                        v-model="form.atRisk"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="At Risk Stable"
                       />
@@ -276,21 +278,21 @@
               <div class="m-4 flex ">
                     <button
                       type="button"
-                      @click="close()"
+                      @click="previousTab()"
                       class="w-full  mr-4 px-4 py-2 border-2 border-gray-200 font-bold bg-inherit text-black rounded"
                     >
-                      Cancel
+                      Previous
                     </button>
                     <button
                       type="button"
-                      @click="validateCurrentTab"
+                      @click="validateCurrentTab(2)"
                       class="w-full bg-blue-900 text-white py-2 px-4 rounded hover:bg-blue-900"
                     >
-                      Add investment
+                      Next
                     </button>
                     </div>                   
-            </template>
-            <template #other>
+              </div>
+              <div v-if="activeTab === 3"> 
               <div class="flex items-center justify-center">
                 <div class="px-6 max-w-xl max-h-96 overflow-y-auto">
                     <!-- Growth Field -->
@@ -440,21 +442,21 @@
               <div class="m-4 flex ">
                     <button
                       type="button"
-                      @click="close()"
+                      @click="previousTab()"
                       class="w-full  mr-4 px-4 py-2 border-2 border-gray-200 font-bold bg-inherit text-black rounded"
                     >
-                      Cancel
+                      Previous
                     </button>
                     <button
                       type="button"
-                      @click="validateCurrentTab"
+                      @click="validateCurrentTab(3)"
                       class="w-full bg-blue-900 text-white py-2 px-4 rounded hover:bg-blue-900"
                     >
-                      Add investment
+                      Next
                     </button>
                     </div>
-            </template>
-            <template #Financialreturns>
+              </div>
+              <div v-if="activeTab === 4"> 
               <div class="flex items-center justify-center">
                 <div class="max-w-md w-full">
                   <!-- Synergry Field -->
@@ -551,21 +553,21 @@
               <div class="m-4 flex ">
                     <button
                       type="button"
-                      @click="close()"
+                      @click="previousTab()"
                       class="w-full  mr-4 px-4 py-2 border-2 border-gray-200 font-bold bg-inherit text-black rounded"
                     >
-                      Cancel
+                      Previous
                     </button>
                     <button
                       type="button"
-                      @click="validateCurrentTab"
+                      @click="validateCurrentTab(4)"
                       class="w-full bg-blue-900 text-white py-2 px-4 rounded hover:bg-blue-900"
                     >
-                      Add investment
+                     Next
                     </button>
                     </div>
-            </template>
-            <template #Financialimpact>
+              </div>
+              <div v-if="activeTab === 5"> 
               <div class="flex items-center justify-center">              
                 <div class="max-w-xl w-full">
                     <p class="text-center font-bold text-xl mb-3">Set Prediction</p>
@@ -772,10 +774,10 @@
               <div class="m-4 flex ">
                     <button
                       type="button"
-                      @click="close()"
+                      @click="previousTab()"
                       class="w-full  mr-4 px-4 py-2 border-2 border-gray-200 font-bold bg-inherit text-black rounded"
                     >
-                      Cancel
+                      Previous
                     </button>
                     <button
                       type="submit"
@@ -784,9 +786,10 @@
                       Add investment
                     </button>
                     </div>
+              </div>
+              </form>
             </template>  
-          </Tabs>        
-        </form>
+          </Tabs>  
       </div>
     </div>
     </div>
@@ -795,12 +798,25 @@
 
 <script>
 import Tabs from "~/components/Tabs.vue";
+import { reactive } from 'vue';
+
   export default {
+    props: {
+      tableData: {
+        type: Array,
+        required: true,
+      },
+      editData: {
+        type: Object,
+        default: () => ({}),
+      },
+    },
     name: 'Modal',
     data() {
       return {
         currentTab: 0,
         form: {
+          id:"",
           title: "",
           selectedType: "",
           investmentDetails:"",
@@ -813,7 +829,7 @@ import Tabs from "~/components/Tabs.vue";
           atRiskConsideration:"",
           guaranteed:"",
           guaranteedp:"",
-          atRisks:"",
+          atRisk:"",
           atGrowth:"",
           threeYearRevenueGrowthOther:"",
           threeYearRevenueGrowthOtherP:"",
@@ -848,28 +864,58 @@ import Tabs from "~/components/Tabs.vue";
           month15:""
         },
         options: ["Option 1", "Option 2", "Option 3", "Option 4"],
+        errors: {
+          title:""
+        },
       }
+    },
+    watch: {
+      editData: {
+        immediate: true,
+        handler(newValue) {
+          this.form = { ...newValue };
+        },
+      },
     },
     methods: {
       close() {
         this.$emit('close');
       },
-      handleSubmit() {
-        console.log("Form submitted:", this.form);
-        alert("Form submitted");
-        // Reset the form
-        this.form.title = "";
-        this.form.selectedType = "";
-        this.form.investmentDetails = "";
-        this.form.size = "";
+
+      validate() {
+        let isValid = true;
+
+        // Validate Title
+        
+        if (!this.form.title) {
+          this.errors.title = 'Title is required';
+          isValid = false;
+        } else {
+          this.errors.title = null;
+        }
+
+        return isValid;
       },
 
-      validateCurrentTab() {
-        this.currentTab++;
-        if(this.currentTab>5){
-          this.currentTab = 0;
-        }
+      handleSubmit() {
+          if(this.validate()){
+              console.log("Form submitted:", this.form);              
+              this.$emit('save', this.form);
+              alert("Form submitted");
+              this.$emit('close');
+          }
       },
+
+      validateCurrentTab(activeTab) {
+       // if(this.validate()){
+       console.log(this.currentTab);
+            this.currentTab = this.currentTab + 1 ;
+        //}
+      },
+
+      previousTab(){
+        this.currentTab = this.currentTab - 1 
+      }
     },
   };
 </script>
