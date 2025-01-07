@@ -67,6 +67,8 @@
         </div>
 
         <div class="relative overflow-x-auto">
+        <div v-if="loading">Loading...</div>
+        <div  v-else>
           <DataTable :data="tableData" :columns="tableColumns">
             <template #action="{ item }">
               <div class="action-buttons">
@@ -119,6 +121,7 @@
               </div>
             </template>
           </DataTable>
+          </div>
         </div>
       </div>
     </div>
@@ -131,11 +134,10 @@
     />
   </div>
 </template>
-  
-  
-  <script>
+
+<script>
 import "@/assets/styles/global.css";
-import jsonData from '@/data/db.json';
+
 definePageMeta({
   layout: "home",
 });
@@ -189,12 +191,35 @@ export default {
         { label: "Guaranteed", key: "GuaranteedAmount",width: "20%", sortable: true },
         { label: "At-risk", key: "AtRiskAmount",width: "20%", sortable: true },
       ],
-      tableData: jsonData.investments,
       editData: null,
-    };
+      loading: true,
+      error: null,
+      tableData:[],
+    }
   },
-
+  watch: {
+    tableData: {
+      immediate: true,
+      handler() {
+        this.loading = false;
+      },
+    },
+  },
+  created() {
+    this.fetchInvestments();
+  },
   methods: {
+    async fetchInvestments() {
+      try {
+        const response = await fetch('http://localhost:3001/investments');
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        this.tableData = await response.json();
+      } catch (err) {
+        console.log(err);
+      }
+    },
     deleteItem(item) {
       const index = this.tableData.findIndex(function (object) {
         return object.id === item.id;
@@ -203,7 +228,6 @@ export default {
     },
 
     editItem(item) {
-      alert(`Editing item: ${item.title}`);
       this.editData = { ...item };
       this.isModalVisible = true;
     },
@@ -226,7 +250,6 @@ export default {
       const index = this.tableData.findIndex(
         (item) => item.id === updatedData.id
       );
-      console.log("index", index);
       if (index !== -1) {
         this.tableData.splice(index, 1, updatedData);
       } else {
