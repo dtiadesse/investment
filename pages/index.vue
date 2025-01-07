@@ -135,6 +135,7 @@
   
   <script>
 import "@/assets/styles/global.css";
+import jsonData from '@/data/db.json';
 definePageMeta({
   layout: "home",
 });
@@ -173,92 +174,22 @@ export default {
       tableColumns: [
         {
           label: "Investment Title",
-          key: "title",
+          key: "Title",
           sortable: true,
-          width: "40%",
+          width: "30%",
           color: "#000",
           fontWeight: "600",
         },
         {
           label: "Total Consideration",
-          key: "totalConsideration",
+          key: "TotalConsideration",
+          width: "20%",
           sortable: true,
         },
-        { label: "Guaranteed", key: "guaranteed", sortable: true },
-        { label: "At-risk", key: "atRisk", sortable: true },
+        { label: "Guaranteed", key: "GuaranteedAmount",width: "20%", sortable: true },
+        { label: "At-risk", key: "AtRiskAmount",width: "20%", sortable: true },
       ],
-      tableData: [
-        {
-          id: 1,
-          title: "Progress Capital - Team - Recruiting",
-          totalConsideration: "3.36",
-          guaranteed: "5.22",
-          atRisk: "2.4",
-        },
-        {
-          id: 2,
-          title: "Cynthia Ng - Individual - Recruiting",
-          totalConsideration: "0",
-          guaranteed: "0",
-          atRisk: "2.4",
-        },
-        {
-          id: 3,
-          title: "jimo liu - Individual - Recruiting",
-          totalConsideration: "1.59",
-          guaranteed: "3.03",
-          atRisk: "2.4",
-        },
-        {
-          id: 4,
-          title: "Louay Alsadek - Team - Recruiting",
-          totalConsideration: "1.1",
-          guaranteed: "1.91",
-          atRisk: "2.4",
-        },
-        {
-          id: 5,
-          title: "Miami Industrial - Fernandez & Palazzo - Team - Recruiting",
-          totalConsideration: "3.44",
-          guaranteed: "3.44",
-          atRisk: "2.4",
-        },
-        {
-          id: 6,
-          title: "Moseley Watkins - Team - Recruiting",
-          totalConsideration: "1.23",
-          guaranteed: "3.92",
-          atRisk: "2.4",
-        },
-        {
-          id: 7,
-          title: "Troy Pollet - Individual - Recruiting",
-          totalConsideration: "3.67",
-          guaranteed: "3.49",
-          atRisk: "2.4",
-        },
-        {
-          id: 8,
-          title: "Errol Blumer - Individual - Recruiting",
-          totalConsideration: "5.37",
-          guaranteed: "0",
-          atRisk: "2.4",
-        },
-        {
-          id: 9,
-          title: "Mac Crowther Team - Team - Recruiting",
-          totalConsideration: "6.58",
-          guaranteed: "3.5",
-          atRisk: "2.4",
-        },
-        {
-          id: 10,
-          title: "Adam Gatto - Individual - Recruiting",
-          totalConsideration: "1.01",
-          guaranteed: "1.36",
-          atRisk: "2.4",
-        },
-      ],
+      tableData: jsonData.investments,
       editData: null,
     };
   },

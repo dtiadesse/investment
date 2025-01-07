@@ -32,66 +32,66 @@
                     <div class="max-w-md w-full">
                         <!-- Title Field -->
                         <div class="mb-4">
-                          <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
+                          <label for="Title" class="block text-sm font-medium text-gray-700 mb-2">
                             Title
                           </label>
                           <input
-                            id="title"
+                            id="Title"
                             type="text"
-                            v-model="form.title"
+                            v-model="form.Title"
                             class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Progress Capital - Team - Recruiting"
                           />
-                          <span v-if="errors.title" class="text-red-500 text-sm">{{ errors.title }}</span>
+                          <span v-if="errors.Title" class="text-red-500 text-sm">{{ errors.title }}</span>
                         </div>
 
                         <!-- Type Field -->
                         <div class="mb-4">
-                          <label for="type" class="block text-sm font-medium text-gray-700 mb-2">
+                          <label for="InvestmentType" class="block text-sm font-medium text-gray-700 mb-2">
                             Type
                           </label>
                           <select
-                            id="type"
-                            v-model="form.selectedType"
+                            id="InvestmentType"
+                            v-model="form.InvestmentType"
                             class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           >
                             <option disabled value="">Select an type</option>
-                            <option v-for="(option, index) in options" :key="index" :value="option">
-                              {{ option }}
+                            <option v-for="(value, index) in investmentType" :key="index" :value="value">
+                              {{ value }}
                             </option>
                           </select>
                         </div>
 
                         <!-- Investment Details Field -->
                         <div class="mb-4">
-                          <label for="investmentDetails" class="block text-sm font-medium text-gray-700 mb-2">
+                          <label for="InvestmentDetails" class="block text-sm font-medium text-gray-700 mb-2">
                             Investment Details
                           </label>
                           <select
-                            id="investmentDetails"
-                            v-model="form.investmentDetails"
+                            id="InvestmentDetails"
+                            v-model="form.InvestmentDetails"
                             class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           >
                             <option disabled value="">Select an Investment Details</option>
-                            <option v-for="(option, index) in options" :key="index" :value="option">
-                              {{ option }}
+                            <option v-for="(value, index) in investmentDetails" :key="index" :value="value">
+                              {{ value }}
                             </option>
                           </select>
                         </div>
                         
                         <!-- Size Field -->
                         <div class="mb-4">
-                          <label for="size" class="block text-sm font-medium text-gray-700 mb-2">
+                          <label for="Size" class="block text-sm font-medium text-gray-700 mb-2">
                             Size
                           </label>
                           <select
-                            id="size"
-                            v-model="form.size"
+                            id="Size"
+                            v-model="form.Size"
                             class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           >
                             <option disabled value="">Select an size</option>
-                            <option v-for="(option, index) in options" :key="index" :value="option">
-                              {{ option }}
+                            <option v-for="(value, index) in size" :key="index" :value="value">
+                              {{ value }}
                             </option>
                           </select>
                         </div>
@@ -122,13 +122,13 @@
                 <div class="max-w-md w-full">
                     <!-- Base Revenue Field -->
                     <div class="mb-4">
-                      <label for="baseRevenue" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="BaseRevenue" class="block text-sm font-medium text-gray-700 mb-2">
                         Base Revenue (value??)
                       </label>
                       <input
-                        id="baseRevenue"
+                        id="BaseRevenue"
                         type="text"
-                        v-model="form.baseRevenue"
+                        v-model="form.BaseRevenue"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Progress Capital - Team - Recruiting"
                       />
@@ -136,13 +136,13 @@
 
                     <!-- Growth Revenue Field -->
                     <div class="mb-4">
-                      <label for="growthRevenue" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="GrowthRevenue" class="block text-sm font-medium text-gray-700 mb-2">
                         Growth Revenue
                       </label>
                       <input
-                        id="growthRevenue"
+                        id="GrowthRevenue"
                         type="text"
-                        v-model="form.growthRevenue"
+                        v-model="form.GrowthRevenue"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Progress Capital - Team - Recruiting"
                       />
@@ -152,25 +152,25 @@
                     <div class="mb-4">
                       <div class="flex">
                         <div class="mr-4">
-                        <label for="growth" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="Growth" class="block text-sm font-medium text-gray-700 mb-2">
                           Growth
                         </label>
                         <input
-                          id="growth"
+                          id="Growth"
                           type="text"
-                          v-model="form.growth"
+                          v-model="form.Growth"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="Growth"
                         />
                         </div>
                         <div>
-                        <label for="growthP" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="GrowthPercentage" class="block text-sm font-medium text-gray-700 mb-2">
                           Growth(%)
                         </label>
                         <input
-                          id="growthP"
+                          id="GrowthPercentage"
                           type="text"
-                          v-model="form.growthP"
+                          v-model="form.GrowthPercentage"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="Growth(%)"
                         />
@@ -202,13 +202,13 @@
                 <div class="max-w-md w-full">
                     <!-- Total Consideration Field -->
                     <div class="mb-4">
-                      <label for="totalConsideration" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="TotalConsideration" class="block text-sm font-medium text-gray-700 mb-2">
                         Total Consideration (value??)
                       </label>
                       <input
-                        id="totalConsideration"
+                        id="TotalConsideration"
                         type="text"
-                        v-model="form.totalConsideration"
+                        v-model="form.TotalConsideration"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Total Consideration"
                       />
@@ -232,25 +232,25 @@
                     <div class="mb-4">
                       <div class="flex">
                         <div class="mr-4">
-                        <label for="guaranteed" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="GuaranteedAmount" class="block text-sm font-medium text-gray-700 mb-2">
                           Guaranteed
                         </label>
                         <input
-                          id="guaranteed"
+                          id="GuaranteedAmount"
                           type="text"
-                          v-model="form.guaranteed"
+                          v-model="form.GuaranteedAmount"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="Guaranteed"
                         />
                         </div>
                         <div>
-                        <label for="guaranteedp" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="PercentageGuaranteed" class="block text-sm font-medium text-gray-700 mb-2">
                           Guaranteed(%)
                         </label>
                         <input
-                          id="guaranteedp"
+                          id="PercentageGuaranteed"
                           type="text"
-                          v-model="form.guaranteedp"
+                          v-model="form.PercentageGuaranteed"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="(%)Guaranteed"
                         />
@@ -260,13 +260,13 @@
 
                     <!-- At Risk Stable Field -->
                     <div class="mb-4">
-                      <label for="atRisk" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="AtRiskAmount" class="block text-sm font-medium text-gray-700 mb-2">
                         At Risk (Stable)
                       </label>
                       <input
-                        id="atRisk"
+                        id="AtRiskAmount"
                         type="text"
-                        v-model="form.atRisk"
+                        v-model="form.AtRiskAmount"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="At Risk Stable"
                       />
@@ -274,13 +274,13 @@
 
                     <!-- At Risk Growth Field -->
                     <div class="mb-4">
-                      <label for="atGrowth" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="AtRiskGrowthAmount" class="block text-sm font-medium text-gray-700 mb-2">
                         At Risk (Growth)
                       </label>
                       <input
-                        id="atGrowth"
+                        id="AtRiskGrowthAmount"
                         type="text"
-                        v-model="form.atGrowth"
+                        v-model="form.AtRiskGrowthAmount"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="At Risk Stable"
                       />
@@ -312,25 +312,25 @@
                     <div class="mb-4">
                       <div class="flex">
                         <div class="mr-4">
-                        <label for="threeYearRevenueGrowthOther" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="ThreeYearRevenueGrowthValue" class="block text-sm font-medium text-gray-700 mb-2">
                           3 YEAR REVENUE GROWTH Value
                         </label>
                         <input
-                          id="threeYearRevenueGrowthOther"
+                          id="ThreeYearRevenueGrowthValue"
                           type="text"
-                          v-model="form.threeYearRevenueGrowthOther"
+                          v-model="form.ThreeYearRevenueGrowthValue"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="8.3"
                         />
                         </div>
                         <div>
-                        <label for="threeYearRevenueGrowthOtherP" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="ThreeYearRevenueGrowthPercentage" class="block text-sm font-medium text-gray-700 mb-2">
                           3 YEAR REVENUE GROWTH (%)
                         </label>
                         <input
-                          id="threeYearRevenueGrowthOtherP"
+                          id="ThreeYearRevenueGrowthPercentage"
                           type="text"
-                          v-model="form.threeYearRevenueGrowthOtherP"
+                          v-model="form.ThreeYearRevenueGrowthPercentage"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="0.84%"
                         />
@@ -342,37 +342,37 @@
                     <div class="mb-4">
                       <div class="flex">                      
                         <div class="mr-2">
-                        <label for="threeYearEbitdaGrowth" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="ThreeYearEBITDAGrowth" class="block text-sm font-medium text-gray-700 mb-2">
                           3 YEAR EBITDA GROWTH
                         </label>
                         <input
-                          id="threeYearEbitdaGrowth"
+                          id="ThreeYearEBITDAGrowth"
                           type="text"
-                          v-model="form.threeYearEbitdaGrowth"
+                          v-model="form.ThreeYearEBITDAGrowth"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="1.7"
                         />
                         </div>
                         <div class="mr-2">
-                        <label for="guaranteedOther" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="GuaranteedAmount" class="block text-sm font-medium text-gray-700 mb-2">
                           Guaranteed
                         </label>
                         <input
-                          id="guaranteedOther"
+                          id="GuaranteedAmount"
                           type="text"
-                          v-model="form.guaranteedOther"
+                          v-model="form.GuaranteedAmount"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="4"
                         />
                         </div>
                         <div>
-                        <label for="capitalEbitda" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="CapitalAsPercentageOfEBITDA" class="block text-sm font-medium text-gray-700 mb-2">
                           Capital as % of EBITDA
                         </label>
                         <input
-                          id="capitalEbitda"
+                          id="CapitalAsPercentageOfEBITDA"
                           type="text"
-                          v-model="form.capitalEbitda"
+                          v-model="form.CapitalAsPercentageOfEBITDA"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="2.41x"
                         />
@@ -382,13 +382,13 @@
                     
                     <!-- 3 Year Revenue Growth Field -->
                     <div class="mb-4">
-                      <label for="threeYearRevenueGrowth" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="ThreeYearRevenueGrowthPercentage" class="block text-sm font-medium text-gray-700 mb-2">
                         3 Year Revenue Growth (%)
                       </label>
                       <input
-                        id="threeYearRevenueGrowth"
+                        id="ThreeYearRevenueGrowthPercentage"
                         type="text"
-                        v-model="form.threeYearRevenueGrowth"
+                        v-model="form.ThreeYearRevenueGrowthPercentage"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="0.32%"
                       />
@@ -396,13 +396,13 @@
 
                     <!-- Capital as % of Revenue Field -->
                     <div class="mb-4">
-                      <label for="capitalRevenue" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="CapitalAsPercentageOfRevenue" class="block text-sm font-medium text-gray-700 mb-2">
                         Capital as % of Revenue
                       </label>
                       <input
-                        id="capitalRevenue"
+                        id="CapitalAsPercentageOfRevenue"
                         type="text"
-                        v-model="form.capitalRevenue"
+                        v-model="form.CapitalAsPercentageOfRevenue"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="0.48x"
                       />
@@ -410,13 +410,13 @@
                     
                     <!-- FCF Field -->
                     <div class="mb-4">
-                      <label for="fcf" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="FreeCashFlow" class="block text-sm font-medium text-gray-700 mb-2">
                         FCF (%)
                       </label>
                       <input
-                        id="fcf"
+                        id="FreeCashFlow"
                         type="text"
-                        v-model="form.fcf"
+                        v-model="form.FreeCashFlow"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="1.6"
                       />
@@ -424,13 +424,13 @@
 
                     <!-- Base Cum Field -->
                     <div class="mb-4">
-                      <label for="baseCumCF" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="BaseCumulativeCashFlow" class="block text-sm font-medium text-gray-700 mb-2">
                         Base Cum. CF
                       </label>
                       <input
-                        id="baseCumCF"
+                        id="BaseCumulativeCashFlow"
                         type="text"
-                        v-model="form.baseCumCF"
+                        v-model="form.BaseCumulativeCashFlow"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="8.7%"
                       />
@@ -438,13 +438,13 @@
                     
                     <!-- Growth Cum. Field -->
                     <div class="mb-4">
-                      <label for="growthCum" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="GrowthCumulativeCashFlow" class="block text-sm font-medium text-gray-700 mb-2">
                       Growth Cum.
                       </label>
                       <input
-                        id="growthCum"
+                        id="GrowthCumulativeCashFlow"
                         type="text"
-                        v-model="form.growthCum"
+                        v-model="form.GrowthCumulativeCashFlow"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="8.7%"
                       />
@@ -476,25 +476,25 @@
                     <div class="mb-4">
                       <div class="flex">
                         <div class="mr-4">
-                        <label for="presynergy" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="PreSynergyMultiple" class="block text-sm font-medium text-gray-700 mb-2">
                           Pre-Synergry Multiple (x)
                         </label>
                         <input
-                          id="presynergy"
+                          id="PreSynergyMultiple"
                           type="text"
-                          v-model="form.presynergy"
+                          v-model="form.PreSynergyMultiple"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="3.36"
                         />
                         </div>
                         <div>
-                        <label for="postSynergy" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="PostSynergyMultiple" class="block text-sm font-medium text-gray-700 mb-2">
                           Post-Synergry Multiple (x)
                         </label>
                         <input
-                          id="postSynergy"
+                          id="PostSynergyMultiple"
                           type="text"
-                          v-model="form.postSynergy"
+                          v-model="form.PostSynergyMultiple"
                           class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                           placeholder="8.756"
                         />
@@ -504,13 +504,13 @@
 
                     <!-- Payback Field -->
                     <div class="mb-4">
-                      <label for="payback" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="Payback" class="block text-sm font-medium text-gray-700 mb-2">
                         Payback (yrs)
                       </label>
                       <input
-                        id="payback"
+                        id="Payback"
                         type="text"
-                        v-model="form.payback"
+                        v-model="form.Payback"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="4.0"
                       />
@@ -518,13 +518,13 @@
 
                     <!-- IRR Field -->
                     <div class="mb-4">
-                      <label for="irr" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="InternalRateofReturn" class="block text-sm font-medium text-gray-700 mb-2">
                         IRR (%)
                       </label>
                       <input
-                        id="irr"
+                        id="InternalRateofReturn"
                         type="text"
-                        v-model="form.irr"
+                        v-model="form.InternalRateofReturn"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="19.70"
                       />
@@ -532,13 +532,13 @@
 
                     <!-- Integration Period Field -->
                     <div class="mb-4">
-                      <label for="integrationPeriod" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="IntegrationPeriod" class="block text-sm font-medium text-gray-700 mb-2">
                         Integration Period (value??/month??)
                       </label>
                       <input
-                        id="integrationPeriod"
+                        id="IntegrationPeriod"
                         type="text"
-                        v-model="form.integrationPeriod"
+                        v-model="form.IntegrationPeriod"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                         placeholder="84"
                       />
@@ -546,16 +546,16 @@
 
                     <!-- Execution Risk Field -->
                     <div class="mb-4">
-                      <label for="executionRisk" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="ExecutionRisk" class="block text-sm font-medium text-gray-700 mb-2">
                         Execution Risk
                       </label>
                       <select
-                        id="executionRisk"
-                        v-model="form.executionRisk"
+                        id="ExecutionRisk"
+                        v-model="form.ExecutionRisk"
                         class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
                       >
                         <option disabled value="">Select an Execution Risk</option>
-                        <option v-for="(option, index) in options" :key="index" :value="option">
+                        <option v-for="(option, index) in executionRisk" :key="index" :value="option">
                           {{ option }}
                         </option>
                       </select>
@@ -830,36 +830,36 @@ import { reactive } from 'vue';
         currentTab: 0,
         form: {
           id:"",
-          title: "",
-          selectedType: "",
-          investmentDetails:"",
-          size:"",
-          baseRevenue:"",
-          growthRevenue:"",
-          growth:"",
-          growthp:"",
-          totalConsideration:"",
+          Title: "",
+          InvestmentType: "",
+          InvestmentDetails:"",
+          Size:"",
+          BaseRevenue:"",
+          GrowthRevenue:"",
+          Growth:"",
+          GrowthPercentage:"",
+          TotalConsideration:"",
           atRiskConsideration:"",
-          guaranteed:"",
-          guaranteedp:"",
-          atRisk:"",
-          atGrowth:"",
-          threeYearRevenueGrowthOther:"",
-          threeYearRevenueGrowthOtherP:"",
+          GuaranteedAmount:"",
+          PercentageGuaranteed:"",
+          AtRiskAmount:"",
+          AtRiskGrowthAmount:"",
+          ThreeYearRevenueGrowthValue:"",
+          ThreeYearRevenueGrowthPercentage:"",
           threeYearEbitdaGrowth:"",
           guaranteedOther:"",
-          capitalEbitda:"",
+          CapitalAsPercentageOfEBITDA:"",
           threeYearRevenueGrowth:"",
-          capitalRevenue:"",
-          fcf:"",
-          baseCumCF:"",
-          growthCum:"",
-          presynergy:"",
-          postSynergy:"",
-          payback:"",
-          irr:"",
-          integrationPeriod:"",
-          executionRisk:"",
+          CapitalAsPercentageOfRevenue:"",
+          FreeCashFlow:"",
+          BaseCumulativeCashFlow:"",
+          GrowthCumulativeCashFlow:"",
+          PreSynergyMultiple:"",
+          PostSynergyMultiple:"",
+          Payback:"",
+          InternalRateofReturn:"",
+          IntegrationPeriod:"",
+          ExecutionRisk:"",
           year1:"",
           year2:"",
           year3:"",
@@ -877,8 +877,12 @@ import { reactive } from 'vue';
           month15:""
         },
         options: ["Option 1", "Option 2", "Option 3", "Option 4"],
+        investmentType: ["ADS Investment","SS Investment"],
+        investmentDetails: ["RECRUITING", "M&A-SERVICES", "M&A-ADVISORY", "M&A-Services","Platform Investments"],
+        size: ["M&A - > $15M","M&A - < $15M", "Platform - > $3M", "Platform - $1M - $3M", "R&R - < $1M rev","R&R - $1M - $5M rev","R&R - >$5M Rev"],
+        executionRisk:["Low", "MEDIUM", "High"],
         errors: {
-          title:""
+          Title:""
         },
       }
     },
@@ -900,11 +904,11 @@ import { reactive } from 'vue';
 
         // Validate Title
         
-        if (!this.form.title) {
-          this.errors.title = 'Title is required';
+        if (!this.form.Title) {
+          this.errors.Title = 'Title is required';
           isValid = false;
         } else {
-          this.errors.title = null;
+          this.errors.Title = null;
         }
 
         return isValid;
