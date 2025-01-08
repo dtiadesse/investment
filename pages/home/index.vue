@@ -67,6 +67,8 @@
         </div>
 
         <div class="relative overflow-x-auto">
+        <div v-if="loading">Loading...</div>
+        <div  v-else>
           <DataTable :data="tableData" :columns="tableColumns">
             <template #action="{ item }">
               <div class="action-buttons">
@@ -119,6 +121,7 @@
               </div>
             </template>
           </DataTable>
+          </div>
         </div>
       </div>
     </div>
@@ -132,9 +135,9 @@
   </div>
 </template>
 
-
 <script>
 import "@/assets/styles/global.css";
+
 definePageMeta({
   layout: "home",
 });
@@ -173,97 +176,50 @@ export default {
       tableColumns: [
         {
           label: "Investment Title",
-          key: "title",
+          key: "Title",
           sortable: true,
-          width: "40%",
+          width: "30%",
           color: "#000",
           fontWeight: "600",
         },
         {
           label: "Total Consideration",
-          key: "totalConsideration",
+          key: "TotalConsideration",
+          width: "20%",
           sortable: true,
         },
-        { label: "Guaranteed", key: "guaranteed", sortable: true },
-        { label: "At-risk", key: "atRisk", sortable: true },
-      ],
-      tableData: [
-        {
-          id: 1,
-          title: "Progress Capital - Team - Recruiting",
-          totalConsideration: "3.36",
-          guaranteed: "5.22",
-          atRisk: "2.4",
-        },
-        {
-          id: 2,
-          title: "Cynthia Ng - Individual - Recruiting",
-          totalConsideration: "0",
-          guaranteed: "0",
-          atRisk: "2.4",
-        },
-        {
-          id: 3,
-          title: "jimo liu - Individual - Recruiting",
-          totalConsideration: "1.59",
-          guaranteed: "3.03",
-          atRisk: "2.4",
-        },
-        {
-          id: 4,
-          title: "Louay Alsadek - Team - Recruiting",
-          totalConsideration: "1.1",
-          guaranteed: "1.91",
-          atRisk: "2.4",
-        },
-        {
-          id: 5,
-          title: "Miami Industrial - Fernandez & Palazzo - Team - Recruiting",
-          totalConsideration: "3.44",
-          guaranteed: "3.44",
-          atRisk: "2.4",
-        },
-        {
-          id: 6,
-          title: "Moseley Watkins - Team - Recruiting",
-          totalConsideration: "1.23",
-          guaranteed: "3.92",
-          atRisk: "2.4",
-        },
-        {
-          id: 7,
-          title: "Troy Pollet - Individual - Recruiting",
-          totalConsideration: "3.67",
-          guaranteed: "3.49",
-          atRisk: "2.4",
-        },
-        {
-          id: 8,
-          title: "Errol Blumer - Individual - Recruiting",
-          totalConsideration: "5.37",
-          guaranteed: "0",
-          atRisk: "2.4",
-        },
-        {
-          id: 9,
-          title: "Mac Crowther Team - Team - Recruiting",
-          totalConsideration: "6.58",
-          guaranteed: "3.5",
-          atRisk: "2.4",
-        },
-        {
-          id: 10,
-          title: "Adam Gatto - Individual - Recruiting",
-          totalConsideration: "1.01",
-          guaranteed: "1.36",
-          atRisk: "2.4",
-        },
+        { label: "Guaranteed", key: "GuaranteedAmount",width: "20%", sortable: true },
+        { label: "At-risk", key: "AtRiskAmount",width: "20%", sortable: true },
       ],
       editData: null,
-    };
+      loading: true,
+      error: null,
+      tableData:[],
+    }
   },
-
+  watch: {
+    tableData: {
+      immediate: true,
+      handler() {
+        this.loading = false;
+      },
+    },
+  },
+  created() {
+    this.fetchInvestments();
+  },
   methods: {
+    async fetchInvestments() {
+      try {
+        const response = await fetch('http://localhost:3001/investments');
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        this.tableData = await response.json();
+      } catch (err) {
+        console.log(err);
+      }
+    },
     deleteItem(item) {
       const index = this.tableData.findIndex(function (object) {
         return object.id === item.id;
@@ -272,7 +228,6 @@ export default {
     },
 
     editItem(item) {
-      alert(`Editing item: ${item.title}`);
       this.editData = { ...item };
       this.isModalVisible = true;
     },
@@ -295,7 +250,6 @@ export default {
       const index = this.tableData.findIndex(
         (item) => item.id === updatedData.id
       );
-      console.log("index", index);
       if (index !== -1) {
         this.tableData.splice(index, 1, updatedData);
       } else {
@@ -306,7 +260,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+  <style scoped>
 .addItem {
   background-color: rgb(10 35 104);
 }
@@ -373,4 +327,5 @@ button:disabled {
   transition: opacity 500ms ease-out;
 }
 </style>
-
+  
+  
