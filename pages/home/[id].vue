@@ -5,9 +5,9 @@
     </div>
     <div class="grid gap-4 grid-cols-2">
       <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-      <div class="flex items-center justify-between">
-        <h2 class="text-xl font-bold p-4">Financial Impact</h2>
-        <button class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-4 py-2 me-2">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold p-4">Financial Impact</h2>
+            <button class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-4 py-2 me-2">
                <svg
                     class="h-6 w-6 mr-2"
                     width="24"
@@ -27,7 +27,23 @@
                   </svg>
               <p class="text-base">Edit Charts</p>
             </button>  
-            </div>
+          </div>
+          <p class="px-4 text-xl text-gray-600">
+          Revenue ($)
+        </p>
+          <FinancialImpactBarChart
+              :seriesLabels="seriesLabels"
+              :datasets="data"
+              :labels="labels"
+          />
+          <p class="px-4 text-xl text-gray-600">
+          EBITDA (?x)
+        </p>
+          <FinancialImpactBarChart
+              :seriesLabels="seriesLabels"
+              :datasets="data"
+              :labels="labels"
+          />
       </div>
       <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
         <h2 class="text-xl font-bold p-4">Financial Returns</h2>
@@ -44,6 +60,19 @@
 definePageMeta({
   layout: "home",
 });
+ const barColors = ["#2C2F48", "#00A8E8"];
+    const seriesLabels = ["Pre-Synergy Multiple", "Post-Synergy Multiple"]
+    const labels = [
+        "Progress Capital",
+        "Cynthia Ng",
+        "Louay Alsadeek",
+        "Miami Industries",
+        "Moseley Watkins",
+        "Troy Pollet",
+      ]
+    const data = [[4, 5, 4.5, 6, 5.5, 5.5],[3, 2.8, 3.2, 2.7, 3.1, 3.5]]
+     const preSynergyData = [4, 5, 4.5, 6, 5.5, 5.5, 4.8, 5, 5.5]
+      const postSynergyData = [3, 2.8, 3.2, 2.7, 3.1, 3.5, 2.9, 3.2, 4.6]
 const tableData = [
         {
           Title: "IRR(%)",

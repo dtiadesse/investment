@@ -97,7 +97,7 @@
           </ul>
         </div>
       </div>
-      <div class="flex py-2 px-4 bg-gray-100">
+      <div class="flex py-2 px-4 bg-gray-100 border-b">
         <div class="w-60 flex items-center">Leadership</div>
         <div class="w-1/4 flex items-center"><p class="w-2 h-2 bg-green-500 rounded-full mr-2"></p><p>Active/Green</p></div>
         <div class="w-2/3 flex items-center">
@@ -109,6 +109,9 @@
             </li>
           </ul>
         </div>
+      </div>
+      <div class="flex py-2 px-4">
+          Expand Full List Of Risks ▼
       </div>
 </template>
 
