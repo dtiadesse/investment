@@ -9,9 +9,9 @@ import { ref, onMounted, watch } from 'vue';
 
 // Props
 const props = defineProps({
-seriesLabels: {
+  seriesLabels: {
     type: Array,
-    required: true,
+   default: () => [],
   },
   datasets: {
     type: Array,
@@ -152,8 +152,8 @@ const drawChart = () => {
      const legendXStart = 150;
       const legendY = chartHeight + 115; // Position above canvas bottom
       const legendSpacing = 160;
-    
-      props.seriesLabels.forEach((label, index) => {
+      if(props.seriesLabels.length>0){
+        props.seriesLabels.forEach((label, index) => {
         const x = legendXStart + index * legendSpacing;
 
         // Draw legend color box
@@ -166,6 +166,7 @@ const drawChart = () => {
         ctx.textAlign = "left";
         ctx.fillText(label, x + 20, legendY + 15); // Add space after color box
       });
+      }
   };
   
   // Clear the canvas

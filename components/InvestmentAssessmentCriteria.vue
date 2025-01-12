@@ -32,89 +32,111 @@
         </div>
 
       </div>
-      <div class="flex py-2 px-4 border-b">
-        <div class="w-60 flex items-center">Business Integration / Implementation</div>
-        <div class="w-1/4 flex items-center"><p class="w-2 h-2 bg-green-500 rounded-full mr-2"></p><p>Active/Green</p></div>
+      <div class="flex py-2 px-4 border-b"  v-for="item in tableValue">
+        <div class="w-60 flex items-center">{{item.BusinessIntegration}}</div>
+        <div class="w-1/4 flex items-center"><p class="w-2 h-2 bg-green-500 rounded-full mr-2"></p><p>{{item.Status}}</p></div>
         <div class="w-2/3 flex items-center">
           <ul class="list-disc pl-6">
             <li>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-              when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+              {{item.Risks}}
             </li>
           </ul>
         </div>
       </div>
-      <div class="flex py-2 px-4 border-b bg-gray-100">
-        <div class="w-60 flex items-center">Functional Integration / Implementation</div>
-        <div class="w-1/4 flex items-center"><p class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></p><p>/Amber</p></div>
+      <div class="flex py-2 px-4 border-b"  v-for="item in hiddenItems"  v-if="isExpanded">
+        <div class="w-60 flex items-center">{{item.BusinessIntegration}}</div>
+        <div class="w-1/4 flex items-center"><p class="w-2 h-2 bg-green-500 rounded-full mr-2"></p><p>{{item.Status}}</p></div>
         <div class="w-2/3 flex items-center">
           <ul class="list-disc pl-6">
             <li>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-              when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+              {{item.Risks}}
             </li>
           </ul>
         </div>
       </div>
-      <div class="flex py-2 px-4 border-b">
-        <div class="w-60 flex items-center">Financial Impact</div>
-        <div class="w-1/4 flex items-center"><p class="w-2 h-2 bg-green-500 rounded-full mr-2"></p><p>Active/Green</p></div>
-        <div class="w-2/3 flex items-center">
-          <ul class="list-disc pl-6">
-            <li>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-              when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex py-2 px-4 border-b bg-gray-100">
-        <div class="w-60 flex items-center">Financial Returns</div>
-        <div class="w-1/4 flex items-center"><p class="w-2 h-2 bg-red-500 rounded-full mr-2"></p><p>High Risk / red</p></div>
-        <div class="w-2/3 flex items-center">
-          <ul class="list-disc pl-6">
-            <li>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-              when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex py-2 px-4 border-b">
-        <div class="w-60 flex items-center">Risk /Return</div>
-        <div class="w-1/4 flex items-center"><p class="w-2 h-2 bg-gray-500 rounded-full mr-2"></p><p>Neutral/Gray</p></div>
-        <div class="w-2/3 flex items-center">
-          <ul class="list-disc pl-6">
-            <li>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-              when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex py-2 px-4 bg-gray-100 border-b">
-        <div class="w-60 flex items-center">Leadership</div>
-        <div class="w-1/4 flex items-center"><p class="w-2 h-2 bg-green-500 rounded-full mr-2"></p><p>Active/Green</p></div>
-        <div class="w-2/3 flex items-center">
-          <ul class="list-disc pl-6">
-            <li>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-              when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex py-2 px-4">
-          Expand Full List Of Risks ▼
+      <div class="flex py-2 px-4 justify-center">
+        <button @click="toggleExpand" class="buttonExpand">    
+          Expand Full List Of Risks  {{ isExpanded ? '▲' : '▼' }}
+        </button>
       </div>
 </template>
 
-<script setup>
+<script>
+export default {
+  name: 'DataTable',
+  props: {
+    tableData: {
+      type: Array,
+      required: true
+    }
+  },
+  data() {
+    return {
+      // Full list of items
+      items: [
+            {
+              "BusinessIntegration":"Business Integration / Implementation",
+              "Status":"Active/Green",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            },
+            {
+              "BusinessIntegration":"Functional Integration / Implementation",
+              "Status":"/Amber",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            },
+            {
+              "BusinessIntegration":"Financial Impact",
+              "Status":"Active/Green",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            },
+            {
+              "BusinessIntegration":"Financial Returns",
+              "Status":"High Risk / red",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            },
+            {
+              "BusinessIntegration":"Risk /Return",
+              "Status":"Neutral/Gray",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            },
+            {
+              "BusinessIntegration":"Leadership",
+              "Status":"Active/Green",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            }
+          ],
+      // Track expanded state
+      isExpanded: false,
+      // Number of items to show initially
+      initialVisibleCount: 3,
+    };
+  },
+  computed: {
+    tableValue() {
+      return this.tableData;
+    },
+    // Dynamically calculate the visible items
+    visibleItems() {
+      return this.items.slice(0, this.initialVisibleCount);
+    },
+    // Dynamically calculate the hidden items
+    hiddenItems() {
+      return this.items.slice(this.initialVisibleCount);
+    },
+  },
+
+  methods:{
+    toggleExpand() {
+      this.isExpanded = !this.isExpanded;
+    },
+  }
+};
 
 </script>
+
+<style>
+.buttonExpand {
+  cursor: pointer;
+  color:blue
+}
+</style>

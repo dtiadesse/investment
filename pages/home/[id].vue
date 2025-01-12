@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto p-4">
     <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 mb-3">
-      <InvestmentAssessmentCriteria/>
+      <InvestmentAssessmentCriteria :tableData="tableData.InvestmentAssessmentCriteria"/>
     </div>
     <div class="grid gap-4 grid-cols-2">
       <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
@@ -40,7 +40,6 @@
           EBITDA (?x)
         </p>
           <FinancialImpactBarChart
-              :seriesLabels="seriesLabels"
               :datasets="data"
               :labels="labels"
           />
@@ -48,7 +47,7 @@
       <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
         <h2 class="text-xl font-bold p-4">Financial Returns</h2>
         <div class="m-4 mt-0">
-          <FinancialReturnsTable :data="tableData" :columns="tableColumns">
+          <FinancialReturnsTable :data="tableData.FinancialReturns" :columns="tableColumns">
           </FinancialReturnsTable>        
         </div>
       </div>
@@ -56,56 +55,15 @@
   </div>
 </template>
 
-<script setup>
+<script>
 definePageMeta({
   layout: "home",
 });
- const barColors = ["#2C2F48", "#00A8E8"];
-    const seriesLabels = ["Pre-Synergy Multiple", "Post-Synergy Multiple"]
-    const labels = [
-        "Progress Capital",
-        "Cynthia Ng",
-        "Louay Alsadeek",
-        "Miami Industries",
-        "Moseley Watkins",
-        "Troy Pollet",
-      ]
-    const data = [[4, 5, 4.5, 6, 5.5, 5.5],[3, 2.8, 3.2, 2.7, 3.1, 3.5]]
-     const preSynergyData = [4, 5, 4.5, 6, 5.5, 5.5, 4.8, 5, 5.5]
-      const postSynergyData = [3, 2.8, 3.2, 2.7, 3.1, 3.5, 2.9, 3.2, 4.6]
-const tableData = [
-        {
-          Title: "IRR(%)",
-          Initial: "3.36",
-          LatestRevised: "5.22",
-          Delta: "-4",
-        },
-        {
-          Title: "Payback(yrs)",
-          Initial: "3.36",
-          LatestRevised: "5.22",
-          Delta: "0.2",
-        },
-        {
-          Title: "Pre-EBITDAx",
-          Initial: "3.36",
-          LatestRevised: "5.22",
-          Delta: "0.2",
-        },
-        {
-          Title: "Post-EBITDAx",
-          Initial: "3.36",
-          LatestRevised: "5.22",
-          Delta: "0.3",
-        },
-        {
-          Title: "CTA ($/m)",
-          Initial: "3.36",
-          LatestRevised: "5.22",
-          Delta: "0.5",
-        }
-      ]
-const tableColumns = [
+export default {
+  data() {
+    return {
+      labels: [],
+      tableColumns: [
         {
           label: "",
           key: "Title",
@@ -121,5 +79,45 @@ const tableColumns = [
         },
         { label: "Latest Revised", key: "LatestRevised",width: "30%", textAlign:"center" },
         { label: "Delta", key: "Delta",width: "20%", minusValueColor:"red",plusValueColor:"green",minusBgValueColor:"rgb(254 242 242)",plusBgValueColor:"rgb(220 252 231)",textAlign:"center" },
-      ]
+      ],
+      seriesLabels: ["Pre-Synergy Multiple", "Post-Synergy Multiple"],
+      barColors: ["#2C2F48", "#00A8E8"],
+      data:[],
+      loading: true,
+      error: null,
+      tableData:[],
+     
+    }
+  },
+  watch: {
+    tableData: {
+      immediate: true,
+      handler() {
+        this.loading = false;
+      },
+    },
+  },
+  created() {
+    this.fetchInvestmentsDetails();
+  },
+  methods: {
+    async fetchInvestmentsDetails() {
+      try {
+        const { id } = useRoute().params
+        console.log(id)
+        const response = await fetch('http://localhost:3001/investments/'+id);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        this.tableData = await response.json();
+        this.labels = this.tableData.ChartFinancialImpactDataLabel
+        this.data = [this.tableData.ChartFinancialImpactDataValue1, this.tableData.ChartFinancialImpactDataValue2];
+        console.log(this.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+};
+    
 </script>

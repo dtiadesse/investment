@@ -5,6 +5,80 @@
           "Title": "Project A",
           "InvestmentType": "ADS Investment",
           "InvestmentDetails": "RECRUITING",
+          "InvestmentAssessmentCriteria":[
+            {
+              "BusinessIntegration":"Business Integration / Implementation",
+              "Status":"Active/Green",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            },
+            {
+              "BusinessIntegration":"Functional Integration / Implementation",
+              "Status":"/Amber",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            },
+            {
+              "BusinessIntegration":"Financial Impact",
+              "Status":"Active/Green",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            },
+            {
+              "BusinessIntegration":"Financial Returns",
+              "Status":"High Risk / red",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            },
+            {
+              "BusinessIntegration":"Risk /Return",
+              "Status":"Neutral/Gray",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            },
+            {
+              "BusinessIntegration":"Leadership",
+              "Status":"Active/Green",
+              "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            }
+          ],
+          "FinancialReturns":[
+            {
+              "Title":"IRR(%)",
+              "Initial":"3.36",
+              "LatestRevised":"5.22",
+              "Delta":"-4"
+            },
+            {
+              "Title":"Payback(yrs)",
+              "Initial":"3.36",
+              "LatestRevised":"5.22",
+              "Delta":"0.2"
+            },
+            {
+              "Title":"Pre-EBITDAx",
+              "Initial":"3.36",
+              "LatestRevised":"5.22",
+              "Delta":"0.2"
+            },
+            {
+              "Title":"Post-EBITDAx",
+              "Initial":"3.36",
+              "LatestRevised":"5.22",
+              "Delta":"0.3"
+            },
+            {
+              "Title":"CTA ($/m)",
+              "Initial":"3.36",
+              "LatestRevised":"5.22",
+              "Delta":"0.5"
+            }
+          ],
+          "ChartFinancialImpactDataValue1":[4, 5, 4.5, 6, 5.5, 5.5],
+          "ChartFinancialImpactDataValue2":[3, 2.8, 3.2, 2.7, 3.1, 3.5],
+          "ChartFinancialImpactDataLabel":[
+              "Progress Capital",
+              "Cynthia Ng",
+              "Louay Alsadeek",
+              "Miami Industries",
+              "Moseley Watkins",
+              "Troy Pollet"
+            ],
           "Size": "R&R - >$5M Rev",
           "SelectionCriteria": "RECRUITINGR&R - >$5M Rev",
           "BaseRevenue": 8.3,

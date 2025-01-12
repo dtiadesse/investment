@@ -181,12 +181,14 @@ export default {
           width: "30%",
           color: "#000",
           fontWeight: "600",
+          minWidth:"min-w-[191px]"
         },
         {
           label: "Total Consideration",
           key: "TotalConsideration",
           width: "20%",
           sortable: true,
+          minWidth:"min-w-[191px]"
         },
         { label: "Guaranteed", key: "GuaranteedAmount",width: "20%", sortable: true },
         { label: "At-risk", key: "AtRiskAmount",width: "20%", sortable: true },
@@ -195,6 +197,64 @@ export default {
       loading: true,
       error: null,
       tableData:[],
+      tableColumnsNew:[
+        {
+          label: "Investment Title",
+          key: "Title",
+          sortable: true,
+          color: "#000",
+          fontWeight: "600",
+          minWidthClass:"min-w-[198px]"
+        },
+        {
+          label: "Investment Type",
+          key: "InvestmentType",
+          sortable: true,
+          color: "#000",
+          fontWeight: "600",
+          minWidthClass:"min-w-[220px]"
+        },
+        {
+          label: "Total Consideration",
+          key: "TotalConsideration",
+          sortable: true,
+          color: "#000",
+          fontWeight: "600",
+          minWidthClass:"min-w-[240px]"
+        },
+        {
+          label: "Status",
+          key: "Status",
+          sortable: true,
+          color: "#000",
+          fontWeight: "600",
+          minWidthClass:"min-w-[160px]"
+        },
+        {
+          label: "Initial",
+          key: "Initial",
+          sortable: true,
+          color: "#000",
+          fontWeight: "600",
+          minWidthClass:"min-w-[160px]"
+        },
+        {
+          label: "Latest Revised",
+          key: "LatestRevised",
+          sortable: true,
+          color: "#000",
+          fontWeight: "600",
+          minWidthClass:"min-w-[200px]"
+        },
+        {
+          label: "Revenue",
+          key: "Revenue",
+          sortable: true,
+          color: "#000",
+          fontWeight: "600",
+          minWidthClass:"min-w-[160px]"
+        },
+      ]
     }
   },
   watch: {
