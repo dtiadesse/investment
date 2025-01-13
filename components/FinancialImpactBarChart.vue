@@ -1,6 +1,6 @@
 <template>
   <div class="chart-container">
-    <canvas ref="chartCanvas" :width="700" :height="500"></canvas>
+    <canvas ref="chartCanvas" :width="640" :height="440"></canvas>
   </div>
 </template>
 
@@ -125,7 +125,7 @@ const drawChart = () => {
   // Function to draw the bars
   const drawBars = () => {
     const groupWidth = chartWidth / props.labels.length;
-    const barWidth = groupWidth / props.datasets.length - 6;
+    const barWidth = groupWidth / props.datasets.length - 18;
 
     props.labels.forEach((label, labelIndex) => {
      props.datasets.forEach((dataset, datasetIndex) => {

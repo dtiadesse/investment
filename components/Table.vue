@@ -1,8 +1,8 @@
 <template>
   <!-- ====== Table Section Start -->
-  <section class="bg-white dark:bg-dark py-20 lg:py-[120px]">
+  <section class="bg-white dark:bg-dark lg:py-[120px]">
     <div class="container mx-auto">
-      <div class="flex flex-wrap -mx-4">
+      <div class="flex flex-wrap">
         <div class="w-full px-4">
           <div class="max-w-full overflow-x-auto">
             <table class="w-full table-auto">

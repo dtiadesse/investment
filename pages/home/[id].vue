@@ -3,9 +3,8 @@
     <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 mb-3">
       <InvestmentAssessmentCriteria :tableData="tableData.InvestmentAssessmentCriteria"/>
     </div>
-    <div class="grid gap-4 grid-cols-2">
-      <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-          <div class="flex items-center justify-between">
+    <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 mb-3">
+      <div class="flex items-center justify-between">
             <h2 class="text-xl font-bold p-4">Financial Impact</h2>
             <button class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-4 py-2 me-2">
                <svg
@@ -28,6 +27,8 @@
               <p class="text-base">Edit Charts</p>
             </button>  
           </div>
+          <div class="flex items-center justify-between">
+          <div class="">
           <p class="px-4 text-xl text-gray-600">
           Revenue ($)
         </p>
@@ -36,6 +37,8 @@
               :datasets="data"
               :labels="labels"
           />
+          </div>
+          <div class="">
           <p class="px-4 text-xl text-gray-600">
           EBITDA (?x)
         </p>
@@ -43,12 +46,22 @@
               :datasets="data"
               :labels="labels"
           />
-      </div>
+          </div>
+          </div>
+    </div>
+    <div class="grid gap-4 grid-cols-2">
       <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
         <h2 class="text-xl font-bold p-4">Financial Returns</h2>
         <div class="m-4 mt-0">
           <FinancialReturnsTable :data="tableData.FinancialReturns" :columns="tableColumns">
           </FinancialReturnsTable>        
+        </div>
+      </div>
+      <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+        <h2 class="text-xl font-bold p-4">Other KPI's</h2>
+        <div class="m-4 mt-0">
+          <OtherKPISTable :data="tableData.OtherKpis" :columns="tableKPIColumns">
+          </OtherKPISTable>        
         </div>
       </div>
     </div>
@@ -79,6 +92,23 @@ export default {
         },
         { label: "Latest Revised", key: "LatestRevised",width: "30%", textAlign:"center" },
         { label: "Delta", key: "Delta",width: "20%", minusValueColor:"red",plusValueColor:"green",minusBgValueColor:"rgb(254 242 242)",plusBgValueColor:"rgb(220 252 231)",textAlign:"center" },
+      ],
+       tableKPIColumns: [
+        {
+          label: "",
+          key: "Title",
+          width: "20%",
+          color: "#000",
+          fontWeight: "600",
+        },
+        {
+          label: "Baseline",
+          key: "Baseline",
+          width: "20%",
+          textAlign:"center",
+        },
+        { label: "Target", key: "Target",width: "30%", textAlign:"center" },
+        { label: "Current", key: "Current",width: "20%",textAlign:"center"},
       ],
       seriesLabels: ["Pre-Synergy Multiple", "Post-Synergy Multiple"],
       barColors: ["#2C2F48", "#00A8E8"],

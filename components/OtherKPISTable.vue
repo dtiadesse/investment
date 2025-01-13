@@ -10,7 +10,7 @@
       </thead>
       <tbody>
         <tr v-for="item in tableData" :key="item.id">
-          <td v-for="column in columns" :key="column.key" :style="{'background-color':item[column.key]<0?column.minusBgValueColor:column.plusBgValueColor,'color':item[column.key]<0?column.minusValueColor:column.plusValueColor,'font-weight':column.fontWeight,'text-align':column.textAlign}">
+          <td v-for="column in columns" :key="column.key" :style="{'font-weight':column.fontWeight,'text-align':column.textAlign}">
             {{ item[column.key] }}
           </td>
         </tr>
