@@ -1,79 +1,11 @@
 <template>
   <div class="container mx-auto px-4">
-    <div class="grid gap-4 grid-cols-2">
-      <div
-        class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-      >
-        <p class="prepostsynergy">Pre and Post Synergry</p>
-        <InvChart
-          :seriesLabels="seriesLabels"
-          :labels="labels"
-          :preSynergyData="preSynergyData"
-          :postSynergyData="postSynergyData"
-          :chartWidth="700"
-          :chartHeight="500"
-          :barSpacing="13"
-          orientation="vertical"
-        />
-      </div>
-      <div
-        class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-      >
-        <p class="prepostsynergy">
-          Total Consideration vs At-Risk Consideration
-        </p>
-        <HorizontalBarChart
-          :labels="labels"
-          :preSynergyData="preSynergyData"
-          :postSynergyData="postSynergyData"
-          :chartWidth="550"
-          :chartHeight="480"
-          :barHeight="27"
-          :barSpacing="15"
-          :valueScaleSteps="7"
-        />
-      </div>
-    </div>
-
-    <div class="container-fluid pt-5">
-      <div
-        class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-      >
-        <div style="display: inline-block; width: 100%">
-          <div class="pt-6 pl-6 investment float-left">All Investments</div>
-          <div class="py-5 pr-4 float-right">
-            <button
-              @click="showModal"
-              class="text-white flex addItem font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"
-            >
-              <svg
-                class="h-6 w-6 text-white-700"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-              <p class="text-base">Add Item</p>
-            </button>
-          </div>
-        </div>
-
-        <div class="relative overflow-x-auto">
-        <div v-if="loading">Loading...</div>
-        <div  v-else>
-          <DataTable :data="tableData" :columns="tableColumns">
-            <template #action="{ item }">
+    
+    <Table :data="tableData" :columns="tableColumnsNew">
+      <template #action="{ item }">
               <div class="action-buttons">
                 <button
-                  @click="editItem(item)"
+                @click="editItem(item)"
                   class="px-1 py-1 text-sm font-bold text-center border border-slate-300 inline-flex items-center rounded-lg focus:outline-none"
                 >
                   <svg
@@ -96,7 +28,7 @@
                   Edit
                 </button>
                 <button
-                  @click="deleteItem(item)"
+                @click="deleteItem(item)"
                   class="px-1 py-1 ml-2 text-sm font-bold text-center border border-slate-300 inline-flex items-center rounded-lg focus:outline-none"
                 >
                   <svg
@@ -120,11 +52,7 @@
                 </button>
               </div>
             </template>
-          </DataTable>
-          </div>
-        </div>
-      </div>
-    </div>
+    </Table>
     <Modal
       v-show="isModalVisible"
       :tableData="tableData"

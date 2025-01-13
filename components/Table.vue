@@ -13,9 +13,6 @@
                     <span v-if="sortColumn === column.key">
                     {{ sortDirection === 'asc' ? '↑' : '↓' }}
                     </span>
-                    <span v-else>
-                        ↑
-                    </span>
                   </th>
                   <th v-if="$slots.action"></th>                  
                 </tr>
@@ -79,7 +76,7 @@ export default {
       const start = (this.currentPage - 1) * this.rowsPerPage;
       const end = start + this.rowsPerPage;
      // return this.sortedData.slice(start, end);
-      return this.data;
+      return this.sortedData;
     },
     totalPages() {
       return Math.ceil(this.data.length / this.rowsPerPage);
