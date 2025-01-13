@@ -116,22 +116,18 @@
             <option value="Neutral/Gray">Neutral/Gray</option>
             </select>
           </div>
-        <div class="w-2/3 flex items-center">
-          <ul class="list-disc">
-            <div v-if="!isEditing">
-              <li>{{item.Risks}}</li>
+            <div v-if="!isEditing"  class="w-2/3 flex items-center">
+              {{item.Risks}}
             </div>
-            <div v-else>
+            <div v-else  class="w-2/3 flex items-center">
             <textarea
               v-model="item.Risks"
               class="w-screen px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >{{item.Risks}}</textarea>
             </div>
-          </ul>
-        </div>
       </div>
       <div class="flex py-2 px-4 border-b"  v-for="item in hiddenItems"  v-if="isExpanded">
-        <div v-if="!isEditing" class="w-72 flex items-center mr-4">
+          <div v-if="!isEditing" class="w-72 flex items-center mr-4">
             {{item.BusinessIntegration}}
           </div>
           <div v-else class="w-72 flex items-center mr-4">
@@ -157,10 +153,18 @@
               class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
-          <div v-if="!isEditing" class="w-52 flex items-center mr-4">
-            {{item.CurrentScore}}
+          <div v-if="!isEditing" class="w-60 flex items-center mr-4" :class="(item.Status === 'Active/Green')?'text-green-500':(item.Status === '/Amber')?'text-red-500':(item.Status === 'High Risk / red')?'text-red-500':(item.Status === 'Neutral/Gray')?'text-gray-500':''">
+            {{item.CurrentScore}} 
+            <span v-if="item.Status ==='Active/Green'"> {{'↑'}} 
+            </span>
+            <span v-else-if="item.Status ==='High Risk / red' || item.Status ==='/Amber'">
+             {{'↓' }} 
+             </span>
+             <span v-else>
+              {{'' }} 
+             </span>
           </div>
-          <div v-else class="w-52 flex items-center mr-4">
+          <div v-else class="w-60 flex items-center mr-4">
             <input
               type="text"
               v-model="item.CurrentScore"
@@ -170,7 +174,6 @@
           <div v-if="!isEditing"  class="w-60 flex items-center mr-4">
             <p class="w-2 h-2 rounded-full mr-2" :class="(item.Status === 'Active/Green')?'bg-green-500':(item.Status === '/Amber')?'bg-yellow-500':(item.Status === 'High Risk / red')?'bg-red-500':(item.Status === 'Neutral/Gray')?'bg-gray-500':''"></p>
             <p>{{item.Status}}</p>
-          
           </div>
           <div v-else  class="w-60 flex items-center mr-4">
             <select
@@ -183,19 +186,15 @@
             <option value="Neutral/Gray">Neutral/Gray</option>
             </select>
           </div>
-        <div class="w-2/3 flex items-center">
-          <ul class="list-disc">
-            <div v-if="!isEditing">
-              <li>{{item.Risks}}</li>
+            <div v-if="!isEditing"  class="w-2/3 flex items-center">
+              {{item.Risks}}
             </div>
-            <div v-else>
+            <div v-else  class="w-2/3 flex items-center">
             <textarea
               v-model="item.Risks"
               class="w-screen px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >{{item.Risks}}</textarea>
             </div>
-          </ul>
-        </div>
       </div>
       <div class="flex py-2 px-4 justify-end">
         <button @click="toggleExpand" class="buttonExpand">    
