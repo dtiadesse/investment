@@ -8,32 +8,44 @@
           "InvestmentAssessmentCriteria":[
             {
               "BusinessIntegration":"Business Integration / Implementation",
+              "InitialScore":"2.44",
+              "CurrentScore":"2.22",
               "Status":"Active/Green",
               "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             },
             {
               "BusinessIntegration":"Functional Integration / Implementation",
               "Status":"/Amber",
+              "InitialScore":"2.44",
+              "CurrentScore":"2.22",
               "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             },
             {
               "BusinessIntegration":"Financial Impact",
               "Status":"Active/Green",
+              "InitialScore":"2.44",
+              "CurrentScore":"2.22",
               "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             },
             {
               "BusinessIntegration":"Financial Returns",
               "Status":"High Risk / red",
+              "InitialScore":"2.44",
+              "CurrentScore":"2.22",
               "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             },
             {
               "BusinessIntegration":"Risk /Return",
               "Status":"Neutral/Gray",
+              "InitialScore":"2.44",
+              "CurrentScore":"2.22",
               "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             },
             {
               "BusinessIntegration":"Leadership",
               "Status":"Active/Green",
+              "InitialScore":"2.44",
+              "CurrentScore":"2.22",
               "Risks":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             }
           ],
