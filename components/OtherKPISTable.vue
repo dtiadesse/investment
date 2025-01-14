@@ -3,16 +3,18 @@
     <table>
       <thead>
         <tr class="bg-gray-100">
-          <th v-for="column in columns" :key="column.key" :style="{'min-width':column.width,'width':column.width,'text-align':column.textAlign}">
-            {{ column.label }}
-          </th>
+          <th class="font-bold"></th>
+          <th class="text-center">Baseline</th>
+          <th class="text-center">Target</th>
+          <th class="text-center">Current</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in tableData" :key="item.id">
-          <td v-for="column in columns" :key="column.key" :style="{'font-weight':column.fontWeight,'text-align':column.textAlign}">
-            {{ item[column.key] }}
-          </td>
+          <td style="font-weight:600">{{ item.Title }}</td>
+          <td class="text-center">{{item.Baseline}}</td>
+          <td class="text-center">{{item.Target}}</td>
+          <td class="text-center">{{item.Current}}</td>
         </tr>
       </tbody>
     </table>
@@ -21,13 +23,9 @@
 
 <script>
 export default {
-  name: 'DataTable',
+  name: 'OtherKPIsTable',
   props: {
     data: {
-      type: Array,
-      required: true
-    },
-    columns: {
       type: Array,
       required: true
     },
@@ -53,7 +51,6 @@ table {
 }
 th {
   cursor: pointer;
-  text-align: left;
   background-color: #f4f4f447;
   padding: 14px;
   padding-left: 25px;

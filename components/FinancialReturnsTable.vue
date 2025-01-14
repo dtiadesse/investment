@@ -3,16 +3,18 @@
     <table>
       <thead>
         <tr class="bg-gray-100">
-          <th v-for="column in columns" :key="column.key" :style="{'min-width':column.width,'width':column.width,'text-align':column.textAlign}">
-            {{ column.label }}
-          </th>
+          <th class="font-bold"></th>
+          <th class="text-center">Initial</th>
+          <th class="text-center">Latest Revised</th>
+          <th class="text-center">Delta</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in tableData" :key="item.id">
-          <td v-for="column in columns" :key="column.key" :style="{'background-color':item[column.key]<0?column.minusBgValueColor:column.plusBgValueColor,'color':item[column.key]<0?column.minusValueColor:column.plusValueColor,'font-weight':column.fontWeight,'text-align':column.textAlign}">
-            {{ item[column.key] }}
-          </td>
+          <td style="font-weight:600">{{ item.Title }}</td>
+          <td class="text-center">{{item.Initial}}</td>
+          <td class="text-center">{{item.LatestRevised}}</td>
+          <td :style="{'background-color':item.Delta<0?'rgb(254 242 242)':'rgb(220 252 231)','color':item.Delta<0?'red':'green','text-align':'center'}">{{item.Delta}}</td>
         </tr>
       </tbody>
     </table>
@@ -21,13 +23,9 @@
 
 <script>
 export default {
-  name: 'DataTable',
+  name: 'OtherKPIsTable',
   props: {
     data: {
-      type: Array,
-      required: true
-    },
-    columns: {
       type: Array,
       required: true
     },
@@ -53,7 +51,6 @@ table {
 }
 th {
   cursor: pointer;
-  text-align: left;
   background-color: #f4f4f447;
   padding: 14px;
   padding-left: 25px;

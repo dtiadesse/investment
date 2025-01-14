@@ -303,6 +303,8 @@ export default {
     
     // Save the edit
     saveEditTable() {
+      const tableData = this.tableValue.concat(this.hiddenItems);
+      console.log(tableData);
       this.isEditing = false; // Exit editing mode
     },
     cancelEdit(){
