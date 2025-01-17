@@ -115,6 +115,7 @@
           </select>
         </form>
       </section>
+      
       <!-- Other KPI -->
       <section class="p-4 border border-gray-300 rounded bg-white">
         <h2 class="text-lg font-bold mb-4">Other KPI</h2>
@@ -192,6 +193,7 @@
             </button>
           </div> 
       </section>
+
       <!-- Additional Data -->
       <section class="p-4 border border-gray-300 rounded bg-white">
         <h2 class="text-lg font-bold mb-4">Additional Data</h2>
@@ -210,34 +212,16 @@
         </form>
       </section>
     </div>
-    
+
     <!-- Financial Impact -->
     <section class="mt-6 p-4 border border-gray-300 rounded bg-white">
       <h2 class="text-lg font-bold mb-4">Financial Impact</h2> 
-        <div class="grid grid-rows-12 grid-flow-col gap-4 mt-6">
-          <div
-            v-for="(month, index) in months"
-            :key="index"
-            class="px-2 py-1 text-center"
-          >
-            {{ month }}
-          </div>
-          <div class="flex" v-for="(month, index) in months" :key="index">
-            <div class="mr-3 w-full">
-              <input type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="8,7361" />
+        <div class="grid grid-rows-1 grid-flow-col gap-4 mt-6">
+          <div class="p-3"  v-for="(year, index) in years">
+           <div class="mb-4" v-for="(month, index) in months" :key="index">            
+              <label class="block text-sm font-medium mb-2" v-if="month == 'Total'">Year {{year}}</label>
+              <input value="1" type="text" class="w-full p-2 border border-gray-300 rounded" />            
             </div>
-            <div class="mr-3 w-full">
-              <input type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="8,736" />
-            </div>
-            <div class="mr-3 w-full">
-              <input type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="8,736" />
-            </div>
-            <div class="mr-3 w-full">
-              <input type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="8,736" />
-            </div>
-            <div class="mr-3 w-full">
-              <input type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="8,736" />
-            </div>                  
           </div>
         </div>
     </section>
@@ -257,8 +241,9 @@ export default {
       inputs: [
         { KPIName: "" }, // Initial input field
       ],
-      years:[1,2,3,4,5],
+      years:[1,2,3,4,5,6],
       months: [
+        "Total",
         "January",
         "February",
         "March",
