@@ -1,6 +1,6 @@
 <template>
   <!-- ====== Table Section Start -->
-  <section class="bg-white dark:bg-dark lg:py-[120px]">
+  <section class="bg-white dark:bg-dark lg:py-[10px]">
     <div class="container mx-auto">
       <div class="flex flex-wrap">
         <div class="w-full px-4">
@@ -29,8 +29,25 @@
             </tbody>
             </table>
           </div>
-        </div>
+        </div>        
       </div>
+      <div class="pagination">
+          <nav class="flex items-center -space-x-px" aria-label="Pagination">
+            <button type="button"  @click="changePage(currentPage - 1)" :disabled="currentPage === 1" class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" aria-label="Previous">
+              <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"></path>
+              </svg>
+              <span class="hidden sm:block">Previous</span>
+            </button>
+            <button type="button" class="min-h-[38px] min-w-[38px] flex hover:bg-gray-100 justify-center items-center border border-gray-200 py-2 px-3 text-sm first:rounded-s-lg last:rounded-e-lg  disabled:opacity-50 disabled:pointer-events-none" aria-current="page" @click="changePage(page)" v-for="page in totalPages" :key="page" :class="{ active: page === currentPage }">{{page}}</button>
+            <button type="button" @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages" class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" aria-label="Next">
+              <span class="hidden sm:block" >Next</span>
+              <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+            </button>
+          </nav>
+        </div>
     </div>
   </section>
   <!-- ====== Table Section End -->
@@ -75,8 +92,8 @@ export default {
     paginatedData() {
       const start = (this.currentPage - 1) * this.rowsPerPage;
       const end = start + this.rowsPerPage;
-     // return this.sortedData.slice(start, end);
-      return this.sortedData;
+      return this.sortedData.slice(start, end);
+     // return this.sortedData;
     },
     totalPages() {
       return Math.ceil(this.data.length / this.rowsPerPage);
@@ -125,5 +142,29 @@ td {
   justify-content: center;
   margin-top: 10px; 
   margin-bottom:10px;
+}
+button {
+  cursor: pointer;
+   font-weight:500;
+}
+button.active {
+  font-weight: bold;
+  background-color: blue;
+  color:#fff;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+   background-color:#fff;
+}
+.nextButton{
+  background-color:#ddd6;
+  font-weight:500;
+   border-radius:5px;
+}
+.noButton{
+  background-color:#fff;
+   border-radius:5px;
+   font-weight:500;
 }
 </style>
