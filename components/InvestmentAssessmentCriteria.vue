@@ -2,13 +2,13 @@
     <div class="flex justify-between items-center">
         <div class="text-2xl font-bold p-4">Investment Assessment Criteria</div>
         <div class="flex items-center" v-if="!isEditing">
-            <div class="px-4 py-2 mr-2 font-bold flex items-center border-2 text-black text-center rounded"  :class="(OverallStatus === 'Active/Green')?'border-green-600 bg-green-50':(OverallStatus === '/Amber')?'border-yellow-600 bg-yellow-50':(OverallStatus === 'High Risk / red')?'border-red-600 bg-red-50':(OverallStatus === 'Neutral/Gray')?'border-gray-600 bg-gray-50':' '" role="button">
+            <div class="px-2 py-1 mr-2 font-bold flex items-center border-2 text-black text-center rounded"  :class="(OverallStatus === 'Active/Green')?'border-green-600 bg-green-50':(OverallStatus === '/Amber')?'border-yellow-600 bg-yellow-50':(OverallStatus === 'High Risk / red')?'border-red-600 bg-red-50':(OverallStatus === 'Neutral/Gray')?'border-gray-600 bg-gray-50':' '" role="button">
               <p class="pr-3">Overall Status</p>
               <p class="w-2 h-2 rounded-full mr-2" :class="(OverallStatus === 'Active/Green')?'bg-green-500':(OverallStatus === '/Amber')?'bg-yellow-500':(OverallStatus === 'High Risk / red')?'bg-red-500':(OverallStatus === 'Neutral/Gray')?'bg-gray-500':''"></p>
               <p>{{OverallStatus}}</p>
             </div>
             <button
-              class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-4 py-2 me-2"
+              class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1 me-2"
             >
                <svg
                     class="h-6 w-6 mr-2"
@@ -31,11 +31,11 @@
             </button>         
         </div>
         <div class="flex items-center" v-else>
-            <div class="px-4 py-2 mr-2 font-bold flex items-center text-black text-center"  role="button">
+            <div class="px-2 py-1 mr-2 font-bold flex items-center text-black text-center"  role="button">
               <p class="pr-3">Overall Status</p>
               <select
               v-model="OverallStatus"
-              class="w-52 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="w-52 px-2 py-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
             <option value="Active/Green">Active/Green</option>
             <option value="/Amber">/Amber</option>
@@ -44,14 +44,14 @@
             </select>
             </div>
             <button
-              class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-4 py-2 me-2"
+              class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1 me-2"
             >
-              <p class="text-base" @click="cancelEdit()">Cancel</p>
+              <p class="text-base" @click="openConfirmationDialog()">Cancel</p>
             </button>  
             <button
-              class="text-white flex items-center border-2 bg-blue-400 border-blue-400 font-bold rounded text-sm px-4 py-2 me-2"
+              class="text-white flex items-center border-2 bg-blue-400 border-blue-400 font-bold rounded text-sm px-2 py-1 me-2"
             >
-              <p class="text-base" @click="saveEditTable()">Save Changes</p>
+              <p class="text-base" @click="openConfirmationDialog()">Save Changes</p>
             </button>         
         </div>
 
@@ -116,84 +116,17 @@
             <option value="Neutral/Gray">Neutral/Gray</option>
             </select>
           </div>
-            <div v-if="!isEditing"  class="w-2/3 flex items-center">
-              {{item.Risks}}
+            <div v-if="!isEditing && !isExpanded"  class="w-2/3 flex items-center">
+              {{item.Risks.substring(0, 160)}} {{'...'}}
             </div>
-            <div v-else  class="w-2/3 flex items-center">
+            <div v-if="isEditing && !isExpanded"  class="w-2/3 flex items-center">
             <textarea
               v-model="item.Risks"
               class="w-screen px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >{{item.Risks}}</textarea>
             </div>
-      </div>
-      <div class="flex py-2 px-4 border-b"  v-for="item in hiddenItems"  v-if="isExpanded">
-          <div v-if="!isEditing" class="w-72 flex items-center mr-4">
-            {{item.BusinessIntegration}}
-          </div>
-          <div v-else class="w-72 flex items-center mr-4">
-            <select
-              v-model="item.BusinessIntegration"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-            <option value="Leadership">Leadership</option>
-            <option value="Risk /Return">Risk /Return</option>
-            <option value="Financial Returns">Financial Returns</option>
-            <option value="Financial Impact">Financial Impact</option>
-            <option value="Functional Integration / Implementation">Functional Integration / Implementation</option>
-            <option value="Business Integration / Implementation">Business Integration / Implementation</option>
-            </select>
-          </div>
-          <div v-if="!isEditing"  class="w-60 flex items-center mr-4">
-            {{item.InitialScore}}
-          </div>
-          <div v-else  class="w-60 flex items-center mr-4">
-            <input
-              type="text"
-              v-model="item.InitialScore"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <div v-if="!isEditing" class="w-60 flex items-center mr-4" :class="(item.Status === 'Active/Green')?'text-green-500':(item.Status === '/Amber')?'text-red-500':(item.Status === 'High Risk / red')?'text-red-500':(item.Status === 'Neutral/Gray')?'text-gray-500':''">
-            {{item.CurrentScore}} 
-            <span v-if="item.Status ==='Active/Green'"> {{'↑'}} 
-            </span>
-            <span v-else-if="item.Status ==='High Risk / red' || item.Status ==='/Amber'">
-             {{'↓' }} 
-             </span>
-             <span v-else>
-              {{'' }} 
-             </span>
-          </div>
-          <div v-else class="w-60 flex items-center mr-4">
-            <input
-              type="text"
-              v-model="item.CurrentScore"
-              class="w-32 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <div v-if="!isEditing"  class="w-60 flex items-center mr-4">
-            <p class="w-2 h-2 rounded-full mr-2" :class="(item.Status === 'Active/Green')?'bg-green-500':(item.Status === '/Amber')?'bg-yellow-500':(item.Status === 'High Risk / red')?'bg-red-500':(item.Status === 'Neutral/Gray')?'bg-gray-500':''"></p>
-            <p>{{item.Status}}</p>
-          </div>
-          <div v-else  class="w-60 flex items-center mr-4">
-            <select
-              v-model="item.Status"
-              class="w-32 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-            <option value="Active/Green">Active/Green</option>
-            <option value="/Amber">/Amber</option>
-            <option value="High Risk / red">High Risk / red</option>
-            <option value="Neutral/Gray">Neutral/Gray</option>
-            </select>
-          </div>
-            <div v-if="!isEditing"  class="w-2/3 flex items-center">
+            <div v-if="isExpanded"  class="w-2/3 flex items-center">
               {{item.Risks}}
-            </div>
-            <div v-else  class="w-2/3 flex items-center">
-            <textarea
-              v-model="item.Risks"
-              class="w-screen px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >{{item.Risks}}</textarea>
             </div>
       </div>
       <div class="flex py-2 px-4 justify-end">
@@ -204,18 +137,26 @@
         <button
               class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-4 py-2 me-2"
             >
-              <p class="text-base" @click="cancelEdit()">Cancel</p>
+              <p class="text-base" @click="openConfirmationDialog()">Cancel</p>
             </button>  
             <button
               class="text-white flex items-center border-2 bg-blue-400 border-blue-400 font-bold rounded text-sm px-4 py-2 me-2"
             >
-              <p class="text-base" @click="saveEditTable()">Save Changes</p>
+              <p class="text-base" @click="openConfirmationDialog()">Save Changes</p>
             </button>
             </div>
       </div>
+       <!-- Save Changes Confirmation Modal -->
+    <SaveChangesConfirmation
+      :message="'You made changes to this page. Do you want to save them before leaving?'"
+      :isVisible="isModalVisible"
+      @confirm="saveEditTable"
+      @cancel="closeConfirmationDialog"
+    />
 </template>
 
 <script>
+import SaveChangesConfirmation from '~/components/SaveChangesConfirmation.vue';
 export default {
   name: 'DataTable',
   props: {
@@ -277,6 +218,7 @@ export default {
       // Number of items to show initially
       initialVisibleCount: 3,
       isEditing:false,
+      isModalVisible:false,
     };
   },
   computed: {
@@ -306,9 +248,17 @@ export default {
       const tableData = this.tableValue.concat(this.hiddenItems);
       console.log(tableData);
       this.isEditing = false; // Exit editing mode
+      this.isModalVisible = false;
     },
     cancelEdit(){
       this.isEditing = false;
+    },
+    openConfirmationDialog () {
+      this.isModalVisible = true;
+    },
+    closeConfirmationDialog () {
+      this.isModalVisible = false;
+      this.isEditing = !this.isEditing
     }
   }
 };

@@ -68,3 +68,25 @@ div#table2 table tr{
     display: inline-block;
     float: right;
 }
+.ag-root-wrapper{
+    border:none !important;
+}
+.ag-header{
+    background-color:#f8f8f8 !important;
+    border-bottom:1px solid #f1f1f1 !important
+}
+.ag-row{
+    border-bottom:1px solid #f1f1f1 !important
+}
+.ag-sort-order {
+    display: none !important;
+}
+.ag-header-cell-text,.ag-icon,.ag-header-group-text{
+    color:rgb(1, 1, 37) !important;
+}
+.bold-cell {
+    color:rgb(1, 1, 37) !important;
+    font-weight: 500 !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
