@@ -225,7 +225,7 @@
           </div>
         </div>
     </section>
-
+{{$route.params}}
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end mt-6">
       <button class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
       <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
@@ -235,6 +235,7 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 export default {
   data() {
     return {
@@ -259,8 +260,13 @@ export default {
       ],
     };
   },
+  mounted() {
+   const { id } = useRoute().params
+    console.log(id); 
+  },
   methods: {
     addInput() {
+    console.log(this.$route.params)
       this.inputs.push({ KPIName: "" }); // Add a new input
     },
     removeInput(index) {

@@ -437,7 +437,7 @@ const onDelete = () => {
 
     
     const goToAddInvestment = () => {
-      router.push('/investmentEdit');
+      router.push('/investment/add');
     }
 
     // Custom filter icon (using an SVG icon for example)
