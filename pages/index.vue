@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white">
+  <div class="bg-white border border-gray-200 rounded">
     <div style="display: inline-block; width: 100%">
       <div class="px-7 py-6 investment float-left">All Investments</div>
       <div class="py-5 pr-4 float-left">
@@ -188,7 +188,7 @@ export default {
     // Edit action
     const onEdit = () => {
       console.log("Editing row:", rowToEdit.value.data);
-      router.push("/investment/edit/1");
+      router.push("/investment/edit/"+rowToEdit.value.data.id);
       closeMenu();
     };
 
@@ -204,7 +204,7 @@ export default {
     };
 
     const goToAddInvestment = () => {
-      router.push("/investment/edit/1");
+      router.push("/investment/add");
     };
 
     const openConfirmationDialog = () => {

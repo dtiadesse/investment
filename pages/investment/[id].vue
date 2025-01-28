@@ -1,23 +1,17 @@
 <template>
-
-
   <div>
-
-
     <Breadcrumb :breadCrumbItems="breadCrumbItems" :bottomTitle="tableData.Title">
     </Breadcrumb>
-
-
 
     <div class="border border-gray-200 rounded-lg mb-5 bg-white">
       <InvestmentAssessmentCriteria :tableData="tableData.InvestmentAssessmentCriteria" />
     </div>
 
-    <div class="border border-gray-200 rounded-lg bg-white dark:border-gray-700 mb-3">
-      <div class="flex items-center justify-between">
-        <h2 class="text-xl font-bold p-4">Financial Impact</h2>
+    <div class="p-3 pb-0 border border-gray-200 rounded-lg bg-white dark:border-gray-700 mb-3">
+      <div class="flex items-center justify-between  m-3 mb-5">
+        <h2 class="text-xl font-bold">Financial Impact</h2>
         <button @click="goToEditInvestment"
-          class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1 me-2">
+          class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1">
           <svg class="h-6 w-6 mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="black"
             fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" />
@@ -27,7 +21,7 @@
           <p class="text-base">Edit Charts</p>
         </button>
       </div>
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between m-3 mb-0">
         <div class="">
           <p class="text-xl text-gray-600">
             Revenue ($)
@@ -43,12 +37,12 @@
         </div>
       </div>
     </div>
-    <div class="grid gap-4 grid-cols-2 bg-white border border-gray-200 p-5">
-      <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-        <div class="flex items-center justify-between">
-          <h2 class="text-xl font-bold p-4">Financial Returns</h2>
+    <div class="grid gap-4 grid-cols-2">
+      <div class="bg-white p-3 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex items-center justify-between m-3 mb-5">
+          <h2 class="text-xl font-bold">Financial Returns</h2>
           <button @click="goToEditInvestment"
-            class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1 me-2">
+            class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1">
             <svg class="h-6 w-6 mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="black"
               fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" />
@@ -58,16 +52,16 @@
             <p class="text-base">Edit Charts</p>
           </button>
         </div>
-        <div class="m-4 mt-0">
+        <div class="m-3 mt-0">
           <FinancialReturnsTable :data="tableData.FinancialReturns" :columns="tableColumns">
           </FinancialReturnsTable>
         </div>
       </div>
-      <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-        <div class="flex items-center justify-between">
-          <h2 class="text-xl font-bold p-4">Other KPI's</h2>
+      <div class="bg-white p-3 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex items-center justify-between m-3 mb-5">
+          <h2 class="text-xl font-bold">Other KPI's</h2>
           <button @click="goToEditInvestment"
-            class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1 me-2">
+            class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1">
             <svg class="h-6 w-6 mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="black"
               fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" />
@@ -77,7 +71,7 @@
             <p class="text-base">Edit Charts</p>
           </button>
         </div>
-        <div class="m-4 mt-0">
+        <div class="m-3 mt-0">
           <OtherKPISTable :data="tableData.OtherKpis" :columns="tableKPIColumns">
           </OtherKPISTable>
         </div>
@@ -168,9 +162,8 @@ export default {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
-
-
         const data = await response.json();
+        console.log(data[0])
         this.tableData = data[0];
         this.labels = this.tableData.ChartFinancialImpactDataLabel
         this.data = [this.tableData.ChartFinancialImpactDataValue1, this.tableData.ChartFinancialImpactDataValue2];
@@ -194,7 +187,8 @@ export default {
       }
     },
     goToEditInvestment() {
-      this.$router.push('/investment/edit/1');
+      const { id } = useRoute().params
+      this.$router.push('/investment/edit/'+id);
     },
 
   },

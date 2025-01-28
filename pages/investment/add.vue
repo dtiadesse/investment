@@ -2,7 +2,7 @@
   <div class="p-4 bg-gray-50 min-h-screen">
 
     <section>
-      <Breadcrumb :breadCrumbItems="breadCrumbItems" :bottomTitle="tableData.Title">
+      <Breadcrumb :breadCrumbItems="breadCrumbItems">
       </Breadcrumb>
     </section>
     <!-- Header -->
@@ -262,13 +262,17 @@ export default {
           href: '/'
         },
         {
-          text: `${this.tableData.Title}`,
+          text: `Add page`,
           href: '#',
           color: 'rgb(10 35 104)'
         }
       ]
 
     };
+  },
+  mounted() {
+   const { id } = useRoute().params
+    console.log(id); 
   },
   methods: {
     addInput() {

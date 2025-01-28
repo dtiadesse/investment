@@ -37,7 +37,7 @@ const drawChart = () => {
   const { width, height } = canvas;
 
   // Chart dimensions
-  const margin = 60;
+  const margin = 50;
   const yAxisWidth = 18;
   const xAxisHeight = 50;
   const chartHeight = height - 2 * margin - xAxisHeight;
@@ -186,9 +186,9 @@ onMounted(drawChart);
 
 <style scoped>
 .chart-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .chart {

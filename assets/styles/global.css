@@ -90,3 +90,6 @@ div#table2 table tr{
     text-decoration: underline;
     text-underline-offset: 4px;
 }
+body{
+    background-color: #f8f8f8;;
+}
