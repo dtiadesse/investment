@@ -13,7 +13,7 @@ const emit = defineEmits();
 const props = defineProps();
 
 // Open menu event
-const openMenu = (event) => {
+const openMenu = (event: any) => {
   emit("openMenu", event, props.value);
 };
 </script>

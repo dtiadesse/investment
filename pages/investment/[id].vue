@@ -1,270 +1,152 @@
 <template>
-  <div class="p-4 bg-gray-50 min-h-screen">
-    <Breadcrumb :breadCrumbItems="breadCrumbItems"/>
-    <!-- Header -->
-    <section class="flex p-4 border border-gray-300 rounded bg-white justify-end">
-      <button class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
-      <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
-    </section>
-    
-    <!-- Main Grid -->
-    <div class="grid sm:grid-cols-[1fr_1fr_1fr] md:grid-cols-[2fr_2fr_2fr] gap-4 mt-6">
-      <!-- Main Details -->
-      <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Main Details</h2>
-        <form>
-          <label class="block text-sm font-medium mb-2">Title</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="Progress Capital - Team Recruiting" />
-          
-          <label class="block text-sm font-medium mb-2">Type</label>
-          <select class="w-full p-2 border border-gray-300 rounded mb-4">
-            <option>Advisory Investment</option>
-          </select>
 
-          <label class="block text-sm font-medium mb-2">Investment Detail</label>
-          <select class="w-full p-2 border border-gray-300 rounded mb-4">
-            <option>Recruiting</option>
-          </select>
 
-          <label class="block text-sm font-medium mb-2">Size</label>
-          <select class="w-full p-2 border border-gray-300 rounded">
-            <option> > $5M Rev</option>
-          </select>
-        </form>
-      </section>
+  <div>
 
-      <!-- Revenue -->
-      <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Revenue</h2>
-        <form>
-          <label class="block text-sm font-medium mb-2">Base Revenue (value??)</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="8.3" />
 
-          <label class="block text-sm font-medium mb-2">Growth Revenue (value??)</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="10" />
+    <Breadcrumb :breadCrumbItems="breadCrumbItems" :bottomTitle="tableData.Title">
+    </Breadcrumb>
 
-          <label class="block text-sm font-medium mb-2">Growth</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1.7" />
-        
-          <label class="block text-sm font-medium mb-2">Growth (%)</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="20%" />
-        </form>
-      </section>
 
-      <!-- Total & Risk -->
-      <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Total & Risk</h2>
-        <form>
-          <label class="block text-sm font-medium mb-2">Total Consideration (value??)</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="10" />
 
-          <label class="block text-sm font-medium mb-2">At Risk Consideration (value??)</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="6" />
-          
-          <div class="flex">
-            <div class="mr-3">
-              <label class="block text-sm font-medium mb-2">Guaranteed</label>
-              <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="6" />
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-2">(%) Guaranteed</label>
-              <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="40%" />
-            </div>
-          </div>
-          <div class="flex">
-            <div class="mr-3">
-              <label class="block text-sm font-medium mb-2">At Risk (stable)</label>
-              <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="" />
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-2">At Risk (Growth)</label>
-              <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="6" />
-            </div>
-          </div>
-        </form>
-      </section>
+    <div class="border border-gray-200 rounded-lg mb-5 bg-white">
+      <InvestmentAssessmentCriteria :tableData="tableData.InvestmentAssessmentCriteria" />
     </div>
 
-    <div class="grid sm:grid-cols-[1fr_1fr_1fr] md:grid-cols-[2fr_3fr_1fr] gap-4 mt-6">
-      <!-- Financial Returns -->
-      <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Financial Returns</h2>
-        <form>
-          <div class="flex">
-            <div class="mr-3">
-              <label class="block text-sm font-medium mb-2">Pre-Synergy Multiple (x)</label>
-              <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="3.36" />
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-2">Post-Synergy Multiple (x)</label>
-              <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="8.736" />
-            </div>
-          </div>
+    <div class="border border-gray-200 rounded-lg bg-white dark:border-gray-700 mb-3">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl font-bold p-4">Financial Impact</h2>
+        <button @click="goToEditInvestment"
+          class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1 me-2">
+          <svg class="h-6 w-6 mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="black"
+            fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+            <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+          </svg>
+          <p class="text-base">Edit Charts</p>
+        </button>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="">
+          <p class="text-xl text-gray-600">
+            Revenue ($)
+          </p>
 
-          <label class="block text-sm font-medium mb-2">Payback (yrs)</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="4.0" />
-
-          <label class="block text-sm font-medium mb-2">IRR (%)</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="19.70" />
-
-          <label class="block text-sm font-medium mb-2">Integration Period (value?)</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="84" />
-        
-          <label class="block text-sm font-medium mb-2">Execution Risk</label>
-          <select class="w-full p-2 border border-gray-300 rounded mb-4">
-            <option>Low</option>
-          </select>
-        </form>
-      </section>
-      
-      <!-- Other KPI -->
-      <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Other KPI</h2>
-          <div class="max-h-80 overflow-y-auto bg-gray-50 rounded p-4 mb-4" v-if="inputs.length>0">
-            <div v-for="(input, index) in inputs" :key="index" class="mb-4">
-              <div class="flex">
-                <div class="mr-3 w-full">
-                  <label class="block text-sm font-medium mb-2">KPI Name</label>
-                  <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="KPI Name" />
-                </div>
-                <div class="mt-7">
-                  <button @click="removeInput(index)" class="flex px-3 py-2 ml-2 text-red-800 text-sm font-bold text-center border border-red-800 inline-flex items-center rounded-lg focus:outline-none">
-                      Delete
-                        <svg
-                          class="h-5 w-5 text-red-800 ml-2"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <line x1="4" y1="7" x2="20" y2="7" />
-                          <line x1="10" y1="11" x2="10" y2="17" />
-                          <line x1="14" y1="11" x2="14" y2="17" />
-                          <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                        </svg>
-                  </button>
-                </div> 
-              </div>
-              <div class="flex">
-                <div class="mr-3 w-full">
-                  <label class="block text-sm font-medium mb-2">Value type</label>
-                  <select class="w-full p-2 border border-gray-300 rounded mb-4">
-                    <option>$,%,free text</option>
-                  </select>
-                </div>
-                <div class="mr-3 w-full">
-                  <label class="block text-sm font-medium mb-2">Base line</label>
-                  <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1.5m" />
-                </div>
-                <div class="mr-3 w-full">
-                  <label class="block text-sm font-medium mb-2">Target</label>
-                  <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="0.6m" />
-                </div>
-                <div class="mr-3 w-full">
-                  <label class="block text-sm font-medium mb-2">Current</label>
-                  <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="0.2m" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex justify-center">
-            <button @click="addInput" typ class="flex bg-white font-medium border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">
-              Add More 
-              <svg
-                  class="h-6 w-6 text-white-700 ml-2"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <line x1="12" y1="5" x2="12" y2="19" />
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
-            </button>
-          </div> 
-      </section>
-
-      <!-- Additional Data -->
-      <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Additional Data</h2>
-        <form>
-          <label class="block text-sm font-medium mb-2">Capital as % of Revenue</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="0.48x" />
-
-          <label class="block text-sm font-medium mb-2">FCF ($)</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1.6" />
-
-          <label class="block text-sm font-medium mb-2">Base Cum. CF</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="8,736" />
-
-          <label class="block text-sm font-medium mb-2">Growth Cum.</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="8,736" />
-        </form>
-      </section>
-    </div>
-
-    <!-- Financial Impact -->
-    <section class="mt-6 p-4 border border-gray-300 rounded bg-white">
-      <h2 class="text-lg font-bold mb-4">Financial Impact</h2> 
-        <div class="grid grid-rows-1 grid-flow-col gap-4 mt-6">
-          <div class="p-3"  v-for="(year, index) in years">
-           <div class="mb-4" v-for="(month, index) in months" :key="index">            
-              <label class="block text-sm font-medium mb-2" v-if="month == 'Total'">Year {{year}}</label>
-              <input value="1" type="text" class="w-full p-2 border border-gray-300 rounded" />            
-            </div>
-          </div>
+          <FinancialImpactBarChart :seriesLabels="seriesLabels" :datasets="data" :labels="labels" />
         </div>
-    </section>
+        <div class="">
+          <p class="text-xl text-gray-600">
+            EBITDA (?x)
+          </p>
+          <FinancialImpactBarChart :datasets="data" :labels="labels" />
+        </div>
+      </div>
+    </div>
+    <div class="grid gap-4 grid-cols-2 bg-white border border-gray-200 p-5">
+      <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-bold p-4">Financial Returns</h2>
+          <button @click="goToEditInvestment"
+            class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1 me-2">
+            <svg class="h-6 w-6 mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="black"
+              fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+              <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+            </svg>
+            <p class="text-base">Edit Charts</p>
+          </button>
+        </div>
+        <div class="m-4 mt-0">
+          <FinancialReturnsTable :data="tableData.FinancialReturns" :columns="tableColumns">
+          </FinancialReturnsTable>
+        </div>
+      </div>
+      <div class="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-bold p-4">Other KPI's</h2>
+          <button @click="goToEditInvestment"
+            class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1 me-2">
+            <svg class="h-6 w-6 mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="black"
+              fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+              <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+            </svg>
+            <p class="text-base">Edit Charts</p>
+          </button>
+        </div>
+        <div class="m-4 mt-0">
+          <OtherKPISTable :data="tableData.OtherKpis" :columns="tableKPIColumns">
+          </OtherKPISTable>
+        </div>
+      </div>
+    </div>
 
-    <section class="flex p-4 border border-gray-300 rounded bg-white justify-end mt-6">
-      <button class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
-      <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
-    </section>
   </div>
-  
+
 </template>
 
+<style scoped>
+.container {
+  background-color: white;
+  max-width: 100%;
+  border: none;
+}
+</style>
+
 <script>
-import { useRouter } from "vue-router";
+definePageMeta({
+  layout: "home",
+});
 export default {
   data() {
     return {
-      inputs: [
-        { KPIName: "" }, // Initial input field
+      labels: [],
+      tableColumns: [
+        {
+          label: "",
+          key: "Title",
+          width: "20%",
+          color: "#000",
+          fontWeight: "600",
+        },
+        {
+          label: "Initial",
+          key: "Initial",
+          width: "20%",
+          textAlign: "center"
+        },
+        { label: "Latest Revised", key: "LatestRevised", width: "30%", textAlign: "center" },
+        { label: "Delta", key: "Delta", width: "20%", minusValueColor: "red", plusValueColor: "green", minusBgValueColor: "rgb(254 242 242)", plusBgValueColor: "rgb(220 252 231)", textAlign: "center" },
       ],
-      years:[1,2,3,4,5,6],
-      months: [
-        "Total",
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+      tableKPIColumns: [
+        {
+          label: "",
+          key: "Title",
+          width: "20%",
+          color: "#000",
+          fontWeight: "600",
+        },
+        {
+          label: "Baseline",
+          key: "Baseline",
+          width: "20%",
+          textAlign: "center",
+        },
+        { label: "Target", key: "Target", width: "30%", textAlign: "center" },
+        { label: "Current", key: "Current", width: "20%", textAlign: "center" },
       ],
-      data:[],
+      seriesLabels: ["Pre-Synergy Multiple", "Post-Synergy Multiple"],
+      barColors: ["#2C2F48", "#00A8E8"],
+      data: [],
       loading: true,
       error: null,
-      tableData:[],
-      breadCrumbItems:[]
-    };
+      tableData: [],
+      breadCrumbItems: []
+
+    }
   },
   watch: {
     tableData: {
@@ -277,20 +159,21 @@ export default {
   created() {
     this.fetchInvestmentsDetails();
   },
-  mounted() {
-   const { id } = useRoute().params
-    console.log(id); 
-  },
   methods: {
     async fetchInvestmentsDetails() {
       try {
         const { id } = useRoute().params
-        
-        const response = await fetch('http://localhost:3001/investments/'+id);
+
+        const response = await fetch('http://localhost:3001/investment/');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
-        this.tableData = await response.json();
+
+
+        const data = await response.json();
+        this.tableData = data[0];
+        this.labels = this.tableData.ChartFinancialImpactDataLabel
+        this.data = [this.tableData.ChartFinancialImpactDataValue1, this.tableData.ChartFinancialImpactDataValue2];
         this.breadCrumbItems = [
           {
             text: 'Home',
@@ -302,29 +185,19 @@ export default {
           },
           {
             text: `${this.tableData.Title}`,
-            href: `/home/${this.tableData.id}`,
-          },
-          {
-            text: `Edit page`,
             href: '#',
-            color: 'rgb(107 114 128)'
+            color: 'rgb(10 35 104)'
           }
         ]
       } catch (err) {
         console.log(err);
       }
     },
-    addInput() {
-      this.inputs.push({ KPIName: "" }); // Add a new input
+    goToEditInvestment() {
+      this.$router.push('/investment/edit/1');
     },
-    removeInput(index) {
-      this.inputs.splice(index, 1); // Remove an input by index
-    },
-    
+
   },
 };
-</script>
 
-<style scoped>
-/* Add any custom styling if necessary */
-</style>
+</script>

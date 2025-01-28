@@ -1,12 +1,17 @@
 <template>
   <div class="p-4 bg-gray-50 min-h-screen">
-    <Breadcrumb :breadCrumbItems="breadCrumbItems"/>
+
+    <section>
+      <Breadcrumb :breadCrumbItems="breadCrumbItems" :bottomTitle="tableData.Title">
+      </Breadcrumb>
+    </section>
     <!-- Header -->
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end">
-      <button class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
+      <button
+        class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
       <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
-    
+
     <!-- Main Grid -->
     <div class="grid sm:grid-cols-[1fr_1fr_1fr] md:grid-cols-[2fr_2fr_2fr] gap-4 mt-6">
       <!-- Main Details -->
@@ -14,8 +19,9 @@
         <h2 class="text-lg font-bold mb-4">Main Details</h2>
         <form>
           <label class="block text-sm font-medium mb-2">Title</label>
-          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="Progress Capital - Team Recruiting" />
-          
+          <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4"
+            placeholder="Progress Capital - Team Recruiting" />
+
           <label class="block text-sm font-medium mb-2">Type</label>
           <select class="w-full p-2 border border-gray-300 rounded mb-4">
             <option>Advisory Investment</option>
@@ -45,7 +51,7 @@
 
           <label class="block text-sm font-medium mb-2">Growth</label>
           <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1.7" />
-        
+
           <label class="block text-sm font-medium mb-2">Growth (%)</label>
           <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="20%" />
         </form>
@@ -60,7 +66,7 @@
 
           <label class="block text-sm font-medium mb-2">At Risk Consideration (value??)</label>
           <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="6" />
-          
+
           <div class="flex">
             <div class="mr-3">
               <label class="block text-sm font-medium mb-2">Guaranteed</label>
@@ -109,90 +115,74 @@
 
           <label class="block text-sm font-medium mb-2">Integration Period (value?)</label>
           <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="84" />
-        
+
           <label class="block text-sm font-medium mb-2">Execution Risk</label>
           <select class="w-full p-2 border border-gray-300 rounded mb-4">
             <option>Low</option>
           </select>
         </form>
       </section>
-      
+
       <!-- Other KPI -->
       <section class="p-4 border border-gray-300 rounded bg-white">
         <h2 class="text-lg font-bold mb-4">Other KPI</h2>
-          <div class="max-h-80 overflow-y-auto bg-gray-50 rounded p-4 mb-4" v-if="inputs.length>0">
-            <div v-for="(input, index) in inputs" :key="index" class="mb-4">
-              <div class="flex">
-                <div class="mr-3 w-full">
-                  <label class="block text-sm font-medium mb-2">KPI Name</label>
-                  <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="KPI Name" />
-                </div>
-                <div class="mt-7">
-                  <button @click="removeInput(index)" class="flex px-3 py-2 ml-2 text-red-800 text-sm font-bold text-center border border-red-800 inline-flex items-center rounded-lg focus:outline-none">
-                      Delete
-                        <svg
-                          class="h-5 w-5 text-red-800 ml-2"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <line x1="4" y1="7" x2="20" y2="7" />
-                          <line x1="10" y1="11" x2="10" y2="17" />
-                          <line x1="14" y1="11" x2="14" y2="17" />
-                          <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                        </svg>
-                  </button>
-                </div> 
+        <div class="max-h-80 overflow-y-auto bg-gray-50 rounded p-4 mb-4" v-if="inputs.length > 0">
+          <div v-for="(input, index) in inputs" :key="index" class="mb-4">
+            <div class="flex">
+              <div class="mr-3 w-full">
+                <label class="block text-sm font-medium mb-2">KPI Name</label>
+                <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="KPI Name" />
               </div>
-              <div class="flex">
-                <div class="mr-3 w-full">
-                  <label class="block text-sm font-medium mb-2">Value type</label>
-                  <select class="w-full p-2 border border-gray-300 rounded mb-4">
-                    <option>$,%,free text</option>
-                  </select>
-                </div>
-                <div class="mr-3 w-full">
-                  <label class="block text-sm font-medium mb-2">Base line</label>
-                  <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1.5m" />
-                </div>
-                <div class="mr-3 w-full">
-                  <label class="block text-sm font-medium mb-2">Target</label>
-                  <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="0.6m" />
-                </div>
-                <div class="mr-3 w-full">
-                  <label class="block text-sm font-medium mb-2">Current</label>
-                  <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="0.2m" />
-                </div>
+              <div class="mt-7">
+                <button @click="removeInput(index)"
+                  class="flex px-3 py-2 ml-2 text-red-800 text-sm font-bold text-center border border-red-800 inline-flex items-center rounded-lg focus:outline-none">
+                  Delete
+                  <svg class="h-5 w-5 text-red-800 ml-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <line x1="4" y1="7" x2="20" y2="7" />
+                    <line x1="10" y1="11" x2="10" y2="17" />
+                    <line x1="14" y1="11" x2="14" y2="17" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="flex">
+              <div class="mr-3 w-full">
+                <label class="block text-sm font-medium mb-2">Value type</label>
+                <select class="w-full p-2 border border-gray-300 rounded mb-4">
+                  <option>$,%,free text</option>
+                </select>
+              </div>
+              <div class="mr-3 w-full">
+                <label class="block text-sm font-medium mb-2">Base line</label>
+                <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1.5m" />
+              </div>
+              <div class="mr-3 w-full">
+                <label class="block text-sm font-medium mb-2">Target</label>
+                <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="0.6m" />
+              </div>
+              <div class="mr-3 w-full">
+                <label class="block text-sm font-medium mb-2">Current</label>
+                <input type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="0.2m" />
               </div>
             </div>
           </div>
-          <div class="flex justify-center">
-            <button @click="addInput" typ class="flex bg-white font-medium border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">
-              Add More 
-              <svg
-                  class="h-6 w-6 text-white-700 ml-2"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <line x1="12" y1="5" x2="12" y2="19" />
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
-            </button>
-          </div> 
+        </div>
+        <div class="flex justify-center">
+          <button @click="addInput" typ
+            class="flex bg-white font-medium border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">
+            Add More
+            <svg class="h-6 w-6 text-white-700 ml-2" width="20" height="20" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </button>
+        </div>
       </section>
 
       <!-- Additional Data -->
@@ -216,34 +206,37 @@
 
     <!-- Financial Impact -->
     <section class="mt-6 p-4 border border-gray-300 rounded bg-white">
-      <h2 class="text-lg font-bold mb-4">Financial Impact</h2> 
-        <div class="grid grid-rows-1 grid-flow-col gap-4 mt-6">
-          <div class="p-3"  v-for="(year, index) in years">
-           <div class="mb-4" v-for="(month, index) in months" :key="index">            
-              <label class="block text-sm font-medium mb-2" v-if="month == 'Total'">Year {{year}}</label>
-              <input value="1" type="text" class="w-full p-2 border border-gray-300 rounded" />            
-            </div>
+      <h2 class="text-lg font-bold mb-4">Financial Impact</h2>
+      <div class="grid grid-rows-1 grid-flow-col gap-4 mt-6">
+        <div class="p-3" v-for="(year, index) in years">
+          <div class="mb-4" v-for="(month, index) in months" :key="index">
+            <label class="block text-sm font-medium mb-2" v-if="month == 'Total'">Year {{ year }}</label>
+            <input value="1" type="text" class="w-full p-2 border border-gray-300 rounded" />
           </div>
         </div>
+      </div>
     </section>
 
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end mt-6">
-      <button class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
+      <button
+        class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
       <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
   </div>
-  
+
 </template>
 
 <script>
-import { useRouter } from "vue-router";
+definePageMeta({
+  layout: "home",
+});
 export default {
   data() {
     return {
       inputs: [
         { KPIName: "" }, // Initial input field
       ],
-      years:[1,2,3,4,5,6],
+      years: [1, 2, 3, 4, 5, 6],
       months: [
         "Total",
         "January",
@@ -259,34 +252,37 @@ export default {
         "November",
         "December",
       ],
-      breadCrumbItems : [
-          {
-            text: 'Home',
-            href: '/'
-          },
-          {
-            text: 'All Investments',
-            href: '/'
-          },
-          {
-            text: `Add Page`,
-            href: '#',
-            color: 'rgb(107 114 128)'
-          }
-        ]
+      breadCrumbItems: [
+        {
+          text: 'Home',
+          href: '/'
+        },
+        {
+          text: 'All Investments',
+          href: '/'
+        },
+        {
+          text: `${this.tableData.Title}`,
+          href: '#',
+          color: 'rgb(10 35 104)'
+        }
+      ]
+
     };
   },
   methods: {
     addInput() {
-    console.log(this.$route.params)
       this.inputs.push({ KPIName: "" }); // Add a new input
     },
     removeInput(index) {
       this.inputs.splice(index, 1); // Remove an input by index
     },
-    
+
+
+
   },
 };
+
 </script>
 
 <style scoped>
