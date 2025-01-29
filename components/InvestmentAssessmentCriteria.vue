@@ -3,31 +3,15 @@
     <div class="flex justify-between items-center">
         <div class="text-2xl font-bold p-5">Investment Assessment Criteria</div>
         <div class="flex items-center mr-5" v-if="!isEditing">
-            <div class="px-2 py-1 mr-5 font-bold flex items-center border-2 text-black text-center rounded"  :class="overallStatusClass" role="button">
+            <div class="px-2 py-1 mr-5 font-bold flex items-center border text-black text-center rounded"  :class="overallStatusClass" role="button">
               <p class="pr-3">Overall Status</p>
               <p class="w-2 h-2 rounded-full mr-2" :class="overallStatusDot"></p>
               <p>{{OverallStatus}}</p>
             </div>
             <button
-              class="mr-5 text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1 me-2"
+              class="mr-5 text-black flex items-center border border-gray-300 font-bold rounded text-sm px-2 py-1 me-2"
             >
-               <svg
-                    class="h-6 w-6 mr-2"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="black"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <path
-                      d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"
-                    />
-                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
-                  </svg>
+              <svg class="h-6 w-6 mr-2" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.7 5.2a1.024 1.024 0 0 1 0 1.448l-2.626 2.628-3.35-3.35L17.35 3.3a1.024 1.024 0 0 1 1.448 0zm-4.166 5.614-3.35-3.35-8.509 8.511L3 21l5.025-1.675z"/></svg>
               <p class="text-base" @click="editTable()">Edit Table</p>
             </button>         
         </div>
@@ -45,12 +29,12 @@
             </select>
             </div>
             <button
-              class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-2 py-1 me-2"
+              class="text-black flex items-center border border-gray-300 font-bold rounded text-sm px-2 py-1 me-2"
             >
               <p class="text-base" @click="openConfirmationDialog()">Cancel</p>
             </button>  
             <button
-              class="text-white flex items-center border-2 bg-blue-400 border-blue-400 font-bold rounded text-sm px-2 py-1 me-2"
+              class="text-white flex items-center border bg-blue-400 border-blue-400 font-bold rounded text-sm px-2 py-1 me-2"
             >
               <p class="text-base" @click="openConfirmationDialog()">Save Changes</p>
             </button>         
@@ -61,16 +45,16 @@
       <div class="flex py-2 px-4">
         <table class="w-full">
           <thead>
-            <tr class="bg-gray-50">
+            <tr class="bg-gray-100">
               <th class="w-64">Criterion</th>
-              <th class="w-32">Initial Score</th>
+              <th class="w-40">Initial Score</th>
               <th class="w-40">Current Score</th>
               <th class="w-48">Status</th>
               <th>Risks</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item,index) in tableValue" :key="index"  :class="index%2!=0?'bg-gray-50':''">
+            <tr v-for="(item,index) in tableValue" :key="index"  :class="index%2!=0?'bg-gray-100':''">
               <td>
                 <div v-if="!isEditing">
                   {{item.BusinessIntegration}}
@@ -161,18 +145,18 @@
           </tbody>
         </table>
       </div>
-      <div class="flex py-2 px-4 justify-end pr-5 mb-4 margin">
-        <button @click="toggleExpand" class="buttonExpand">    
-          Expand Full List Of Risks  {{ isExpanded ? '  ▲' : '  ▼' }}
+      <div class="flex py-2 px-4 justify-end pr-5 mb-2">
+        <button @click="toggleExpand" class="buttonExpand text-sm font-semibold " :class="!isEditing?'margin':''">    
+          Expand Full List Of Risks  <span class="text-xs ml-3">{{ isExpanded ? '  ▲' : '  ▼' }}</span>
         </button>
         <div v-if="isEditing" class="ml-4 flex items-center">
         <button
-              class="text-black flex items-center border-2 border-gray-300 font-bold rounded text-sm px-4 py-2 me-2"
+              class="text-black flex items-center border border-gray-300 font-bold rounded text-sm px-2 py-1 me-2"
             >
               <p class="text-base" @click="openConfirmationDialog()">Cancel</p>
             </button>  
             <button
-              class="text-white flex items-center border-2 bg-blue-400 border-blue-400 font-bold rounded text-sm px-4 py-2 me-2"
+              class="text-white flex items-center border bg-blue-400 border-blue-400 font-bold rounded text-sm px-2 py-1 me-2"
             >
               <p class="text-base" @click="openConfirmationDialog()">Save Changes</p>
             </button>
@@ -271,7 +255,7 @@ export default {
 <style scoped>
 .buttonExpand {
   cursor: pointer;
-  color:blue
+  color:#085ee6
 }
 .w-screen{
   width:40vw
@@ -300,39 +284,8 @@ th span {
 }
 td {
   padding: 6px;
-  border-top: 1px solid #d4d4d4;
-  border-bottom: 1px solid #d4d4d4;
   padding-left: 25px;
   
 }
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px; 
-  margin-bottom:10px;
-}
-button {
-  cursor: pointer;
-   font-weight:500;
-}
-button.active {
-  font-weight: bold;
-  background-color: blue;
-  color:#fff;
-}
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-   background-color:#fff;
-}
-.nextButton{
-  background-color:#ddd6;
-  font-weight:500;
-   border-radius:5px;
-}
-.noButton{
-  background-color:#fff;
-   border-radius:5px;
-   font-weight:500;
-}
+
 </style>
