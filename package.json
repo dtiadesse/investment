@@ -17,6 +17,8 @@
     "ag-grid-community": "^33.0.4",
     "ag-grid-enterprise": "^33.0.4",
     "ag-grid-vue3": "^33.0.4",
+    "chart.js": "^4.4.7",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "nuxt": "^3.14.159",
     "nuxt-mongoose": "^1.0.6",
     "nuxt-oidc-auth": "^0.18.0",

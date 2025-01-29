@@ -17,18 +17,17 @@
         </button>
       </div>
       <div class="flex items-center justify-between m-3 mb-0">
-        <div class="">
+        <div class="mr-5 mb-5 pb-5">
           <p class="text-xl text-gray-600">
             Revenue ($)
           </p>
-
-          <FinancialImpactBarChart :seriesLabels="seriesLabels" :datasets="data" :labels="labels" />
+          <BarRevenueChart :datasets="data" :labels="labels"  />
         </div>
-        <div class="">
+        <div class="mb-5 pb-5">
           <p class="text-xl text-gray-600">
             EBITDA (?x)
           </p>
-          <FinancialImpactBarChart :datasets="data" :labels="labels" />
+          <BarEBITDAChart :datasets="data" :labels="labels" />
         </div>
       </div>
     </div>
