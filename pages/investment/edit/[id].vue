@@ -6,11 +6,10 @@
       </Breadcrumb>
     </section>
     
-    <form @submit.prevent="handleSubmit">
     <!-- Header -->
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end">
       <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
-      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
+      <button type="button"  @click="handleSubmit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
 
     <!-- Main Grid -->      
@@ -177,8 +176,7 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <button @click="addInput" typ
-            class="flex bg-white font-medium border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">
+          <button @click="addInput" type="button"  class="flex bg-white font-medium border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">
             Add More
             <svg class="h-6 w-6 text-white-700 ml-2" width="20" height="20" viewBox="0 0 24 24" stroke-width="2"
               stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -237,9 +235,8 @@
 
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end mt-6">
       <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
-      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
+      <button type="button"  @click="handleSubmit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
-  </form>
   </div>
 
 </template>
@@ -283,7 +280,7 @@ export default {
           InternalRateofReturn:"",
           IntegrationPeriod:"",
           ExecutionRisk:"",
-          OtherKpis: []
+          OtherKpis: [{ Title: "" ,Baseline:"",Target:"",Current:""}]
       },
       investmentType: ["ADS Investment","SS Investment"],
       investmentDetails: ["RECRUITING", "M&A-SERVICES", "M&A-ADVISORY", "M&A-Services","Platform Investments"],
@@ -376,10 +373,10 @@ export default {
     },
    
     addInput() {
-      this.OtherKpis.push({ Title: "" ,Baseline:"",Target:"",Current:""}); // Add a new input
+      this.form.OtherKpis.push(this.form.OtherKpis); // Add a new input
     },
     removeInput(index) {
-      this.OtherKpis.splice(index, 1); // Remove an input by index
+      this.form.OtherKpis.splice(index, 1); // Remove an input by index
     },
     handleSubmit() {
       console.log("Form submitted:", this.form);

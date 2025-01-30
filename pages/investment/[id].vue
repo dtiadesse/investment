@@ -17,7 +17,7 @@
         </button>
       </div>
       <div class="flex items-center justify-between m-3 mb-0">
-        <div class="mr-5 pr-5 pb-5">
+        <div class="pr-5 pb-5 margin">
           <p class="text-xl text-gray-600 mb-3">
             Revenue ($)
           </p>
@@ -75,6 +75,9 @@
   background-color: white;
   max-width: 100%;
   border: none;
+}
+.margin{
+  margin-right:8%
 }
 </style>
 

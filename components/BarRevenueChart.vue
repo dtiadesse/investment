@@ -103,7 +103,7 @@ watch(() =>[props.datasets, props.labels],
 
 <style scoped>
 canvas {
-  width: 80%;
+  width: 60%;
   height: 400px;
 }
 </style>
