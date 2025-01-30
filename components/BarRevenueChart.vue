@@ -13,6 +13,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(CategoryScale, LinearScale, BarElement, BarController, Title, Tooltip, Legend,ChartDataLabels);
 
 const chartRef = ref(null); // Ref to hold the chart instance
+let myChart = null;
 
 // Props
 const props = defineProps({  
@@ -26,10 +27,13 @@ const props = defineProps({
   },
 });
 
-onMounted(() => {
-console.log(props)
+const Barchart = () => {
+if (!chartRef.value) return;
   const ctx = chartRef.value.getContext('2d');
-  new Chart(ctx, {
+  if (myChart) {
+      myChart.destroy();
+    }
+  myChart =  new Chart(ctx, {
     type: 'bar', // Define chart type
     data: {
             labels: props.labels,
@@ -70,30 +74,31 @@ console.log(props)
                 }
               },
             scales: {
-              x: {                
-                grid: {
-                  drawOnChartArea:false,
-                  drawBorder:false,
-                  drawTicks: false,
-                  lineWidth: 0,// Hides the Y-axis grid lines completely
-                },
-              },
-              
-              y: {
+             y: {
                 position: 'right',
                 beginAtZero: true,
-                grid: {
-                  drawTicks: false,
-                  lineWidth: 1,// Hides the Y-axis grid lines completely
+                border: {
+                    display: false
                 },
-                ticks: {
-                  display: true, // Keeps numbers visible
+              }, 
+              x: {             
+                grid: {
+                    display: false,
+                },
+                border: {
+                    display: false
                 },
               },             
             },
           } 
   });
+}
+onMounted(() => {
+ Barchart();
 });
+watch(() =>[props.datasets, props.labels],
+  Barchart
+);
 </script>
 
 <style scoped>

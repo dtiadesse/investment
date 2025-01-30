@@ -13,6 +13,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(CategoryScale, LinearScale, BarElement, BarController, Title, Tooltip, Legend);
 
 const chartRef = ref(null); // Ref to hold the chart instance
+let myChart = null;
 
 // Props
 const props = defineProps({  
@@ -25,11 +26,13 @@ const props = defineProps({
     required: true,
   },
 });
-
-onMounted(() => {
-console.log(props)
-  const ctx = chartRef.value.getContext('2d');
-  new Chart(ctx, {
+const Barchart = () => {
+if (!chartRef.value) return;
+ const ctx = chartRef.value.getContext('2d');
+ if (myChart) {
+      myChart.destroy();
+    }
+  myChart = new Chart(ctx, {
     type: 'bar', // Define chart type
     data: {
             labels: props.labels,
@@ -63,30 +66,33 @@ console.log(props)
                 }
               },
             scales: {
-              x: {                
-                grid: {
-                  drawOnChartArea:false,
-                  drawBorder:false,
-                  drawTicks: false,
-                  lineWidth: 0,// Hides the Y-axis grid lines completely
-                },
-              },
-              
               y: {
                 position: 'right',
                 beginAtZero: true,
+                border: {
+                    display: false
+                },
+              }, 
+              x: {             
                 grid: {
-                  drawTicks: false,
-                  lineWidth: 1,// Hides the Y-axis grid lines completely
+                    display: false,
                 },
-                ticks: {
-                  display: true, // Keeps numbers visible
+                border: {
+                    display: false
                 },
-              },             
+              },            
             },
           } 
   });
+}
+onMounted(() => {
+ Barchart();
 });
+watch(() =>[props.datasets, props.labels],
+  Barchart
+);
+
+
 </script>
 
 <style scoped>

@@ -17,18 +17,22 @@
         </button>
       </div>
       <div class="flex items-center justify-between m-3 mb-0">
-        <div class="mr-5 mb-5 pb-5">
-          <p class="text-xl text-gray-600">
+        <div class="mr-5 pr-5 pb-5">
+          <p class="text-xl text-gray-600 mb-3">
             Revenue ($)
           </p>
           <BarRevenueChart :datasets="data" :labels="labels"  />
         </div>
-        <div class="mb-5 pb-5">
-          <p class="text-xl text-gray-600">
+        <div class="pb-5">
+          <p class="text-xl text-gray-600 mb-3">
             EBITDA (?x)
           </p>
           <BarEBITDAChart :datasets="data" :labels="labels" />
         </div>
+      </div>
+      <div class="flex justify-center mb-5">
+        <div class="mr-4 flex"><p class="w-2 h-2 rounded-full mr-2 mt-2.5" style="background-color:#2C2F48"></p><p class="text-base text-gray-600"> Underwriting</p></div>
+        <div class="flex"><p class="w-2 h-2 rounded-full mr-2 mt-2.5" style="background-color:#00A8E8"></p><p class="text-base text-gray-600"> Actuals + Forecast</p></div>
       </div>
     </div>
     <div class="grid gap-4 grid-cols-2">
@@ -116,8 +120,6 @@ export default {
         { label: "Target", key: "Target", width: "30%", textAlign: "center" },
         { label: "Current", key: "Current", width: "20%", textAlign: "center" },
       ],
-      seriesLabels: ["Pre-Synergy Multiple", "Post-Synergy Multiple"],
-      barColors: ["#2C2F48", "#00A8E8"],
       data: [],
       loading: true,
       error: null,
