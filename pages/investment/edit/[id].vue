@@ -7,9 +7,10 @@
     </section>
     
     <!-- Header -->
+    <form @submit.prevent="handleSubmit">
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end">
       <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
-      <button type="button"  @click="handleSubmit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
 
     <!-- Main Grid -->      
@@ -20,7 +21,7 @@
           <label class="block text-sm font-medium mb-2">Title</label>
           <input type="text" v-model="form.Title" class="w-full p-2 border border-gray-300 rounded mb-4"
             placeholder="Progress Capital - Team Recruiting" />
-
+          <span v-if="form.Title">Title is required</span>
           <label class="block text-sm font-medium mb-2">Type</label>
           <select v-model="form.InvestmentType" class="w-full p-2 border border-gray-300 rounded mb-4">
             <option disabled value="">Select an type</option>
@@ -235,8 +236,9 @@
 
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end mt-6">
       <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
-      <button type="button"  @click="handleSubmit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
+    </form>
   </div>
 
 </template>
@@ -379,8 +381,14 @@ export default {
       this.form.OtherKpis.splice(index, 1); // Remove an input by index
     },
     handleSubmit() {
-      console.log("Form submitted:", this.form);
+      if(validateForm()){
+        console.log("Form submitted:", this.form);
+      }
     },
+    validateForm(){
+      this.form.Title = this.form.Title ? '' : 'Title is required';
+      return !this.form.Title
+    }
   },
   mounted() {
     this.fetchInvestmentsDetails();

@@ -1,17 +1,9 @@
 <template>
-  <div class="xl:container mx-auto h-full grid grid-cols-[16rem_1fr]">
-    <!-- Left Column -->
-    <div class="bg-white">
-      <LeftPane />
-    </div>
-    <!-- Right Column -->
-    <div class="ng-white overflow-auto">
+  <div class="xl:container mx-auto w-full">
       <Header />
       <div class="container pt-2 px-2">
         <slot />
       </div>
-
-    </div>
   </div>
 </template>
 

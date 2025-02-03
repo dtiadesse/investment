@@ -1,17 +1,26 @@
 <template>
-  <div class="flex items-center space-x-4">
-    <!-- Profile Picture -->
-    <img src="/images/avatar.png" alt="Profile Picture" class="w-10 h-10 rounded-full">
-
-    <!-- Logout -->
-    <a href="#" class="text-gray-700 font-medium hover:text-gray-900">Log out</a>
+  <div class="profile">
+    <div class="flex items-center space-x-4 p-4 bg-white">
+      <div class="mt-1 w-12 h-12 rounded-full overflow-hidden">
+        <img
+          :src="profileImageUrl"
+          alt="User Profile"
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <div>
+        <p class="text-lg">Test</p>
+        <span>Admin</span>
+        <p class="text-sm text-gray-500">Logout</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { formattedName } from "~/utils/utils";
 
-//const { user } = useOidcAuth();
+const { user } = useOidcAuth();
 const profileImageUrl = ref("/images/avatar.png");
 
 const fetchProfileImage = async (accessToken: any) => {
@@ -20,7 +29,7 @@ const fetchProfileImage = async (accessToken: any) => {
     {
       method: "GET",
       headers: {
-       // Authorization: `Bearer ${user.value?.accessToken}`,
+        Authorization: `Bearer ${user.value?.accessToken}`,
       },
     }
   );
@@ -31,12 +40,10 @@ const fetchProfileImage = async (accessToken: any) => {
 
   // Convert the image blob to a data URL
   const blob = await response.blob();
-  if(blob){
-    profileImageUrl.value = URL.createObjectURL(blob);
-    }
+  profileImageUrl.value = URL.createObjectURL(blob);
 };
 
-//onMounted(fetchProfileImage);
+onMounted(fetchProfileImage);
 </script>
 
 <style scoped>

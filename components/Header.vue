@@ -1,20 +1,22 @@
 <template>
   <header class="shadow-sm bg-white header">
     <nav class="xl:container mx-auto px-4 py-6 flex justify-between">
-      <!-- <NuxtLink to="/home" class="page-title">Investment App</NuxtLink> -->
-      <div class="grid gap-4 grid-cols-2">
-        <div>
-          <h1 class="text-xl">Hello {{ formattedName(user?.userName) }} !</h1>
+      <div class="flex space-x-12">
+        <div class="logo">
+          <img class="w-full object-cove w-10 h-10" src="/images/CW-Logo.png" alt="Modern building architecture">
         </div>
+        <Menu />
       </div>
+      <UserProfile />
     </nav>
   </header>
 </template>
 
+
 <script lang="ts" setup>
 import { formattedName } from '~/utils/utils';
 
-const { user } = useOidcAuth();
+//const { user } = useOidcAuth();
 
 
 </script>
@@ -25,6 +27,7 @@ const { user } = useOidcAuth();
   left: 0;
   top: 0;
   background: white;
+  z-index:10;
 }
 
 .page-title {

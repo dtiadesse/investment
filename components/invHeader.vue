@@ -9,7 +9,7 @@ const navLinkItems = ref([
     { text: "My Investment", href: "/investment" },
     { text: "All Investment", href: "/" },
 ]);
-const { user } = useOidcAuth();
+//const { user } = useOidcAuth();
 </script>
 
 <template>

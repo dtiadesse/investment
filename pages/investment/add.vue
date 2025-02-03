@@ -6,9 +6,10 @@
       </Breadcrumb>
     </section>
     <!-- Header -->
+    <form @submit.prevent="handleSubmit">
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end">
       <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
-      <button type="button" @click="handleSubmit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
 
     <!-- Main Grid -->      
@@ -19,7 +20,8 @@
           <label class="block text-sm font-medium mb-2">Title</label>
           <input type="text" v-model="form.Title" class="w-full p-2 border border-gray-300 rounded mb-4"
             placeholder="Progress Capital - Team Recruiting" />
-
+          <p class="text-red-500 text-xs mb-4" v-if="errors.Title">{{errors.Title}}</p>
+          
           <label class="block text-sm font-medium mb-2">Type</label>
           <select v-model="form.InvestmentType" class="w-full p-2 border border-gray-300 rounded mb-4">
             <option disabled value="">Select an type</option>
@@ -27,7 +29,8 @@
               {{ value }}
             </option>
           </select>
-
+          <p class="text-red-500 text-xs mb-4" v-if="errors.InvestmentType">{{errors.InvestmentType}}</p>
+          
           <label class="block text-sm font-medium mb-2">Investment Detail</label>
           <select v-model="form.InvestmentDetails" class="w-full p-2 border border-gray-300 rounded mb-4">
             <option disabled value="">Select an Investment Details</option>
@@ -35,6 +38,7 @@
               {{ value }}
             </option>
           </select>
+          <p class="text-red-500 text-xs mb-4" v-if="errors.InvestmentDetails">{{errors.InvestmentDetails}}</p>
 
           <label class="block text-sm font-medium mb-2">Size</label>
           <select v-model="form.Size" class="w-full p-2 border border-gray-300 rounded">
@@ -43,6 +47,7 @@
               {{ value }}
             </option>
           </select>
+          <p class="text-red-500 text-xs mt-4" v-if="errors.Size">{{errors.Size}}</p>
       </section>
 
       <!-- Revenue -->
@@ -50,15 +55,19 @@
         <h2 class="text-lg font-bold mb-4">Revenue</h2>
           <label class="block text-sm font-medium mb-2">Base Revenue (value??)</label>
           <input v-model="form.BaseRevenue" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="8.3" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.BaseRevenue">{{errors.BaseRevenue}}</p>
 
           <label class="block text-sm font-medium mb-2">Growth Revenue (value??)</label>
           <input v-model="form.GrowthRevenue" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="10" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.GrowthRevenue">{{errors.GrowthRevenue}}</p>
 
           <label class="block text-sm font-medium mb-2">Growth</label>
           <input v-model="form.Growth" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1.7" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.Growth">{{errors.Growth}}</p>
 
           <label class="block text-sm font-medium mb-2">Growth (%)</label>
-          <input v-model="form.GrowthPercentage" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="20%" />
+          <input v-model="form.GrowthPercentage" type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="20%" />
+          <p class="text-red-500 text-xs mt-4" v-if="errors.GrowthPercentage">{{errors.GrowthPercentage}}</p>
       </section>
 
       <!-- Total & Risk -->
@@ -175,7 +184,7 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <button @click="addInput"
+          <button type="button" @click="addInput()"
             class="flex bg-white font-medium border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">
             Add More
             <svg class="h-6 w-6 text-white-700 ml-2" width="20" height="20" viewBox="0 0 24 24" stroke-width="2"
@@ -235,8 +244,9 @@
 
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end mt-6">
       <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
-      <button type="button" @click="handleSubmit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
+    </form>
   </div>
 
 </template>
@@ -282,6 +292,16 @@ export default {
           ExecutionRisk:"",
           OtherKpis: [{ Title: "" ,Baseline:"",Target:"",Current:""}]
       },
+      errors: {
+        Title: "",
+        InvestmentType: "",
+        InvestmentDetails:"",
+        Size:"",
+        BaseRevenue:"",
+        GrowthRevenue:"",
+        Growth:"",
+        GrowthPercentage:"",
+      },
       investmentType: ["ADS Investment","SS Investment"],
       investmentDetails: ["RECRUITING", "M&A-SERVICES", "M&A-ADVISORY", "M&A-Services","Platform Investments"],
       size: ["M&A - > $15M","M&A - < $15M", "Platform - > $3M", "Platform - $1M - $3M", "R&R - < $1M rev","R&R - $1M - $5M rev","R&R - >$5M Rev"],
@@ -324,15 +344,27 @@ export default {
   },
   methods: {
     addInput() {
-    console.log(23)
       this.form.OtherKpis.push(this.form.OtherKpis); // Add a new input
     },
     removeInput(index) {
       this.form.OtherKpis.splice(index, 1); // Remove an input by index
     },
     handleSubmit() {
-      console.log("Form submitted:", this.form);
+      if(this.validateForm()){
+        console.log("Form submitted:", this.form);
+      }
     },
+    validateForm(){
+      this.errors.Title = this.form.Title ? '' : 'Title is required';
+      this.errors.InvestmentType = this.form.InvestmentType ? '' : 'Investment Type is required';
+      this.errors.InvestmentDetails = this.form.InvestmentDetails ? '' : 'Investment Details is required';
+      this.errors.Size = this.form.Size ? '' : 'Size is required';
+      this.errors.BaseRevenue = this.form.BaseRevenue ? '' : 'Base Revenue is required';
+      this.errors.GrowthRevenue = this.form.GrowthRevenue ? '' : 'Growth Revenue is required';
+      this.errors.Growth = this.form.Growth ? '' : 'Growth is required';
+      this.errors.GrowthPercentage = this.form.GrowthPercentage ? '' : 'Growth(%) is required';
+      return this.errors;
+    }
   },
 };
 
