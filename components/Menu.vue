@@ -1,7 +1,7 @@
 <template>
   <nav class="relative">
     <ul class="flex items-center space-x-6 text-gray-700 font-medium">
-            <li><a href="#" class="hover:text-gray-900">Home</a></li>
+            <li><a href="/" class="hover:text-gray-900">Home</a></li>
            
             <li class="relative group">
               <a href="#" @click="subMenuF()" class="hover:text-gray-900 flex items-center">
@@ -42,7 +42,7 @@
               </div>
 
               <div class="mt-8">
-                <button class="w-full bg-blue-900 text-white py-3 rounded-md hover:bg-blue-800 font-medium">
+                <button type="button" @click="addInvestment()" class="w-full bg-blue-900 text-white py-3 rounded-md hover:bg-blue-800 font-medium">
                   Add New Investment
                 </button>
               </div>
@@ -55,11 +55,18 @@
 <script lang="ts" setup>
 
 import { ref } from 'vue';
+import { useRouter } from "vue-router";
 
 const submenuOpen = ref(false);
+const router = useRouter();
 
 const subMenuF = () => {
   submenuOpen.value = !submenuOpen.value;
+};
+
+const addInvestment = () => {
+  router.push("/investment/add");
+  submenuOpen.value = false;
 };
 
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white border border-gray-200 rounded">
     <div style="display: inline-block; width: 100%">
-      <div class="px-7 py-6 investment float-left">All Investments</div>
+      <div class="px-7 py-6 investment float-left title">All Investments</div>
       <div class="py-5 pr-4 float-left">
         <button @click="goToAddInvestment"
           class="text-white flex addItem font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2">
@@ -105,6 +105,7 @@ export default {
         data.forEach((item: any, index: number) => {
           item.id = index + 1; // Add a new property "index"
         });
+        
         rowData.value = data;
 
         // Dynamically generate column definitions based on keys in the response
@@ -163,7 +164,7 @@ export default {
 
     // Search filter
     const onQuickFilterChanged = () => {
-      gridApi.value?.setQuickFilter(searchValue.value);
+      gridApi.value?.setGridOption('quickFilterText',searchValue.value);
     };
 
     // Grid ready event

@@ -6,9 +6,9 @@
       </Breadcrumb>
     </section>
     <!-- Header -->
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="openConfirmationDialog()">
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end">
-      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
+      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700" @click="cancelEdit()">Cancel</button>
       <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
 
@@ -16,10 +16,9 @@
     <div class="grid sm:grid-cols-[1fr_1fr_1fr] md:grid-cols-[2fr_2fr_2fr] gap-4 mt-6">
       <!-- Main Details -->
       <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Main Details</h2>
+        <h2 class="text-lg font-bold mb-4 title">Main Details</h2>
           <label class="block text-sm font-medium mb-2">Title</label>
-          <input type="text" v-model="form.Title" class="w-full p-2 border border-gray-300 rounded mb-4"
-            placeholder="Progress Capital - Team Recruiting" />
+          <input type="text" v-model="form.Title" class="w-full p-2 border border-gray-300 rounded mb-4"/>
           <p class="text-red-500 text-xs mb-4" v-if="errors.Title">{{errors.Title}}</p>
           
           <label class="block text-sm font-medium mb-2">Type</label>
@@ -52,51 +51,51 @@
 
       <!-- Revenue -->
       <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Revenue</h2>
+        <h2 class="text-lg font-bold mb-4 title">Revenue</h2>
           <label class="block text-sm font-medium mb-2">Base Revenue (value??)</label>
-          <input v-model="form.BaseRevenue" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="8.3" />
+          <input v-model="form.BaseRevenue" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
           <p class="text-red-500 text-xs mb-4" v-if="errors.BaseRevenue">{{errors.BaseRevenue}}</p>
 
           <label class="block text-sm font-medium mb-2">Growth Revenue (value??)</label>
-          <input v-model="form.GrowthRevenue" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="10" />
+          <input v-model="form.GrowthRevenue" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
           <p class="text-red-500 text-xs mb-4" v-if="errors.GrowthRevenue">{{errors.GrowthRevenue}}</p>
 
           <label class="block text-sm font-medium mb-2">Growth</label>
-          <input v-model="form.Growth" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1.7" />
+          <input v-model="form.Growth" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
           <p class="text-red-500 text-xs mb-4" v-if="errors.Growth">{{errors.Growth}}</p>
 
           <label class="block text-sm font-medium mb-2">Growth (%)</label>
-          <input v-model="form.GrowthPercentage" type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="20%" />
+          <input v-model="form.GrowthPercentage" type="text" class="w-full p-2 border border-gray-300 rounded" />
           <p class="text-red-500 text-xs mt-4" v-if="errors.GrowthPercentage">{{errors.GrowthPercentage}}</p>
       </section>
 
       <!-- Total & Risk -->
       <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Total & Risk</h2>
+        <h2 class="text-lg font-bold mb-4 title">Total & Risk</h2>
           <label class="block text-sm font-medium mb-2">Total Consideration (value??)</label>
-          <input v-model="form.TotalConsideration" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="10" />
+          <input v-model="form.TotalConsideration" type="text" class="w-full p-2 border border-gray-300 rounded mb-4"  />
 
           <label class="block text-sm font-medium mb-2">At Risk Consideration (value??)</label>
-          <input v-model="form.AtRiskGrowthAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="6" />
+          <input v-model="form.AtRiskGrowthAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4"  />
 
           <div class="flex">
             <div class="mr-3">
               <label class="block text-sm font-medium mb-2">Guaranteed</label>
-              <input v-model="form.GuaranteedAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="6" />
+              <input v-model="form.GuaranteedAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
             </div>
             <div>
               <label class="block text-sm font-medium mb-2">(%) Guaranteed</label>
-              <input v-model="form.PercentageGuaranteed" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="40%" />
+              <input v-model="form.PercentageGuaranteed" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
             </div>
           </div>
           <div class="flex">
             <div class="mr-3">
               <label class="block text-sm font-medium mb-2">At Risk (stable)</label>
-              <input v-model="form.AtRiskAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="" />
+              <input v-model="form.AtRiskAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
             </div>
             <div>
               <label class="block text-sm font-medium mb-2">At Risk (Growth)</label>
-              <input v-model="form.AtRiskGrowthAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="6" />
+              <input v-model="form.AtRiskGrowthAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
             </div>
           </div>
       </section>
@@ -105,26 +104,26 @@
     <div class="grid sm:grid-cols-[1fr_1fr_1fr] md:grid-cols-[2fr_3fr_1fr] gap-4 mt-6">
       <!-- Financial Returns -->
       <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Financial Returns</h2>
+        <h2 class="text-lg font-bold mb-4 title">Financial Returns</h2>
           <div class="flex">
             <div class="mr-3">
               <label class="block text-sm font-medium mb-2">Pre-Synergy Multiple (x)</label>
-              <input type="text"  v-model="form.PreSynergyMultiple" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="3.36" />
+              <input type="text"  v-model="form.PreSynergyMultiple" class="w-full p-2 border border-gray-300 rounded mb-4" />
             </div>
             <div>
               <label class="block text-sm font-medium mb-2">Post-Synergy Multiple (x)</label>
-              <input type="text" v-model="form.PostSynergyMultiple" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="8.736" />
+              <input type="text" v-model="form.PostSynergyMultiple" class="w-full p-2 border border-gray-300 rounded mb-4" />
             </div>
           </div>
 
           <label class="block text-sm font-medium mb-2">Payback (yrs)</label>
-          <input type="text" v-model="form.Payback" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="4.0" />
+          <input type="text" v-model="form.Payback" class="w-full p-2 border border-gray-300 rounded mb-4" />
 
           <label class="block text-sm font-medium mb-2">IRR (%)</label>
-          <input type="text" v-model="form.InternalRateofReturn" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="19.70" />
+          <input type="text" v-model="form.InternalRateofReturn" class="w-full p-2 border border-gray-300 rounded mb-4" />
 
           <label class="block text-sm font-medium mb-2">Integration Period (value?)</label>
-          <input type="text" v-model="form.IntegrationPeriod" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="84" />
+          <input type="text" v-model="form.IntegrationPeriod" class="w-full p-2 border border-gray-300 rounded mb-4"  />
 
           <label class="block text-sm font-medium mb-2">Execution Risk</label>
           <select v-model="form.ExecutionRisk" class="w-full p-2 border border-gray-300 rounded mb-4">
@@ -137,13 +136,13 @@
 
       <!-- Other KPI -->
       <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Other KPI</h2>
+        <h2 class="text-lg font-bold mb-4 title">Other KPI</h2>
         <div class="max-h-80 overflow-y-auto bg-gray-50 rounded p-4 mb-4" v-if="OtherKpis.length > 0">
           <div v-for="(kpis, index) in form.OtherKpis" :key="index" class="mb-4">
             <div class="flex">
               <div class="mr-3 w-full">
                 <label class="block text-sm font-medium mb-2">KPI Name</label>
-                <input type="text" v-model="form.OtherKpis[index].Title" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="KPI Name" />
+                <input type="text" v-model="form.OtherKpis[index].Title" class="w-full p-2 border border-gray-300 rounded mb-4"  />
               </div>
               <div class="mt-7">
                 <button @click="removeInput(index)"
@@ -164,21 +163,24 @@
             <div class="flex">
               <div class="mr-3 w-full">
                 <label class="block text-sm font-medium mb-2">Value type</label>
-                <select class="w-full p-2 border border-gray-300 rounded mb-4">
-                  <option>$,%,free text</option>
+                <select v-model="form.OtherKpis[index].Type" class="w-full p-2 border border-gray-300 rounded mb-4">
+                  <option disabled value="">Select a type</option>
+                  <option v-for="(option, index) in kpiType" :key="index" :value="option">
+                    {{ option }}
+                  </option>
                 </select>
               </div>
               <div class="mr-3 w-full">
                 <label class="block text-sm font-medium mb-2">Base line</label>
-                <input type="text" v-model="form.OtherKpis[index].Baseline" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1.5m" />
+                <input type="text" v-model="form.OtherKpis[index].Baseline" class="w-full p-2 border border-gray-300 rounded mb-4"  />
               </div>
               <div class="mr-3 w-full">
                 <label class="block text-sm font-medium mb-2">Target</label>
-                <input type="text" v-model="form.OtherKpis[index].Target" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="0.6m" />
+                <input type="text" v-model="form.OtherKpis[index].Target" class="w-full p-2 border border-gray-300 rounded mb-4" />
               </div>
               <div class="mr-3 w-full">
                 <label class="block text-sm font-medium mb-2">Current</label>
-                <input type="text" v-model="form.OtherKpis[index].Current" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="0.2m" />
+                <input type="text" v-model="form.OtherKpis[index].Current" class="w-full p-2 border border-gray-300 rounded mb-4" />
               </div>
             </div>
           </div>
@@ -199,24 +201,24 @@
 
       <!-- Additional Data -->
       <section class="p-4 border border-gray-300 rounded bg-white">
-        <h2 class="text-lg font-bold mb-4">Additional Data</h2>
+        <h2 class="text-lg font-bold mb-4 title">Additional Data</h2>
           <label class="block text-sm font-medium mb-2">Capital as % of Revenue</label>
-          <input type="text" v-model="form.CapitalAsPercentageOfRevenue" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="0.48x" />
+          <input type="text" v-model="form.CapitalAsPercentageOfRevenue" class="w-full p-2 border border-gray-300 rounded mb-4" />
 
           <label class="block text-sm font-medium mb-2">FCF ($)</label>
-          <input type="text" v-model="form.FreeCashFlow" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1.6" />
+          <input type="text" v-model="form.FreeCashFlow" class="w-full p-2 border border-gray-300 rounded mb-4" />
 
           <label class="block text-sm font-medium mb-2">Base Cum. CF</label>
-          <input type="text" v-model="form.BaseCumulativeCashFlow" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="8,736" />
+          <input type="text" v-model="form.BaseCumulativeCashFlow" class="w-full p-2 border border-gray-300 rounded mb-4" />
 
           <label class="block text-sm font-medium mb-2">Growth Cum.</label>
-          <input type="text" v-model="form.GrowthCumulativeCashFlow" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="8,736" />
+          <input type="text" v-model="form.GrowthCumulativeCashFlow" class="w-full p-2 border border-gray-300 rounded mb-4" />
       </section>
     </div>
 
     <!-- Financial Impact -->
     <section class="mt-6 p-4 border border-gray-300 rounded bg-white">
-      <h2 class="text-lg font-bold mb-4">Financial Impact</h2>
+      <h2 class="text-lg font-bold mb-4 title">Financial Impact</h2>
       <div class="overflow-x-auto">
       <table class="table-auto w-full border-collapse">
         <thead>
@@ -224,18 +226,18 @@
             <th class="px-4 py-2 text-gray-600 text-left">Total</th>
             <th v-for="(year, index) in years" class="border text-left border-blue-300 bg-blue-50 px-4 py-2 text-gray-600">
               <p class="mb-1">Year {{year}}</p>
-              <input type="text" placeholder="8,736" class="mb-2 w-full border border-gray-300 rounded-md p-2">
+              <input type="text" class="mb-2 w-full border border-gray-300 rounded-md p-2">
             </th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(month, index) in months">
             <td class="px-4 py-2 text-gray-800">{{month}}</td>
-            <td class="border bg-gray-100 border-blue-300 px-4 py-2"><input type="text" placeholder="8,736" class="w-full border border-gray-300 rounded-md p-2"></td>
-            <td class="border bg-gray-100 border-blue-300 px-4 py-2"><input type="text" placeholder="8,736" class="w-full border border-gray-300 rounded-md p-2"></td>
-            <td class="border bg-gray-100 border-blue-300 px-4 py-2"><input type="text" placeholder="8,736" class="w-full border border-gray-300 rounded-md p-2"></td>
-            <td class="border bg-gray-100 border-blue-300 px-4 py-2"><input type="text" placeholder="8,736" class="w-full border border-gray-300 rounded-md p-2"></td>
-            <td class="border bg-gray-100 border-blue-300 px-4 py-2"><input type="text" placeholder="8,736" class="w-full border border-gray-300 rounded-md p-2"></td>
+            <td class="border bg-gray-100 border-blue-300 px-4 py-2"><input type="text" class="w-full border border-gray-300 rounded-md p-2"></td>
+            <td class="border bg-gray-100 border-blue-300 px-4 py-2"><input type="text" class="w-full border border-gray-300 rounded-md p-2"></td>
+            <td class="border bg-gray-100 border-blue-300 px-4 py-2"><input type="text" class="w-full border border-gray-300 rounded-md p-2"></td>
+            <td class="border bg-gray-100 border-blue-300 px-4 py-2"><input type="text" class="w-full border border-gray-300 rounded-md p-2"></td>
+            <td class="border bg-gray-100 border-blue-300 px-4 py-2"><input type="text" class="w-full border border-gray-300 rounded-md p-2"></td>
           </tr>
         </tbody>
       </table>
@@ -243,10 +245,18 @@
     </section>
 
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end mt-6">
-      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700">Cancel</button>
+      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700" @click="cancelEdit()">Cancel</button>
       <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
     </form>
+
+    <SaveChangesConfirmation
+      :message="'You made changes to this page. Do you want to save them before leaving?'"
+      :isVisible="isModalVisible"
+      @confirm="handleSubmit"
+      @cancel="closeConfirmationDialog"
+    />
+
   </div>
 
 </template>
@@ -302,6 +312,7 @@ export default {
         Growth:"",
         GrowthPercentage:"",
       },
+      isModalVisible:false,
       investmentType: ["ADS Investment","SS Investment"],
       investmentDetails: ["RECRUITING", "M&A-SERVICES", "M&A-ADVISORY", "M&A-Services","Platform Investments"],
       size: ["M&A - > $15M","M&A - < $15M", "Platform - > $3M", "Platform - $1M - $3M", "R&R - < $1M rev","R&R - $1M - $5M rev","R&R - >$5M Rev"],
@@ -309,6 +320,7 @@ export default {
       OtherKpis: [
         { Title: "" ,Baseline:"",Target:"",Current:""}, // Initial input field
       ],
+      kpiType:["$","%","free text"],
       years: [1, 2, 3, 4, 5],
       months: [
         "January",
@@ -352,6 +364,8 @@ export default {
     handleSubmit() {
       if(this.validateForm()){
         console.log("Form submitted:", this.form);
+         this.isModalVisible = false;
+         this.$router.push("/");
       }
     },
     validateForm(){
@@ -364,7 +378,16 @@ export default {
       this.errors.Growth = this.form.Growth ? '' : 'Growth is required';
       this.errors.GrowthPercentage = this.form.GrowthPercentage ? '' : 'Growth(%) is required';
       return this.errors;
-    }
+    },
+    openConfirmationDialog () {
+      this.isModalVisible = true;
+    },
+    closeConfirmationDialog () {
+      this.isModalVisible = false;
+    },
+    cancelEdit(){
+      this.$router.push("/");
+    },
   },
 };
 

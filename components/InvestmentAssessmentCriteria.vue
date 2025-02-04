@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="flex justify-between items-center">
-        <div class="text-2xl font-bold p-5">Investment Assessment Criteria</div>
+        <div class="text-2xl font-bold p-5 title">Investment Assessment Criteria</div>
         <div class="flex items-center mr-5" v-if="!isEditing">
             <div class="px-2 py-1 mr-5 font-bold flex items-center border text-black text-center rounded"  :class="overallStatusClass" role="button">
               <p class="pr-3">Overall Status</p>

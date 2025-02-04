@@ -9,7 +9,7 @@
 
     <div class="p-3 pb-0 border border-gray-200 rounded-lg bg-white dark:border-gray-700 mb-3">
       <div class="flex items-center justify-between  m-3 mb-5">
-        <h2 class="text-xl font-bold">Financial Impact</h2>
+        <h2 class="text-xl font-bold title">Financial Impact</h2>
         <button @click="goToEditInvestment"
           class="text-black flex items-center border border-gray-300 font-bold rounded text-sm px-2 py-1">
           <svg class="h-6 w-6 mr-2" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.7 5.2a1.024 1.024 0 0 1 0 1.448l-2.626 2.628-3.35-3.35L17.35 3.3a1.024 1.024 0 0 1 1.448 0zm-4.166 5.614-3.35-3.35-8.509 8.511L3 21l5.025-1.675z"/></svg>
@@ -38,7 +38,7 @@
     <div class="grid gap-4 grid-cols-2">
       <div class="bg-white p-3 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
         <div class="flex items-center justify-between m-3 mb-5">
-          <h2 class="text-xl font-bold">Financial Returns</h2>
+          <h2 class="text-xl font-bold title">Financial Returns</h2>
           <button @click="goToEditInvestment"
             class="text-black flex items-center border border-gray-300 font-bold rounded text-sm px-2 py-1">
             <svg class="h-6 w-6 mr-2" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.7 5.2a1.024 1.024 0 0 1 0 1.448l-2.626 2.628-3.35-3.35L17.35 3.3a1.024 1.024 0 0 1 1.448 0zm-4.166 5.614-3.35-3.35-8.509 8.511L3 21l5.025-1.675z"/></svg>
@@ -52,7 +52,7 @@
       </div>
       <div class="bg-white p-3 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
         <div class="flex items-center justify-between m-3 mb-5">
-          <h2 class="text-xl font-bold">Other KPI's</h2>
+          <h2 class="text-xl font-bold title">Other KPI's</h2>
           <button @click="goToEditInvestment"
             class="text-black flex items-center border border-gray-300 font-bold rounded text-sm px-2 py-1">
             <svg class="h-6 w-6 mr-2" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.7 5.2a1.024 1.024 0 0 1 0 1.448l-2.626 2.628-3.35-3.35L17.35 3.3a1.024 1.024 0 0 1 1.448 0zm-4.166 5.614-3.35-3.35-8.509 8.511L3 21l5.025-1.675z"/></svg>
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-
+  
   </div>
 
 </template>
@@ -147,13 +147,13 @@ export default {
       try {
         const { id } = useRoute().params
 
-        const response = await fetch('http://localhost:3001/investment/');
+        const response = await fetch('http://localhost:3001/investment/'+id);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
         const data = await response.json();
-        console.log(data[0])
-        this.tableData = data[0];
+        console.log(data)
+        this.tableData = data;
         this.labels = this.tableData.ChartFinancialImpactDataLabel
         this.data = [this.tableData.ChartFinancialImpactDataValue1, this.tableData.ChartFinancialImpactDataValue2];
         this.breadCrumbItems = [

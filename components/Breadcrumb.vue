@@ -46,8 +46,7 @@ const props = defineProps({
       </ol>
     </nav>
     <div class="flex pt-3 justify-between ml-3 border-t border-gray-200 mb-3" v-if="bottomTitle">
-      <div class="text-xl font-medium leading-none tracking-tight text-blue-900 md:text-xl dark:text-white"
-        style="color:rgb(10 35 104)">{{ bottomTitle }}</div>
+      <div class="text-xl font-medium leading-none tracking-tight text-blue-900 md:text-xl dark:text-white title">{{ bottomTitle }}</div>
       <div class="mr-5 flex">
         <button class="mr-5 text-black flex items-center border border-gray-300 font-bold rounded text-sm px-2 py-1 me-2">
           <svg class="h-6 w-6 mr-2" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.7 5.2a1.024 1.024 0 0 1 0 1.448l-2.626 2.628-3.35-3.35L17.35 3.3a1.024 1.024 0 0 1 1.448 0zm-4.166 5.614-3.35-3.35-8.509 8.511L3 21l5.025-1.675z"/></svg>

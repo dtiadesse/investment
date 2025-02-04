@@ -52,8 +52,8 @@ if (!chartRef.value) return;
       options: {
             responsive: true,
             maintainAspectRatio: false,
-            categoryPercentage: 0.5, // here 
-            barPercentage: 1.05,  // here
+            categoryPercentage: 0.8, // here 
+            barPercentage: 1.09,  // here
             plugins: {
                 legend: {
                   display: false // Position of the legend
@@ -73,7 +73,20 @@ if (!chartRef.value) return;
                     display: false
                 },
               }, 
-              x: {             
+              x: {
+                ticks: {
+                    callback: function(value, index, ticks_array) {
+                        let characterLimit = 12;
+                        let label = this.getLabelForValue(value);
+                        if ( label.length >= characterLimit) {
+                            return label.slice(0, label.length).substring(0, characterLimit -1).trim() + '...';
+                        }
+                        return label;
+                    },
+                    autoSkip: false,
+                    minRotation: 60,
+                    maxRotation: 60,
+                },              
                 grid: {
                     display: false,
                 },
@@ -97,7 +110,7 @@ watch(() =>[props.datasets, props.labels],
 
 <style scoped>
 canvas {
-  width: 60%;
+  width: 100%;
   height: 400px;
 }
 </style>
