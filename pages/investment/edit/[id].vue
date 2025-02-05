@@ -19,9 +19,9 @@
       <section class="p-4 border border-gray-300 rounded bg-white">
         <h2 class="text-lg font-bold mb-4 title">Main Details</h2>
           <label class="block text-sm font-medium mb-2">Title</label>
-          <input type="text" v-model="form.Title" class="w-full p-2 border border-gray-300 rounded mb-4"
-            />
-         
+          <input type="text" v-model="form.Title" class="w-full p-2 border border-gray-300 rounded mb-4"/>
+          <p class="text-red-500 text-xs mb-4" v-if="errors.Title">{{errors.Title}}</p>
+          
           <label class="block text-sm font-medium mb-2">Type</label>
           <select v-model="form.InvestmentType" class="w-full p-2 border border-gray-300 rounded mb-4">
             <option disabled value="">Select an type</option>
@@ -29,7 +29,8 @@
               {{ value }}
             </option>
           </select>
-
+          <p class="text-red-500 text-xs mb-4" v-if="errors.InvestmentType">{{errors.InvestmentType}}</p>
+          
           <label class="block text-sm font-medium mb-2">Investment Detail</label>
           <select v-model="form.InvestmentDetails" class="w-full p-2 border border-gray-300 rounded mb-4">
             <option disabled value="">Select an Investment Details</option>
@@ -37,6 +38,7 @@
               {{ value }}
             </option>
           </select>
+          <p class="text-red-500 text-xs mb-4" v-if="errors.InvestmentDetails">{{errors.InvestmentDetails}}</p>
 
           <label class="block text-sm font-medium mb-2">Size</label>
           <select v-model="form.Size" class="w-full p-2 border border-gray-300 rounded">
@@ -45,6 +47,7 @@
               {{ value }}
             </option>
           </select>
+          <p class="text-red-500 text-xs mt-4" v-if="errors.Size">{{errors.Size}}</p>
       </section>
 
       <!-- Revenue -->
@@ -52,44 +55,54 @@
         <h2 class="text-lg font-bold mb-4 title">Revenue</h2>
           <label class="block text-sm font-medium mb-2">Base Revenue (value??)</label>
           <input v-model="form.BaseRevenue" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.BaseRevenue">{{errors.BaseRevenue}}</p>
 
           <label class="block text-sm font-medium mb-2">Growth Revenue (value??)</label>
           <input v-model="form.GrowthRevenue" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.GrowthRevenue">{{errors.GrowthRevenue}}</p>
 
           <label class="block text-sm font-medium mb-2">Growth</label>
           <input v-model="form.Growth" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.Growth">{{errors.Growth}}</p>
 
           <label class="block text-sm font-medium mb-2">Growth (%)</label>
-          <input v-model="form.GrowthPercentage" type="text" class="w-full p-2 border border-gray-300 rounded mb-4"  />
+          <input v-model="form.GrowthPercentage" type="text" class="w-full p-2 border border-gray-300 rounded" />
+          <p class="text-red-500 text-xs mt-4" v-if="errors.GrowthPercentage">{{errors.GrowthPercentage}}</p>
       </section>
 
       <!-- Total & Risk -->
       <section class="p-4 border border-gray-300 rounded bg-white">
         <h2 class="text-lg font-bold mb-4 title">Total & Risk</h2>
           <label class="block text-sm font-medium mb-2">Total Consideration (value??)</label>
-          <input v-model="form.TotalConsideration" type="text" class="w-full p-2 border border-gray-300 rounded mb-4"/>
+          <input v-model="form.TotalConsideration" type="text" class="w-full p-2 border border-gray-300 rounded mb-4"  />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.TotalConsideration">{{errors.TotalConsideration}}</p>
 
           <label class="block text-sm font-medium mb-2">At Risk Consideration (value??)</label>
-          <input v-model="form.AtRiskGrowthAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+          <input v-model="form.AtRiskGrowthAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4"  />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.AtRiskGrowthAmount">{{errors.AtRiskGrowthAmount}}</p>
 
           <div class="flex">
             <div class="mr-3">
               <label class="block text-sm font-medium mb-2">Guaranteed</label>
               <input v-model="form.GuaranteedAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+              <p class="text-red-500 text-xs mb-4" v-if="errors.GuaranteedAmount">{{errors.GuaranteedAmount}}</p>
             </div>
             <div>
               <label class="block text-sm font-medium mb-2">(%) Guaranteed</label>
               <input v-model="form.PercentageGuaranteed" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+              <p class="text-red-500 text-xs mb-4" v-if="errors.PercentageGuaranteed">{{errors.PercentageGuaranteed}}</p>
             </div>
           </div>
           <div class="flex">
             <div class="mr-3">
               <label class="block text-sm font-medium mb-2">At Risk (stable)</label>
-              <input v-model="form.AtRiskAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+              <input v-model="form.AtRiskAmount" type="text" class="w-full p-2 border border-gray-300 rounded" />
+              <p class="text-red-500 text-xs mt-4" v-if="errors.AtRiskAmount">{{errors.AtRiskAmount}}</p>
             </div>
             <div>
               <label class="block text-sm font-medium mb-2">At Risk (Growth)</label>
-              <input v-model="form.AtRiskGrowthAmount" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+              <input v-model="form.AtRiskGrowthAmount" type="text" class="w-full p-2 border border-gray-300 rounded" />
+              <p class="text-red-500 text-xs mt-4" v-if="errors.AtRiskGrowthAmount">{{errors.AtRiskGrowthAmount}}</p>
             </div>
           </div>
       </section>
@@ -103,35 +116,41 @@
             <div class="mr-3">
               <label class="block text-sm font-medium mb-2">Pre-Synergy Multiple (x)</label>
               <input type="text"  v-model="form.PreSynergyMultiple" class="w-full p-2 border border-gray-300 rounded mb-4" />
+              <p class="text-red-500 text-xs mb-4" v-if="errors.PreSynergyMultiple">{{errors.PreSynergyMultiple}}</p>
             </div>
             <div>
               <label class="block text-sm font-medium mb-2">Post-Synergy Multiple (x)</label>
-              <input type="text" v-model="form.PostSynergyMultiple" class="w-full p-2 border border-gray-300 rounded mb-4"/>
+              <input type="text" v-model="form.PostSynergyMultiple" class="w-full p-2 border border-gray-300 rounded mb-4" />
+              <p class="text-red-500 text-xs mb-4" v-if="errors.PostSynergyMultiple">{{errors.PostSynergyMultiple}}</p>
             </div>
           </div>
 
           <label class="block text-sm font-medium mb-2">Payback (yrs)</label>
           <input type="text" v-model="form.Payback" class="w-full p-2 border border-gray-300 rounded mb-4" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.Payback">{{errors.Payback}}</p>
 
           <label class="block text-sm font-medium mb-2">IRR (%)</label>
           <input type="text" v-model="form.InternalRateofReturn" class="w-full p-2 border border-gray-300 rounded mb-4" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.InternalRateofReturn">{{errors.InternalRateofReturn}}</p>
 
           <label class="block text-sm font-medium mb-2">Integration Period (value?)</label>
-          <input type="text" v-model="form.IntegrationPeriod" class="w-full p-2 border border-gray-300 rounded mb-4"/>
+          <input type="text" v-model="form.IntegrationPeriod" class="w-full p-2 border border-gray-300 rounded mb-4"  />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.IntegrationPeriod">{{errors.IntegrationPeriod}}</p>
 
           <label class="block text-sm font-medium mb-2">Execution Risk</label>
-          <select v-model="form.ExecutionRisk" class="w-full p-2 border border-gray-300 rounded mb-4">
+          <select v-model="form.ExecutionRisk" class="w-full p-2 border border-gray-300 rounded">
             <option disabled value="">Select an Execution Risk</option>
             <option v-for="(option, index) in executionRisk" :key="index" :value="option">
               {{ option }}
             </option>
           </select>
+          <p class="text-red-500 text-xs mt-4" v-if="errors.ExecutionRisk">{{errors.ExecutionRisk}}</p>
       </section>
 
       <!-- Other KPI -->
       <section class="p-4 border border-gray-300 rounded bg-white">
         <h2 class="text-lg font-bold mb-4 title">Other KPI</h2>
-        <div class="max-h-80 overflow-y-auto bg-gray-50 rounded p-4 mb-4" v-if="OtherKpis.length > 0">
+        <div class="max-h-80 overflow-y-auto bg-gray-50 rounded p-4 mb-4" v-if="form.OtherKpis?.length > 0">
           <div v-for="(kpis, index) in form.OtherKpis" :key="index" class="mb-4">
             <div class="flex">
               <div class="mr-3 w-full">
@@ -197,15 +216,19 @@
         <h2 class="text-lg font-bold mb-4 title">Additional Data</h2>
           <label class="block text-sm font-medium mb-2">Capital as % of Revenue</label>
           <input type="text" v-model="form.CapitalAsPercentageOfRevenue" class="w-full p-2 border border-gray-300 rounded mb-4" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.CapitalAsPercentageOfRevenue">{{errors.CapitalAsPercentageOfRevenue}}</p>
 
           <label class="block text-sm font-medium mb-2">FCF ($)</label>
           <input type="text" v-model="form.FreeCashFlow" class="w-full p-2 border border-gray-300 rounded mb-4" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.FreeCashFlow">{{errors.FreeCashFlow}}</p>
 
           <label class="block text-sm font-medium mb-2">Base Cum. CF</label>
           <input type="text" v-model="form.BaseCumulativeCashFlow" class="w-full p-2 border border-gray-300 rounded mb-4" />
+          <p class="text-red-500 text-xs mb-4" v-if="errors.BaseCumulativeCashFlow">{{errors.BaseCumulativeCashFlow}}</p>
 
           <label class="block text-sm font-medium mb-2">Growth Cum.</label>
-          <input type="text" v-model="form.GrowthCumulativeCashFlow" class="w-full p-2 border border-gray-300 rounded mb-4"  />
+          <input type="text" v-model="form.GrowthCumulativeCashFlow" class="w-full p-2 border border-gray-300 rounded" />
+          <p class="text-red-500 text-xs mt-4" v-if="errors.GrowthCumulativeCashFlow">{{errors.GrowthCumulativeCashFlow}}</p>
       </section>
     </div>
 
@@ -277,12 +300,6 @@ export default {
           PercentageGuaranteed:"",
           AtRiskAmount:"",
           AtRiskGrowthAmount:"",
-          ThreeYearRevenueGrowthValue:"",
-          ThreeYearRevenueGrowthPercentage:"",
-          threeYearEbitdaGrowth:"",
-          guaranteedOther:"",
-          CapitalAsPercentageOfEBITDA:"",
-          threeYearRevenueGrowth:"",
           CapitalAsPercentageOfRevenue:"",
           FreeCashFlow:"",
           BaseCumulativeCashFlow:"",
@@ -293,7 +310,7 @@ export default {
           InternalRateofReturn:"",
           IntegrationPeriod:"",
           ExecutionRisk:"",
-          OtherKpis: [{ Title: "" ,Baseline:"",Target:"",Current:""}]
+          OtherKpis: [{Type:"", Title: "" ,Baseline:"",Target:"",Current:""}]
       },
       errors: {
         Title: "",
@@ -304,6 +321,23 @@ export default {
         GrowthRevenue:"",
         Growth:"",
         GrowthPercentage:"",
+        TotalConsideration:"",
+        atRiskConsideration:"",
+        GuaranteedAmount:"",
+        PercentageGuaranteed:"",
+        AtRiskAmount:"",
+        AtRiskGrowthAmount:"",
+        CapitalAsPercentageOfRevenue:"",
+        FreeCashFlow:"",
+        BaseCumulativeCashFlow:"",
+        GrowthCumulativeCashFlow:"",
+        PreSynergyMultiple:"",
+        PostSynergyMultiple:"",
+        Payback:"",
+        InternalRateofReturn:"",
+        IntegrationPeriod:"",
+        ExecutionRisk:"",
+        OtherKpis:""
       },
       isModalVisible:false,
       investmentType: ["ADVISORY INVESTMENT","SERVICES INVESTMENT"],
@@ -318,9 +352,6 @@ export default {
           "R&R - >$5M Rev"
         ],
       executionRisk:["Low", "MEDIUM", "High"],
-      OtherKpis: [
-        { Title: "" ,Baseline:"",Target:"",Current:""}, // Initial input field
-      ],
       kpiType:["$","%","free text"],
       years: [1, 2, 3, 4, 5],
       months: [
@@ -371,14 +402,14 @@ export default {
       try {
         const { id } = useRoute().params
 
-        const response = await fetch('http://localhost:3001/investment/');
+        const response = await fetch('http://localhost:3001/investment/'+id);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
 
 
         const data = await response.json();
-        this.form = this.tableData = data[0];
+        this.form = this.tableData = data;
         this.labels = this.tableData.ChartFinancialImpactDataLabel
         this.data = [this.tableData.ChartFinancialImpactDataValue1, this.tableData.ChartFinancialImpactDataValue2];
         this.breadCrumbItems = [
@@ -416,18 +447,24 @@ export default {
         console.log("Form submitted:", this.form);
         this.isModalVisible = false;
         this.$router.push("/");
+      } else {
+        console.log('Form validation failed');
+        this.isModalVisible = false;
       }
     },
     validateForm(){
-      this.errors.Title = this.form.Title ? '' : 'Title is required';
-      this.errors.InvestmentType = this.form.InvestmentType ? '' : 'Investment Type is required';
-      this.errors.InvestmentDetails = this.form.InvestmentDetails ? '' : 'Investment Details is required';
-      this.errors.Size = this.form.Size ? '' : 'Size is required';
-      this.errors.BaseRevenue = this.form.BaseRevenue ? '' : 'Base Revenue is required';
-      this.errors.GrowthRevenue = this.form.GrowthRevenue ? '' : 'Growth Revenue is required';
-      this.errors.Growth = this.form.Growth ? '' : 'Growth is required';
-      this.errors.GrowthPercentage = this.form.GrowthPercentage ? '' : 'Growth(%) is required';
-      return this.errors;
+      Object.entries(this.errors).map(([name]) => ({
+        name,
+      }));
+      Object.entries(this.form).map(([name]) => {      
+        if(name == 'OtherKpis'){
+          this.errors[name] = this.form[name][0].Title ? '' : 'This field is required';
+        } else { 
+          this.errors[name] = this.form[name] ? '' : 'This field is required';
+        }
+      });      
+      const isValid = !Object.values(this.errors).some(error => error !== '');
+      return isValid;         
     },
     openConfirmationDialog () {
       this.isModalVisible = true;
