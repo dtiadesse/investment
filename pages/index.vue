@@ -38,8 +38,10 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <DeleteConfirmation :message="'You made changes to this page. Do you want to save them before leaving?'"
-      :isVisible="isModalVisible.value" @confirm="onDelete" @cancel="closeConfirmationDialog" />
+    <DeleteConfirmation
+      :isVisible="isModalVisible" 
+      @confirm="onDelete()" 
+      @cancel="closeConfirmationDialog()" />
   </div>
 </template>
 
@@ -89,7 +91,7 @@ export default {
     const menuPosition = ref({ top: 0, left: 0 });
     const rowToEdit: any = ref(null);
     const rowToDelete: any = ref(null);
-    let isModalVisible: any = {};
+    const isModalVisible = ref(false);
     // Fetch investments and dynamically generate columnDefs
     const fetchInvestments = async () => {
       isLoading.value = true;
@@ -178,7 +180,7 @@ export default {
       rowToEdit.value = row;
       rowToDelete.value = row;
       menuPosition.value = { top: event.clientY, left: event.clientX };
-      showMenu.value = true;
+      showMenu.value = !showMenu.value;      
     };
 
     // Close the menu
@@ -199,9 +201,9 @@ export default {
       const index = rowData.value.findIndex((row: any) => row === rowToDelete.value.data);
       if (index > -1) {
         rowData.value.splice(index, 1);
-      }
+      }      
       closeMenu();
-      closeConfirmationDialog();
+      isModalVisible.value = false;
     };
 
     const goToAddInvestment = () => {

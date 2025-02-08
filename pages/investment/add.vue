@@ -8,7 +8,7 @@
     <!-- Header -->
     <form @submit.prevent="openConfirmationDialog()">
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end">
-      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700" @click="cancelEdit()">Cancel</button>
+      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700" @click="openCancellationDialog()">Cancel</button>
       <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
 
@@ -262,18 +262,22 @@
     </section>
 
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end mt-6">
-      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700" @click="cancelEdit()">Cancel</button>
+      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700" @click="openCancellationDialog()">Cancel</button>
       <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
     </form>
 
     <SaveChangesConfirmation
-      :message="'You made changes to this page. Do you want to save them before leaving?'"
       :isVisible="isModalVisible"
       @confirm="handleSubmit"
       @cancel="closeConfirmationDialog"
     />
 
+    <CancelConfirmation
+      :isVisible="isCencelModalVisible"
+      @confirm="confirmDialog"
+      @cancel="closeCancelConfirmationDialog"
+    />
   </div>
 
 </template>
@@ -341,6 +345,7 @@ export default {
         OtherKpis:""
       },
       isModalVisible:false,
+      isCencelModalVisible:false,
       investmentType: ["ADS Investment","SS Investment"],
       investmentDetails: ["RECRUITING", "M&A-SERVICES", "M&A-ADVISORY", "M&A-Services","Platform Investments"],
       size: ["M&A - > $15M","M&A - < $15M", "Platform - > $3M", "Platform - $1M - $3M", "R&R - < $1M rev","R&R - $1M - $5M rev","R&R - >$5M Rev"],
@@ -389,9 +394,11 @@ export default {
     handleSubmit() {
       if(this.validateForm()){
         console.log("Form submitted:", this.form);
+         this.isCencelModalVisible = false;
          this.isModalVisible = false;
          this.$router.push("/");
       } else {
+        this.isCencelModalVisible = false;
         this.isModalVisible = false;
       }
     },
@@ -412,8 +419,20 @@ export default {
     openConfirmationDialog () {
       this.isModalVisible = true;
     },
-    closeConfirmationDialog () {
+    closeConfirmationDialog () {    
+      this.isCencelModalVisible = true;  
       this.isModalVisible = false;
+      this.$router.push("/");
+    },
+    closeCancelConfirmationDialog () {    
+      this.isCencelModalVisible = false; 
+    },
+    confirmDialog () {    
+      this.isCencelModalVisible = false; 
+      this.$router.push("/");
+    },
+    openCancellationDialog(){
+      this.isCencelModalVisible = true;
     },
     cancelEdit(){
       this.$router.push("/");

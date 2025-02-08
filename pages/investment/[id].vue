@@ -1,6 +1,25 @@
 <template>
   <div>
     <Breadcrumb :breadCrumbItems="breadCrumbItems" :bottomTitle="tableData.Title">
+      <template #action>
+        <div class="mr-5 flex">
+          <button class="mr-5 text-black flex items-center border border-gray-300 font-bold rounded text-sm px-2 py-1 me-2">
+            <svg class="h-6 w-6 mr-2" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.7 5.2a1.024 1.024 0 0 1 0 1.448l-2.626 2.628-3.35-3.35L17.35 3.3a1.024 1.024 0 0 1 1.448 0zm-4.166 5.614-3.35-3.35-8.509 8.511L3 21l5.025-1.675z"/></svg>
+            <p class="text-base" @click="goToEditInvestment">Edit</p>
+          </button>
+          <button @click="openDeleteDialog()" class="mr-5 flex items-center border border-gray-300 font-bold rounded text-sm px-2 py-1 me-2">
+            <svg class="h-5 w-5 text-red-800" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" />
+                      <line x1="4" y1="7" x2="20" y2="7" />
+                      <line x1="10" y1="11" x2="10" y2="17" />
+                      <line x1="14" y1="11" x2="14" y2="17" />
+                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+            </svg>
+          </button>          
+        </div>
+      </template>
     </Breadcrumb>
 
     <div class="border border-gray-200 rounded-lg mb-5 bg-white">
@@ -65,7 +84,12 @@
         </div>
       </div>
     </div>
-  
+    <DeleteConfirmation 
+        :message="'Are you sure, You want to delete?'"
+        :isVisible="isModalVisible" 
+        :title="'Delete'"
+        @confirm="onDelete()" 
+        @cancel="closeConfirmationDialog()" />
   </div>
 
 </template>
@@ -77,7 +101,7 @@
   border: none;
 }
 .margin{
-  margin-right:8%
+  margin-right:5%
 }
 </style>
 
@@ -127,8 +151,8 @@ export default {
       loading: true,
       error: null,
       tableData: [],
-      breadCrumbItems: []
-
+      breadCrumbItems: [],
+      isModalVisible: false,
     }
   },
   watch: {
@@ -179,7 +203,16 @@ export default {
       const { id } = useRoute().params
       this.$router.push('/investment/edit/'+id);
     },
-
+    openDeleteDialog(){
+      this.isModalVisible = true;
+    },
+    onDelete(){
+      this.isModalVisible = false;
+      this.$router.push('/');
+    },
+    closeConfirmationDialog(){
+      this.isModalVisible = false;
+    }, 
   },
 };
 

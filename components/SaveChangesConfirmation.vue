@@ -2,7 +2,7 @@
 <div v-if="isVisible" class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
     <div class="bg-white p-6 rounded-lg shadow-lg w-2/5">
       <h3 class="text-center text-lg font-bold mb-4 underline underline-offset-8 decoration-blue-500 decoration-4">Save Changes</h3>
-      <h3 class="text-center text-lg text-gray-500 mb-4">You made changes to this page. Do you want to save them before leaving?</h3>
+      <h3 class="text-center text-lg text-gray-500 mb-4">{{message}}</h3>
       <div class="flex justify-center space-x-4">
         <button 
           @click="onCancel"

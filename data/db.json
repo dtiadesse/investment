@@ -1051,37 +1051,25 @@
         }
       ],
       "ChartFinancialImpactDataValue1": [
-        3.36,
-        0.00,
-        1.10,
-        3.44,
-        1.23,
-        3.67,
-        5.37,
-        6.58,
-        1.01
+        4,
+        5,
+        4.5,
+        6,
+        5.5
       ],
       "ChartFinancialImpactDataValue2": [
-        5.22,
-        0.00,
-        1.91,
-        3.44,
-        3.92,
-        3.49,
-        0.00,
-        3.50,
-        1.36
+        3,
+        2.8,
+        3.2,
+        2.7,
+        3.1
       ],
       "ChartFinancialImpactDataLabel": [
-        "Progress Capital - Team - Recruiting",
-        "Cynthia Ng - Individual - Recruiting",
-        "Louay Alsadek - Team - Recruiting",
-        "Miami Industrial - Fernandez & Palazzo - Team - Recruiting",
-        "Moseley Watkins - Team - Recruiting",
-        "Troy Pollet - Individual - Recruiting",
-        "Errol Blumer - Individual - Recruiting",
-        "Mac Crowther Team - Team - Recruiting",
-        "Adam Gatto - Individual - Recruiting"
+        "Progress Capital",
+        "Cynthia Ng",
+        "Louay Alsadeek",
+        "Miami Industries",
+        "Moseley Watkins"
       ],
       "Size": "R&R - >$5M Rev",
       "SelectionCriteria": "RECRUITINGR&R - >$5M Rev",
@@ -1231,37 +1219,25 @@
         }
       ],
       "ChartFinancialImpactDataValue1": [
-        3.36,
-        0.00,
-        1.10,
-        3.44,
-        1.23,
-        3.67,
-        5.37,
-        6.58,
-        1.01
+        4,
+        5,
+        4.5,
+        6,
+        5.5
       ],
       "ChartFinancialImpactDataValue2": [
-        5.22,
-        0.00,
-        1.91,
-        3.44,
-        3.92,
-        3.49,
-        0.00,
-        3.50,
-        1.36
+        3,
+        2.8,
+        3.2,
+        2.7,
+        3.1
       ],
       "ChartFinancialImpactDataLabel": [
-        "Progress Capital - Team - Recruiting",
-        "Cynthia Ng - Individual - Recruiting",
-        "Louay Alsadek - Team - Recruiting",
-        "Miami Industrial - Fernandez & Palazzo - Team - Recruiting",
-        "Moseley Watkins - Team - Recruiting",
-        "Troy Pollet - Individual - Recruiting",
-        "Errol Blumer - Individual - Recruiting",
-        "Mac Crowther Team - Team - Recruiting",
-        "Adam Gatto - Individual - Recruiting"
+        "Progress Capital",
+        "Cynthia Ng",
+        "Louay Alsadeek",
+        "Miami Industries",
+        "Moseley Watkins"
       ],
       "Size": "R&R - < $1M rev",
       "SelectionCriteria": "RECRUITINGR&R - < $1M rev",
@@ -1411,37 +1387,25 @@
         }
       ],
       "ChartFinancialImpactDataValue1": [
-        3.36,
-        0.00,
-        1.10,
-        3.44,
-        1.23,
-        3.67,
-        5.37,
-        6.58,
-        1.01
+        4,
+        5,
+        4.5,
+        6,
+        5.5
       ],
       "ChartFinancialImpactDataValue2": [
-        5.22,
-        0.00,
-        1.91,
-        3.44,
-        3.92,
-        3.49,
-        0.00,
-        3.50,
-        1.36
+        3,
+        2.8,
+        3.2,
+        2.7,
+        3.1
       ],
       "ChartFinancialImpactDataLabel": [
-        "Progress Capital - Team - Recruiting",
-        "Cynthia Ng - Individual - Recruiting",
-        "Louay Alsadek - Team - Recruiting",
-        "Miami Industrial - Fernandez & Palazzo - Team - Recruiting",
-        "Moseley Watkins - Team - Recruiting",
-        "Troy Pollet - Individual - Recruiting",
-        "Errol Blumer - Individual - Recruiting",
-        "Mac Crowther Team - Team - Recruiting",
-        "Adam Gatto - Individual - Recruiting"
+        "Progress Capital",
+        "Cynthia Ng",
+        "Louay Alsadeek",
+        "Miami Industries",
+        "Moseley Watkins"
       ],
       "Size": "R&R - $1M - $5M rev",
       "SelectionCriteria": "R&R - $1M - $5M rev",

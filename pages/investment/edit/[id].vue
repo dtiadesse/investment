@@ -9,7 +9,7 @@
     <!-- Header -->
     <form @submit.prevent="openConfirmationDialog()">
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end">
-      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700" @click="cancelEdit()">Cancel</button>
+      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700" @click="openCancellationDialog()">Cancel</button>
       <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
 
@@ -261,7 +261,7 @@
     </section>
 
     <section class="flex p-4 border border-gray-300 rounded bg-white justify-end mt-6">
-      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700"  @click="cancelEdit()">Cancel</button>
+      <button type="button" class="bg-white border border-gray-300 mr-3 text-black px-4 py-2 rounded hover:bg-white-700"  @click="openCancellationDialog()">Cancel</button>
       <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
     </section>
     </form>
@@ -273,7 +273,14 @@
       @confirm="handleSubmit"
       @cancel="closeConfirmationDialog"
     />
-
+ 
+   <DeleteConfirmation
+      :message="'Are you sure, you want to cancel?'"
+      :isVisible="isCencelModalVisible"
+      :title="'Cancel'"
+      @confirm="confirmDialog"
+      @cancel="closeCancelConfirmationDialog"
+    />
 </template>
 
 <script>
@@ -340,6 +347,7 @@ export default {
         OtherKpis:""
       },
       isModalVisible:false,
+      isCencelModalVisible:false,
       investmentType: ["ADVISORY INVESTMENT","SERVICES INVESTMENT"],
       investmentDetails: ["RECRUITING", "M&A - SERVICES", "M&A - ADVISORY", "M&A - Services","Platform Investments"],
       size: [
@@ -445,10 +453,12 @@ export default {
     handleSubmit() {
       if(this.validateForm()){
         console.log("Form submitted:", this.form);
+         this.isCencelModalVisible = false;
         this.isModalVisible = false;
         this.$router.push("/");
       } else {
         console.log('Form validation failed');
+         this.isCencelModalVisible = false;
         this.isModalVisible = false;
       }
     },
@@ -471,6 +481,17 @@ export default {
     },
     closeConfirmationDialog () {
       this.isModalVisible = false;
+      this.$router.push("/");
+    },
+    closeCancelConfirmationDialog () {    
+      this.isCencelModalVisible = false; 
+    },
+    confirmDialog () {    
+      this.isCencelModalVisible = false; 
+      this.$router.push("/");
+    },
+    openCancellationDialog(){
+      this.isCencelModalVisible = true;
     },
     cancelEdit(){
       this.$router.push("/");
